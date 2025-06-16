@@ -108,6 +108,20 @@ const AnimatedCard: React.FC<AnimatedCardProps> = ({ children, delay = 0 }) => {
 function GalleryMain() {
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
 
+  // Estado para modal de imagem
+  const [modalImage, setModalImage] = useState<string | null>(null);
+
+  // Fecha modal ao pressionar ESC
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModalImage(null);
+    };
+    if (modalImage) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalImage]);
+
   useEffect(() => {
     // Trigger header animations after component mounts
     const timer = setTimeout(() => {
@@ -116,6 +130,36 @@ function GalleryMain() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Componente do modal
+  const ImageModal = ({ src, onClose }: { src: string; onClose: () => void }) => (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+      onClick={onClose}
+      style={{ cursor: "zoom-out" }}
+    >
+      <div
+        className="relative max-w-3xl w-full"
+        onClick={e => e.stopPropagation()}
+      >
+        <button
+          className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
+          onClick={onClose}
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <Image
+          src={src}
+          alt="Gallery Large"
+          width={1200}
+          height={800}
+          className="w-full h-auto rounded-xl shadow-2xl"
+          style={{ maxHeight: "80vh", objectFit: "contain" }}
+        />
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -174,13 +218,13 @@ function GalleryMain() {
                 barra: "#0083cb",
               },
               {
-                image: "/Fy.jpg",
+                image: "/GG1.webp",
                 title: "Perfomance on Jazz Day",
                 description: "More than a performance, a celebration of culture and talent",
                 barra: "#fdaf17",
               },
               {
-                image: "/OR.JPG",
+                image: "/OR.jpg",
                 title: "United Youth Taekwondo Tournament",
                 description: "A day of strength, discipline, and sportsmanship",
                 barra: "#008633",
@@ -217,14 +261,13 @@ function GalleryMain() {
       </AnimatedSection>
 
       {/* Sports Day Section */}
-      <AnimatedSection className="py-20 px-6 bg-[#e6e6e6]" delay={100}>
+      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6]" delay={100}>
         <div className="max-w-7xl mx-auto">
-          <div className="w-[800px] h-[60px] bg-[#0083cb] justify-self-center mb-5 p-2 rounded-tl-[60px] rounded-br-[60px] sm:w-[600px] md:w-[700px] lg:w-[800px] mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">
+          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#0083cb] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
+            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
               Srategic Dive in Mussulo
             </h2>
           </div>
-          
           <AnimatedCard delay={300}>
             <div className="space-y-6">
               {/* Fotos no topo */}
@@ -232,7 +275,8 @@ function GalleryMain() {
                 {["/SportDay.jpg", "/G2.webp", "/G3.webp", "/G4.webp"].map((image, index) => (
                   <div
                     key={index}
-                    className="relative group overflow-hidden aspect-square rounded-lg"
+                    className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
+                    onClick={() => setModalImage(image)}
                   >
                     <Image
                       src={image}
@@ -256,10 +300,11 @@ function GalleryMain() {
                     title="YouTube Video"
                   ></iframe>
                 </div>
-                
-                <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-2xl font-bold text-[#0083cb] mb-4">Srategic Dive in Mussulo</h3>
-                  <p className="text-gray-700 text-lg">
+                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
+                  <h3 className="text-lg sm:text-2xl font-bold text-[#0083cb] mb-2 sm:mb-4 text-center sm:text-left">
+                    Srategic Dive in Mussulo
+                  </h3>
+                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
                     A celebration of athleticism, teamwork, and school spirit! Our Sports Day brings together students, teachers, and families for a day filled with fun competitions, encouragement, and unforgettable memories.
                   </p>
                 </div>
@@ -270,23 +315,23 @@ function GalleryMain() {
       </AnimatedSection>
 
       {/* New Academic Year Section */}
-      <AnimatedSection className="py-20 px-6 bg-[#e6e6e6] mt-10" delay={100}>
+      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6] mt-10" delay={100}>
         <div className="max-w-7xl mx-auto">
-          <div className="w-[800px] h-[60px] bg-[#fdaf17] justify-self-center mb-5 p-2 rounded-tl-[60px] rounded-br-[60px] sm:w-[600px] md:w-[700px] lg:w-[800px] mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">
+          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#fdaf17] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
+            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
               Performance on Jazz Day
             </h2>
           </div>
-          
           <AnimatedCard delay={300}>
             <div className="space-y-6">
               {/* Fotos no topo */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {["/fy.jpg", "/GG2.webp", "/GG3.webp", "/GG4.webp"].map(
+                {["/GG1.webp", "/GG2.webp", "/GG3.webp", "/GG4.webp"].map(
                   (image, index) => (
                     <div
                       key={index}
-                      className="relative group overflow-hidden aspect-square rounded-lg"
+                      className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
+                      onClick={() => setModalImage(image)}
                     >
                       <Image
                         src={image}
@@ -311,10 +356,11 @@ function GalleryMain() {
                     title="YouTube Video"
                   ></iframe>
                 </div>
-                
-                <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-2xl font-bold text-[#fdaf17] mb-4">Performance on Jazz Day</h3>
-                  <p className="text-gray-700 text-lg">
+                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
+                  <h3 className="text-lg sm:text-2xl font-bold text-[#fdaf17] mb-2 sm:mb-4 text-center sm:text-left">
+                    Performance on Jazz Day
+                  </h3>
+                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
                     The beginning of a new academic year is always a moment of excitement and hope. We welcome our students with open arms and look forward to a year full of learning, growth, and new friendships!
                   </p>
                 </div>
@@ -325,14 +371,13 @@ function GalleryMain() {
       </AnimatedSection>
 
       {/* Breast Cancer Awareness Section */}
-      <AnimatedSection className="py-20 px-6 bg-[#e6e6e6] mt-10" delay={100}>
+      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6] mt-10" delay={100}>
         <div className="max-w-7xl mx-auto">
-          <div className="w-[800px] h-[60px] bg-[#008633] justify-self-center mb-5 p-2 rounded-tl-[60px] rounded-br-[60px] sm:w-[600px] md:w-[700px] lg:w-[800px] mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">
+          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#008633] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
+            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
               United Youth Taekwondo Tournament
             </h2>
           </div>
-          
           <AnimatedCard delay={300}>
             <div className="space-y-6">
               {/* Fotos no topo */}
@@ -341,7 +386,8 @@ function GalleryMain() {
                   (image, index) => (
                     <div
                       key={index}
-                      className="relative group overflow-hidden aspect-square rounded-lg"
+                      className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
+                      onClick={() => setModalImage(image)}
                     >
                       <Image
                         src={image}
@@ -366,10 +412,11 @@ function GalleryMain() {
                     title="YouTube Video"
                   ></iframe>
                 </div>
-                
-                <div className="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-2xl font-bold text-[#008633] mb-4">United Youth Taekwondo Tournament</h3>
-                  <p className="text-gray-700 text-lg">
+                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
+                  <h3 className="text-lg sm:text-2xl font-bold text-[#008633] mb-2 sm:mb-4 text-center sm:text-left">
+                    United Youth Taekwondo Tournament
+                  </h3>
+                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
                     Promoting awareness and prevention is key to better care. Our workshop brings vital information and support to our community, empowering everyone to take action for their health.
                   </p>
                 </div>
@@ -380,6 +427,11 @@ function GalleryMain() {
       </AnimatedSection>
       
       <Footer />
+
+      {/* Modal de Imagem */}
+      {modalImage && (
+        <ImageModal src={modalImage} onClose={() => setModalImage(null)} />
+      )}
     </div>
   );
 }

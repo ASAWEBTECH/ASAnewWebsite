@@ -110,15 +110,18 @@ export default function Home() {
         style={styles.sectionEducation}
         delay={300}
       >
-        <div style={styles.quadradoContainer}>
+        <div
+          style={styles.quadradoContainer}
+          className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 w-full mx-auto mt-20"
+        >
           <Quadrado />
         </div>
-        <div className="bg-white w-full max-w-md h-16 mt-10 flex items-center rounded-full justify-center">
-          <h1 className="text-2xl font-semibold text-[#2e2b70]">
-            OUR EDUCATION LEVELS
+        <div className="bg-white w-full h-16 mt-10 flex items-center rounded-full justify-center px-4 max-w-[95vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
+          <h1 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#2e2b70] text-center w-full">
+        OUR EDUCATION LEVELS
           </h1>
         </div>
-        <p className="text-lg mt-6 text-white text-center max-w-2xl px-4">
+        <p className="text-base sm:text-lg mt-6 text-white text-center max-w-[95vw] sm:max-w-2xl px-2 sm:px-4">
           We have all the education levels, from elementary to high school
           grade, with complete high technology teaching.
         </p>

@@ -77,7 +77,7 @@ const slideTitles: string[] = [
   const currentTitle = getCurrentTitle(currentIndex);
 
   return (
-    <div className="relative h-[750px] overflow-hidden">
+    <div className="relative h-[400px] sm:h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden">
       {images.map((image, index) => (
         <div
           key={image}
@@ -101,13 +101,15 @@ const slideTitles: string[] = [
       <div className="absolute inset-0 bg-black/10" />
 
       <div className="absolute inset-0 flex items-center justify-center md:justify-start">
-        <div className="text-left text-white max-w-4xl px-4 mt-16 pl-6 md:pl-40 flex flex-col items-start w-full">
+        <div className="text-left text-white max-w-4xl px-2 sm:px-4 mt-10 sm:mt-16 pl-2 sm:pl-6 md:pl-40 flex flex-col items-start w-full">
           {/* Title with slide-in from left animation */}
-          <h1 className="font-bold font-poppins mb-2  leading-relaxed sm:text-xl md:text-xl max-w-xl">Welcome to American Schools of Angola</h1>
-          <div className="w-20 h-1 bg-[#ff9f00] mb-4" />
+            <h1 className="font-bold font-poppins mb-1 leading-relaxed text-xs xs:text-sm sm:text-base md:text-xl max-w-[180px] xs:max-w-xs sm:max-w-md md:max-w-xl">
+              Welcome to American Schools of Angola
+            </h1>
+            <div className="w-10 xs:w-14 sm:w-20 h-0.5 sm:h-1 bg-[#ff9f00] mb-2 sm:mb-4" />
           <h1
-            className={`font-bold font-poppins mb-6 leading-relaxed transition-all duration-1000 ease-out
-      text-2xl sm:text-4xl md:text-5xl max-w-xl
+            className={`font-bold font-poppins mb-4 sm:mb-6 leading-relaxed transition-all duration-1000 ease-out
+      text-lg xs:text-2xl sm:text-4xl md:text-5xl max-w-xl
       ${
         isLoaded && textVisible
           ? "opacity-100 translate-x-0 translate-y-0"
@@ -123,7 +125,7 @@ const slideTitles: string[] = [
           {/* Fixed Description with slide-in from left animation (delayed) */}
           <p
             className={`transition-all font-poppins duration-1000 ease-out
-      text-sm sm:text-lg md:text-xl max-w-xl
+      text-xs xs:text-sm sm:text-lg md:text-xl max-w-xl
       ${
         isLoaded && textVisible
           ? "opacity-100 translate-x-0 translate-y-0"
@@ -135,9 +137,9 @@ const slideTitles: string[] = [
           >
             {fixedDescription}
           </p>
-          
+
           {/* Buttons container with fade-in and slide-up animation */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start">
+          <div className="flex flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start flex-wrap justify-center sm:justify-start">
             <div
               className={`flex gap-4 transition-all duration-1000 ease-out ${
                 isLoaded
@@ -151,7 +153,7 @@ const slideTitles: string[] = [
               <AnimatedButton />
             </div>
             <button
-              className="px-6 py-3 bg-transparent border-2 border-white font-poppins text-white font-semibold rounded-lg hover:bg-white/10 transition-colors duration-200 transform hover:scale-105 backdrop-blur-lg mt-2 sm:mt-0"
+              className="px-4 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-white font-poppins text-white font-semibold rounded-lg hover:bg-white/10 transition-colors duration-200 transform hover:scale-105 backdrop-blur-lg mt-0 text-sm sm:text-base"
               onClick={() => (window.location.href = "/about")}
             >
               Get to Know Us
@@ -162,7 +164,7 @@ const slideTitles: string[] = [
 
       <button
         onClick={goToPrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-white" />
@@ -170,7 +172,7 @@ const slideTitles: string[] = [
 
       <button
         onClick={goToNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-white" />
@@ -257,7 +259,7 @@ const slideTitles: string[] = [
       </div>
 
       {/* Indicadores de slides */}
-      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-8 sm:bottom-24 left-1/2 -translate-x-1/2 flex gap-2">
         {images.map((_, index) => (
           <button
             key={index}

@@ -160,7 +160,6 @@ const styles = {
   imgAlunos: {
     position: 'absolute' as const,
     marginBottom: '-10px',
-    marginRight: '-20px',
     alignSelf: 'flex-end',
   },
 };
