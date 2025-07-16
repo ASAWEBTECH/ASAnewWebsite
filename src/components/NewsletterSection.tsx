@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Mail, Send, CheckCircle } from 'lucide-react';
+import { Mail, Send} from 'lucide-react';
 import Image from 'next/image';
 
 const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -17,14 +17,23 @@ const NewsletterSection: React.FC = () => {
       return;
     }
 
-    // Handle form submission (would connect to API in production)
-    setIsSubmitted(true);
+    // Start processing
+    setIsProcessing(true);
     setIsError(false);
-    setEmail('');
 
-    // Reset the success message after 5 seconds
+    // Create email parameters
+    const recipient = 'newsletter@asangola.com';
+    const subject = encodeURIComponent('Adesão ao Newsletter da American Schools of Angola');
+    const body = encodeURIComponent(`Email do subscritor: ${email}`);
+    
+    // Create mailto link
+    const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    
+    // Wait 5 seconds then open email client and reset form
     setTimeout(() => {
-      setIsSubmitted(false);
+      window.location.href = mailtoLink;
+      setEmail('');
+      setIsProcessing(false);
     }, 5000);
   };
 
@@ -47,28 +56,28 @@ const NewsletterSection: React.FC = () => {
               Get the latest news, updates, and special offers delivered directly to your inbox.
             </p>
 
-            {isSubmitted ? (
-              <div className="flex items-center gap-2 p-4 rounded-lg bg-green-50 text-green-700">
-                <CheckCircle className="h-5 w-5" />
-                <span>Thank you! Your email has been successfully registered.</span>
+            {isProcessing ? (
+              <div className="flex items-center justify-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                <span className="ml-3 text-gray-600">Processing...</span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="relative">
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setIsError(false);
-                    }}
-                    placeholder="Your email address"
-                    className={`w-full p-4 pr-12 rounded-lg border ${
-                      isError 
-                        ? 'border-red-500 focus:ring-red-500' 
-                        : 'border-gray-300 focus:ring-indigo-500'
-                    } focus:border-transparent focus:outline-none focus:ring-2 transition-all duration-300`}
-                    required
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsError(false);
+                  }}
+                  placeholder="Your email address"
+                  className={`w-full p-4 pr-12 rounded-lg border ${
+                    isError 
+                    ? 'border-red-500 focus:ring-red-500' 
+                    : 'border-gray-300 focus:ring-indigo-500'
+                  } focus:border-transparent focus:outline-none focus:ring-2 transition-all duration-300 text-black`}
+                  required
                   />
                   <Mail className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 </div>

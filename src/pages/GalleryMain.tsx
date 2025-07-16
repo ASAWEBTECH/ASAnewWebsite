@@ -1,128 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Header } from "../components/Header";
-import Footer from "../components/Footer";
-import Image from "next/image";
+import React, { useState, useEffect } from 'react';
+import { Calendar, ExternalLink, Instagram, Play } from 'lucide-react';
+import Image from 'next/image';
+import {Header} from '@/components/Header';
+import Footer from '@/components/Footer';
 
-// Hook para animações de entrada e saída
-const useIntersectionObserver = (options = {}) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasBeenVisible, setHasBeenVisible] = useState(false);
-  const elementRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          setHasBeenVisible(true);
-        } else {
-          setIsVisible(false);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '-50px',
-        ...options,
-      }
-    );
-
-    const currentElement = elementRef.current;
-    if (currentElement) {
-      observer.observe(currentElement);
-    }
-
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement);
-      }
-    };
-  });
-
-  return { elementRef, isVisible, hasBeenVisible };
-};
-
-// Componente para seções animadas
-type AnimatedSectionProps = {
-  children: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  delay?: number;
-};
-
-const AnimatedSection: React.FC<AnimatedSectionProps> = ({
-  children,
-  className = "",
-  style = {},
-  delay = 0,
-}) => {
-  const { elementRef, isVisible, hasBeenVisible } = useIntersectionObserver();
-
-  const getAnimationClass = () => {
-    if (!hasBeenVisible) return 'opacity-0 translate-y-12';
-    if (isVisible) return 'opacity-100 translate-y-0';
-    return 'opacity-30 translate-y-6';
-  };
-
-  return (
-    <div
-      ref={elementRef}
-      className={`transition-all duration-1000 ease-out ${getAnimationClass()} ${className}`}
-      style={{
-        ...style,
-        transitionDelay: `${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-// Componente para cards animados individualmente
-type AnimatedCardProps = {
-  children: React.ReactNode;
-  delay?: number;
-};
-
-const AnimatedCard: React.FC<AnimatedCardProps> = ({ children, delay = 0 }) => {
-  const { elementRef, isVisible, hasBeenVisible } = useIntersectionObserver();
-
-  const getAnimationClass = () => {
-    if (!hasBeenVisible) return 'opacity-0 translate-y-8 scale-95';
-    if (isVisible) return 'opacity-100 translate-y-0 scale-100';
-    return 'opacity-40 translate-y-4 scale-98';
-  };
-
-  return (
-    <div
-      ref={elementRef}
-      className={`transition-all duration-800 ease-out ${getAnimationClass()}`}
-      style={{
-        transitionDelay: `${delay}ms`,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-function GalleryMain() {
+const SchoolGallery = () => {
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
-
-  // Estado para modal de imagem
-  const [modalImage, setModalImage] = useState<string | null>(null);
-
-  // Fecha modal ao pressionar ESC
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setModalImage(null);
-    };
-    if (modalImage) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [modalImage]);
-
-  useEffect(() => {
+  // Sample data - replace with your actual Instagram posts
+    useEffect(() => {
     // Trigger header animations after component mounts
     const timer = setTimeout(() => {
       setIsHeaderLoaded(true);
@@ -131,38 +16,58 @@ function GalleryMain() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Componente do modal
-  const ImageModal = ({ src, onClose }: { src: string; onClose: () => void }) => (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
-      onClick={onClose}
-      style={{ cursor: "zoom-out" }}
-    >
-      <div
-        className="relative max-w-3xl w-full"
-        onClick={e => e.stopPropagation()}
-      >
-        <button
-          className="absolute top-2 right-2 text-white text-3xl font-bold z-10"
-          onClick={onClose}
-          aria-label="Close"
-        >
-          &times;
-        </button>
-        <Image
-          src={src}
-          alt="Gallery Large"
-          width={1200}
-          height={800}
-          className="w-full h-auto rounded-xl shadow-2xl"
-          style={{ maxHeight: "80vh", objectFit: "contain" }}
-        />
-      </div>
-    </div>
-  );
+
+  const [activities] = useState([
+    {
+      id: 1,
+      title: "Luanda and Houston United for Health",
+      date: "07-01-2025",
+      description: "On July 1st, the American Schools of Angola (ASA) delivered medical equipment, disposable supplies, and medications to five healthcare units in Luanda",
+      imageUrl: "/m1.png",
+      photoInstagramUrl: "https://www.instagram.com/p/DLmBoOOMz6w/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      videoInstagramUrl: "https://youtu.be/2shZ8H6NPAc?si=gLmZ4aITDc8Z9JdK"
+    },
+    {
+      id: 2,
+      title: "Graduation Day 2024-2025",
+      date: "06-14-2025",
+      description: " ASA Graduation & Academic Year Closing Ceremony 2024–2025. Today we celebrated a remarkable milestone!",
+      imageUrl: "/m2.png",
+      photoInstagramUrl: "https://www.instagram.com/p/DK4xmunsM7K/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+      videoInstagramUrl: "https://youtu.be/_-IgQZVo1Vg?si=sBMSWP0NHEnxGsvB"
+    },
+    {
+      id: 3,
+      title: "United Youth Taekwondo Tournament",
+      date: "05-28-2024",
+      description: "The first edition of the United Youth Taekwondo Tournament brought together over 40 young athletes at the Pavilion",
+      imageUrl: "/m3.png",
+      photoInstagramUrl: "https://www.instagram.com/p/example3",
+      videoInstagramUrl: "https://www.instagram.com/p/video3"
+    },
+  ]);
+
+  const formatDate = (dateString: string | number | Date) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const handleInstagramClick = (url: string | URL | undefined, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation();
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCardClick = (photoUrl: string | URL | undefined) => {
+    window.open(photoUrl, '_blank', 'noopener,noreferrer');
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
+      {/* Header */}
       <Header />
       
       {/* Header Section - Animação apenas de entrada */}
@@ -201,239 +106,166 @@ function GalleryMain() {
             invitation to relive the most cherished moments of our journey.
           </p>
         </div>
+               <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
+  {/* First cloud, left to right, lower opacity */}
+  <svg
+    viewBox="0 0 1440 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-full h-[200px] min-w-full"
+    style={{ 
+      display: "block",
+      width: "100vw",
+      minWidth: "100vw"
+    }}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,80 Q360,120 720,80 T1440,80 V120 H0 Z"
+      fill="white"
+      opacity="0.35"
+    />
+    <path
+      d="M0,100 Q360,140 720,100 T1440,100 V120 H0 Z"
+      fill="white"
+      opacity="0.18"
+    />
+  </svg>
+  {/* Second cloud, right to left, higher opacity, mirrored */}
+  <svg
+    viewBox="0 0 1440 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-full h-[220px] absolute left-0 top-0 min-w-full"
+    style={{ 
+      display: "block", 
+      transform: "scaleX(-1)",
+      width: "100vw",
+      minWidth: "100vw"
+    }}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M0,80 Q360,120 720,80 T1440,80 V120 H0 Z"
+      fill="white"
+      opacity="0.65"
+    />
+    <path
+      d="M0,100 Q360,140 720,100 T1440,100 V120 H0 Z"
+      fill="white"
+      opacity="0.35"
+    />
+  </svg>
+</div>
       </div>
 
-      {/* Featured Section */}
-      <AnimatedSection className="py-20 px-6" delay={200}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-[#2e2b70] mb-12 text-center">
-            Events in the spotlight
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                image: "/SportDay.jpg",
-                title: "A Strategic Dive in Mussulo",
-                description: "A strategic opportunity for relaxation before exams",
-                barra: "#0083cb",
-              },
-              {
-                image: "/GG1.webp",
-                title: "Perfomance on Jazz Day",
-                description: "More than a performance, a celebration of culture and talent",
-                barra: "#fdaf17",
-              },
-              {
-                image: "/OR.jpg",
-                title: "United Youth Taekwondo Tournament",
-                description: "A day of strength, discipline, and sportsmanship",
-                barra: "#008633",
-              },
-            ].map((item, index) => (
-              <AnimatedCard key={index} delay={index * 200}>
-                <div
-                  className="group relative overflow-hidden rounded-xl"
-                  style={{
-                    borderBottomColor: item.barra,
-                    borderBottomWidth: "10px",
-                  }}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={600}
-                    height={320}
-                    className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
-                    <div>
-                      <h3 className="text-xl font-bold text-white">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-300">{item.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedCard>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
+      <section className="bg-white py-12 px-4 md:px-8">
+      <div className="text-center mb-12 mt-10">
+        <h1 className="text-4xl font-bold text-[#2e2b70] mb-4">
+          School Activities Gallery
+        </h1>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          Follow the special moments and activities developed at our school through our Instagram / Youtube
+        </p>
+      </div>
 
-      {/* Sports Day Section */}
-      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6]" delay={100}>
-        <div className="max-w-7xl mx-auto">
-          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#0083cb] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
-            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
-              Srategic Dive in Mussulo
-            </h2>
-          </div>
-          <AnimatedCard delay={300}>
-            <div className="space-y-6">
-              {/* Fotos no topo */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {["/SportDay.jpg", "/G2.webp", "/G3.webp", "/G4.webp"].map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
-                    onClick={() => setModalImage(image)}
+      {/* Activities Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {activities.map((activity) => (
+          <div
+            key={activity.id}
+            className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+            onClick={() => handleCardClick(activity.photoInstagramUrl)}
+          >
+            {/* Image Container */}
+            <div className="relative overflow-hidden">
+              <img
+                src={activity.imageUrl}
+                alt={activity.title}
+                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              
+              {/* Top Icons Row */}
+              <div className="absolute top-4 right-4 flex gap-2">
+                {/* Video Icon - Only show if video exists */}
+                {activity.videoInstagramUrl && (
+                  <button
+                    onClick={(e) => handleInstagramClick(activity.videoInstagramUrl, e)}
+                    className="bg-red-600 bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 transition-all duration-300 transform hover:scale-110"
+                    title="Watch Video"
                   >
-                    <Image
-                      src={image}
-                      alt={`Gallery image ${index + 1}`}
-                      width={400}
-                      height={400}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                ))}
+                    <Play className="w-5 h-5 text-white fill-white" />
+                  </button>
+                )}
+                
+                {/* Photo Instagram Icon */}
+                <div className="bg-black bg-opacity-50 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Instagram className="w-5 h-5 text-white" />
+                </div>
               </div>
               
-              {/* Vídeo e card lado a lado */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="w-full">
-                  <iframe
-                    className="w-full aspect-video rounded-lg overflow-hidden"
-                    src="https://www.youtube.com/embed/xokuMIop-rM?si=-Us4J6Wj3lK0ieTF?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="YouTube Video"
-                  ></iframe>
-                </div>
-                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-lg sm:text-2xl font-bold text-[#0083cb] mb-2 sm:mb-4 text-center sm:text-left">
-                    Srategic Dive in Mussulo
-                  </h3>
-                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
-                    A celebration of athleticism, teamwork, and school spirit! Our Sports Day brings together students, teachers, and families for a day filled with fun competitions, encouragement, and unforgettable memories.
-                  </p>
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ExternalLink className="w-8 h-8 text-white" />
                 </div>
               </div>
             </div>
-          </AnimatedCard>
-        </div>
-      </AnimatedSection>
 
-      {/* New Academic Year Section */}
-      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6] mt-10" delay={100}>
-        <div className="max-w-7xl mx-auto">
-          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#fdaf17] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
-            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
-              Performance on Jazz Day
-            </h2>
-          </div>
-          <AnimatedCard delay={300}>
-            <div className="space-y-6">
-              {/* Fotos no topo */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {["/GG1.webp", "/GG2.webp", "/GG3.webp", "/GG4.webp"].map(
-                  (image, index) => (
-                    <div
-                      key={index}
-                      className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
-                      onClick={() => setModalImage(image)}
-                    >
-                      <Image
-                        src={image}
-                        alt={`Gallery image ${index + 1}`}
-                        width={400}
-                        height={400}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                  )
+            {/* Content */}
+            <div className="p-6">
+              {/* Date */}
+              <div className="flex items-center text-sm text-gray-500 mb-3">
+                <Calendar className="w-4 h-4 mr-2" />
+                {formatDate(activity.date)}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-xl font-semibold mb-3 group-hover:opacity-80 transition-opacity" style={{ color: '#2e2b70' }}>
+                {activity.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                {activity.description}
+              </p>
+
+              {/* Instagram Links */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors">
+                  <Instagram className="w-4 h-4 mr-2" />
+                  View Photos
+                </div>
+                
+                {activity.videoInstagramUrl && (
+                  <button
+                    onClick={(e) => handleInstagramClick(activity.videoInstagramUrl, e)}
+                    className="flex items-center text-red-600 text-sm font-medium hover:text-red-700 transition-colors"
+                  >
+                    <Play className="w-4 h-4 mr-1" />
+                    Watch Video
+                  </button>
                 )}
               </div>
-              
-              {/* Vídeo e card lado a lado */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="w-full">
-                  <iframe
-                    className="w-full aspect-video rounded-lg overflow-hidden"
-                    src="https://www.youtube.com/embed/lNMmoygDuYc?si=rRzrtklJbEQo756y?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="YouTube Video"
-                  ></iframe>
-                </div>
-                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-lg sm:text-2xl font-bold text-[#fdaf17] mb-2 sm:mb-4 text-center sm:text-left">
-                    Performance on Jazz Day
-                  </h3>
-                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
-                    The beginning of a new academic year is always a moment of excitement and hope. We welcome our students with open arms and look forward to a year full of learning, growth, and new friendships!
-                  </p>
-                </div>
-              </div>
             </div>
-          </AnimatedCard>
-        </div>
-      </AnimatedSection>
-
-      {/* Breast Cancer Awareness Section */}
-      <AnimatedSection className="py-20 px-2 sm:px-4 bg-[#e6e6e6] mt-10" delay={100}>
-        <div className="max-w-7xl mx-auto">
-          <div className="w-full max-w-[800px] h-auto min-h-[48px] sm:min-h-[60px] bg-[#008633] justify-self-center mb-5 p-2 sm:p-4 rounded-tl-[40px] rounded-br-[40px] sm:rounded-tl-[60px] sm:rounded-br-[60px] mx-auto flex items-center justify-center">
-            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-center mb-0 break-words">
-              United Youth Taekwondo Tournament
-            </h2>
           </div>
-          <AnimatedCard delay={300}>
-            <div className="space-y-6">
-              {/* Fotos no topo */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {["/GGG1.webp", "/GGG2.webp", "/GGG3.webp", "/GGG4.webp"].map(
-                  (image, index) => (
-                    <div
-                      key={index}
-                      className="relative group overflow-hidden aspect-square rounded-lg cursor-pointer"
-                      onClick={() => setModalImage(image)}
-                    >
-                      <Image
-                        src={image}
-                        alt={`Gallery image ${index + 1}`}
-                        width={400}
-                        height={400}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                  )
-                )}
-              </div>
-              
-              {/* Vídeo e card lado a lado */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="w-full">
-                  <iframe
-                    className="w-full aspect-video rounded-lg overflow-hidden"
-                    src="https://www.youtube.com/embed/8d2bHV4dY8U?si=iRwO4PKg3_Pe7x78?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="YouTube Video"
-                  ></iframe>
-                </div>
-                <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8 flex flex-col justify-center h-full">
-                  <h3 className="text-lg sm:text-2xl font-bold text-[#008633] mb-2 sm:mb-4 text-center sm:text-left">
-                    United Youth Taekwondo Tournament
-                  </h3>
-                  <p className="text-gray-700 text-base sm:text-lg text-center sm:text-left">
-                    Promoting awareness and prevention is key to better care. Our workshop brings vital information and support to our community, empowering everyone to take action for their health.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </AnimatedCard>
-        </div>
-      </AnimatedSection>
-      
+        ))}
+      </div>
+
+      {/* Load More Button */}
+      <div className="text-center mt-12">
+        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 inline-flex items-center">
+          <Instagram className="w-5 h-5 mr-2" />
+          View More Activities
+        </button>
+      </div>
+    </section>
+      {/* Footer */}
       <Footer />
-
-      {/* Modal de Imagem */}
-      {modalImage && (
-        <ImageModal src={modalImage} onClose={() => setModalImage(null)} />
-      )}
     </div>
   );
-}
+};
 
-export default GalleryMain;
+export default SchoolGallery;

@@ -3,34 +3,28 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedButton } from "./AnimatedButton";
 import Image from "next/image";
 
-
 interface ImageSliderProps {
   images: string[];
   interval?: number;
 }
 
-export function ImageSlider({
-  images,
-  interval = 5000,
-}: ImageSliderProps) {
+export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [textVisible, setTextVisible] = useState(true);
 
   // Lista de títulos para cada slide
-const slideTitles: string[] = [
-  "Academic Excellence with Real Results",
-  "Modern Technology for Better Learning",
-  "Active Physical and Sports Development",
-  "Safe, Welcoming and Inclusive Environment",
-  "Complete Preparation for a Bright Future",
-];
-
-
+  const slideTitles: string[] = [
+    "Academic Excellence with Real Results",
+    "Modern Technology for Better Learning",
+    "Active Physical and Sports Development",
+    "Safe, Welcoming and Inclusive Environment",
+    "Complete Preparation for a Bright Future",
+  ];
 
   // Descrição fixa
   const fixedDescription =
-    "We are a unique K-14 School offering Pre K to early college High School United States curriculum.";
+    "We offer Pre-K to early college United States curriculum.";
 
   // Garantir que temos título para todas as imagens
   const getCurrentTitle = (index: number): string => {
@@ -103,10 +97,10 @@ const slideTitles: string[] = [
       <div className="absolute inset-0 flex items-center justify-center md:justify-start">
         <div className="text-left text-white max-w-4xl px-2 sm:px-4 mt-10 sm:mt-16 pl-2 sm:pl-6 md:pl-40 flex flex-col items-start w-full">
           {/* Title with slide-in from left animation */}
-            <h1 className="font-bold font-poppins mb-1 leading-relaxed text-xs xs:text-sm sm:text-base md:text-xl max-w-[180px] xs:max-w-xs sm:max-w-md md:max-w-xl">
-              Welcome to American Schools of Angola
-            </h1>
-            <div className="w-10 xs:w-14 sm:w-20 h-0.5 sm:h-1 bg-[#ff9f00] mb-2 sm:mb-4" />
+          <h1 className="font-bold font-poppins mb-1 leading-relaxed text-xs xs:text-sm sm:text-base md:text-xl max-w-[180px] xs:max-w-xs sm:max-w-md md:max-w-xl">
+            Welcome to American Schools of Angola
+          </h1>
+          <div className="w-10 xs:w-14 sm:w-20 h-0.5 sm:h-1 bg-[#ff9f00] mb-2 sm:mb-4" />
           <h1
             className={`font-bold font-poppins mb-4 sm:mb-6 leading-relaxed transition-all duration-1000 ease-out
       text-lg xs:text-2xl sm:text-4xl md:text-5xl max-w-xl
@@ -139,7 +133,7 @@ const slideTitles: string[] = [
           </p>
 
           {/* Buttons container with fade-in and slide-up animation */}
-          <div className="flex flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start flex-wrap justify-center sm:justify-start">
+          <div className="flex flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start flex-wrap justify-center">
             <div
               className={`flex gap-4 transition-all duration-1000 ease-out ${
                 isLoaded
@@ -153,10 +147,10 @@ const slideTitles: string[] = [
               <AnimatedButton />
             </div>
             <button
-              className="px-4 py-2 sm:px-6 sm:py-3 bg-transparent border-2 border-white font-poppins text-white font-semibold rounded-lg hover:bg-white/10 transition-colors duration-200 transform hover:scale-105 backdrop-blur-lg mt-0 text-sm sm:text-base"
-              onClick={() => (window.location.href = "/about")}
+              className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold border border-white/20 transform hover:scale-105 transition-all duration-300"
+              onClick={() => window.location.href = "/about"}
             >
-              Get to Know Us
+              Who We Are
             </button>
           </div>
         </div>
@@ -193,15 +187,12 @@ const slideTitles: string[] = [
           {/* Contact info */}
           <div
             className={`flex items-center gap-1 text-white text-xs font-medium transition-all duration-800 ease-out ${
-              isLoaded
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
+              isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{
               transitionDelay: "1300ms",
             }}
-          >
-          </div>
+          ></div>
           {/* Social media icons */}
           <div className="flex flex-row gap-2 -mt-24 mr-16">
             {[
@@ -259,6 +250,7 @@ const slideTitles: string[] = [
       </div>
 
       {/* Indicadores de slides */}
+
       <div className="absolute bottom-8 sm:bottom-24 left-1/2 -translate-x-1/2 flex gap-2">
         {images.map((_, index) => (
           <button
@@ -270,6 +262,60 @@ const slideTitles: string[] = [
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
+      </div>
+
+      <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
+        {/* First cloud, left to right, lower opacity */}
+        <svg
+          viewBox="0 0 1440 120"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[200px] min-w-full"
+          style={{
+            display: "block",
+            width: "100vw",
+            minWidth: "100vw",
+          }}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0,80 Q360,120 720,80 T1440,80 V120 H0 Z"
+            fill="white"
+            opacity="0.35"
+          />
+          <path
+            d="M0,100 Q360,140 720,100 T1440,100 V120 H0 Z"
+            fill="white"
+            opacity="0.18"
+          />
+        </svg>
+        {/* Second cloud, right to left, higher opacity, mirrored */}
+        <svg
+          viewBox="0 0 1440 120"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-[220px] absolute left-0 top-0 min-w-full"
+          style={{
+            display: "block",
+            transform: "scaleX(-1)",
+            width: "100vw",
+            minWidth: "100vw",
+          }}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0,80 Q360,120 720,80 T1440,80 V120 H0 Z"
+            fill="white"
+            opacity="0.65"
+          />
+          <path
+            d="M0,100 Q360,140 720,100 T1440,100 V120 H0 Z"
+            fill="white"
+            opacity="0.35"
+          />
+        </svg>
       </div>
     </div>
   );
