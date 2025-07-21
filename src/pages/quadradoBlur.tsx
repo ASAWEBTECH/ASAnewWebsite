@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { GraduationCap } from "lucide-react";
 
@@ -6,8 +6,36 @@ const Quadrado: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Move quadradosData outside component or use useCallback to memoize it
+  const quadradosData = useCallback(() => [
+    {
+      title: "Kindergarten",
+      imgSrc: "/A2.webp",
+      buttonColor: "#22B14C",
+      description: "Building foundation for early learning",
+    },
+    {
+      title: "Elementary",
+      imgSrc: "/A1.webp",
+      buttonColor: "#00A2E8",
+      description: "Developing core academic skills",
+    },
+    {
+      title: "Middle School",
+      imgSrc: "/A4.webp",
+      buttonColor: "#2e2b70",
+      description: "Preparing for advanced learning",
+    },
+    {
+      title: "High School",
+      imgSrc: "/A3.webp",
+      buttonColor: "#FF4444",
+      description: "Ready for college and career",
+    },
+  ], []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -45,64 +73,63 @@ const Quadrado: React.FC = () => {
     };
   }, []);
 
-  const quadradosData = [
-    {
-      title: "Kindergarten",
-      imgSrc: "/A2.webp",
-      buttonColor: "#22B14C",
-      description: "Building foundation for early learning",
-    },
-    {
-      title: "Elementary",
-      imgSrc: "/A1.webp",
-      buttonColor: "#00A2E8",
-      description: "Developing core academic skills",
-    },
-    {
-      title: "Middle School",
-      imgSrc: "/A4.webp",
-      buttonColor: "#2e2b70",
-      description: "Preparing for advanced learning",
-    },
-    {
-      title: "High School",
-      imgSrc: "/A3.webp",
-      buttonColor: "#FF4444",
-      description: "Ready for college and career",
-    },
-  ];
-
-  // Preload all images when component mounts
+  // Fixed useEffect with proper dependencies
   useEffect(() => {
+    const data = quadradosData();
     const preloadImages = () => {
-      quadradosData.forEach((item) => {
+      data.forEach((item) => {
         const img = new window.Image();
         img.onload = () => {
-          setImagesLoaded(prev => new Set([...prev, item.imgSrc]));
+          // Image loaded successfully - you can add logic here if needed
+          console.log(`Image loaded: ${item.imgSrc}`);
+        };
+        img.onerror = () => {
+          // Handle image load error if needed
+          console.error(`Failed to load image: ${item.imgSrc}`);
         };
         img.src = item.imgSrc;
       });
     };
 
     preloadImages();
-  }, []);
+  }, [quadradosData]);
+
+  const handleSlideChange = (newIndex: number) => {
+    if (newIndex === currentIndex || isTransitioning) return;
+    
+    setIsTransitioning(true);
+    
+    // Delay para permitir que a animação comece
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      
+      // Reset após a animação completar
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 500);
+    }, 250);
+  };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % quadradosData.length);
+    const data = quadradosData();
+    const newIndex = (currentIndex + 1) % data.length;
+    handleSlideChange(newIndex);
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
-      (prev) => (prev - 1 + quadradosData.length) % quadradosData.length
-    );
+    const data = quadradosData();
+    const newIndex = (currentIndex - 1 + data.length) % data.length;
+    handleSlideChange(newIndex);
   };
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index);
+    if (index === currentIndex) return;
+    handleSlideChange(index);
   };
 
   const handleViewMore = () => {
-    const currentItem = quadradosData[currentIndex];
+    const data = quadradosData();
+    const currentItem = data[currentIndex];
     let sectionId = "";
 
     // Map titles to section IDs
@@ -131,7 +158,7 @@ const Quadrado: React.FC = () => {
     }
   };
 
-  const currentItem = quadradosData[currentIndex];
+  const data = quadradosData();
 
   return (
     <div style={styles.mainContainer as React.CSSProperties} ref={containerRef}>
@@ -176,7 +203,7 @@ const Quadrado: React.FC = () => {
             >
               Discover our comprehensive educational programs designed to
               nurture students at every stage of their learning journey. Your
-              child&lsquo;s full academic path from Pre-K to their second year of
+              child&#39;s full academic path from Pre-K to their second year of
               university. All in one place
             </p>
 
@@ -222,15 +249,17 @@ const Quadrado: React.FC = () => {
           {!isMobile && (
             <button
               onClick={prevSlide}
+              disabled={isTransitioning}
               style={
                 {
                   ...styles.arrowButton,
                   left: "-50px",
-                  opacity: isVisible ? 1 : 0,
+                  opacity: isVisible ? (isTransitioning ? 0.5 : 1) : 0,
                   transform: isVisible
                     ? "translateY(-50%) translateX(0)"
                     : "translateY(-50%) translateX(-20px)",
                   transition: "all 0.8s ease-out",
+                  cursor: isTransitioning ? "not-allowed" : "pointer",
                 } as React.CSSProperties
               }
             >
@@ -246,7 +275,7 @@ const Quadrado: React.FC = () => {
             </button>
           )}
 
-          {/* Main Card */}
+          {/* Main Card with Slide Container */}
           <div
             style={
               {
@@ -256,123 +285,139 @@ const Quadrado: React.FC = () => {
                   ? "translateY(0) scale(1)"
                   : "translateY(30px) scale(0.9)",
                 transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                overflow: "hidden",
               } as React.CSSProperties
             }
           >
+            {/* Slide Container */}
             <div
               style={
-                (isMobile
-                  ? styles.cardContentMobile
-                  : styles.cardContent) as React.CSSProperties
+                {
+                  display: "flex",
+                  width: `${data.length * 100}%`,
+                  height: "100%",
+                  transform: `translateX(-${currentIndex * (100 / data.length)}%)`,
+                  transition: isTransitioning 
+                    ? "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)" 
+                    : "none",
+                } as React.CSSProperties
               }
             >
-              <div
-                style={
-                  (isMobile
-                    ? styles.textSectionMobile
-                    : styles.textSection) as React.CSSProperties
-                }
-              >
-                <h2
-                  style={
-                    {
-                      ...(isMobile
-                        ? styles.titleTextMobile
-                        : styles.titleText),
-                      transition: "all 0.3s ease",
-                    } as React.CSSProperties
-                  }
-                >
-                  {currentItem.title}
-                </h2>
-                <p
-                  style={
-                    {
-                      ...(isMobile
-                        ? styles.descriptionTextMobile
-                        : styles.descriptionText),
-                      transition: "all 0.3s ease",
-                    } as React.CSSProperties
-                  }
-                >
-                  {currentItem.description}
-                </p>
-                <button
-                  style={
-                    {
-                      ...(isMobile
-                        ? styles.viewMoreButtonMobile
-                        : styles.viewMoreButton),
-                      backgroundColor: currentItem.buttonColor,
-                      transition: "all 0.3s ease",
-                    } as React.CSSProperties
-                  }
-                  onClick={handleViewMore}
-                >
-                  <span style={styles.buttonText as React.CSSProperties}>
-                    View More
-                  </span>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    style={styles.buttonIcon as React.CSSProperties}
-                  >
-                    <path
-                      d="M5 12H19M19 12L12 5M19 12L12 19"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <div
-                style={
-                  (isMobile
-                    ? styles.imageSectionMobile
-                    : styles.imageSection) as React.CSSProperties
-                }
-              >
+              {data.map((item, index) => (
                 <div
+                  key={index}
                   style={
                     {
-                      ...(isMobile
-                        ? styles.imageContainerMobile
-                        : styles.imageContainer),
-                      transition: "all 0.3s ease",
+                      width: `${100 / data.length}%`,
+                      height: "100%",
+                      flexShrink: 0,
                     } as React.CSSProperties
                   }
                 >
-                  <Image
-                    src={currentItem.imgSrc}
-                    alt={currentItem.title}
-                    priority
-                    width={isMobile ? 280 : 400}
-                    height={isMobile ? 280 : 500}
+                  <div
                     style={
-                      {
-                        ...(isMobile
-                          ? styles.mainImageMobile
-                          : styles.mainImage),
-                        transition: "opacity 0.3s ease",
-                        opacity: imagesLoaded.has(currentItem.imgSrc) ? 1 : 0.7,
-                      } as React.CSSProperties
+                      (isMobile
+                        ? styles.cardContentMobile
+                        : styles.cardContent) as React.CSSProperties
                     }
-                  />
+                  >
+                    <div
+                      style={
+                        (isMobile
+                          ? styles.textSectionMobile
+                          : styles.textSection) as React.CSSProperties
+                      }
+                    >
+                      <h2
+                        style={
+                          (isMobile
+                            ? styles.titleTextMobile
+                            : styles.titleText) as React.CSSProperties
+                        }
+                      >
+                        {item.title}
+                      </h2>
+                      <p
+                        style={
+                          (isMobile
+                            ? styles.descriptionTextMobile
+                            : styles.descriptionText) as React.CSSProperties
+                        }
+                      >
+                        {item.description}
+                      </p>
+                      <button
+                        style={
+                          {
+                            ...(isMobile
+                              ? styles.viewMoreButtonMobile
+                              : styles.viewMoreButton),
+                            backgroundColor: item.buttonColor,
+                          } as React.CSSProperties
+                        }
+                        onClick={handleViewMore}
+                      >
+                        <span style={styles.buttonText as React.CSSProperties}>
+                          View More
+                        </span>
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          style={styles.buttonIcon as React.CSSProperties}
+                        >
+                          <path
+                            d="M5 12H19M19 12L12 5M19 12L12 19"
+                            stroke="white"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div
+                      style={
+                        (isMobile
+                          ? styles.imageSectionMobile
+                          : styles.imageSection) as React.CSSProperties
+                      }
+                    >
+                      <div
+                        style={
+                          (isMobile
+                            ? styles.imageContainerMobile
+                            : styles.imageContainer) as React.CSSProperties
+                        }
+                      >
+                        <Image
+                          src={item.imgSrc}
+                          alt={item.title}
+                          priority
+                          width={isMobile ? 280 : 400}
+                          height={isMobile ? 280 : 500}
+                          style={
+                            (isMobile
+                              ? styles.mainImageMobile
+                              : styles.mainImage) as React.CSSProperties
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
 
           {/* Dots Container */}
           <div style={styles.dotsContainer as React.CSSProperties}>
-            {quadradosData.map((_, index) => (
+            {data.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
+                disabled={isTransitioning}
                 style={
                   {
                     ...styles.dot,
@@ -383,6 +428,8 @@ const Quadrado: React.FC = () => {
                     transform:
                       index === currentIndex ? "scale(1.2)" : "scale(1)",
                     transition: "all 0.3s ease",
+                    cursor: isTransitioning ? "not-allowed" : "pointer",
+                    opacity: isTransitioning ? 0.5 : 1,
                   } as React.CSSProperties
                 }
               />
@@ -393,15 +440,17 @@ const Quadrado: React.FC = () => {
           {!isMobile && (
             <button
               onClick={nextSlide}
+              disabled={isTransitioning}
               style={
                 {
                   ...styles.arrowButton,
                   right: "-50px",
-                  opacity: isVisible ? 1 : 0,
+                  opacity: isVisible ? (isTransitioning ? 0.5 : 1) : 0,
                   transform: isVisible
                     ? "translateY(-50%) translateX(0)"
                     : "translateY(-50%) translateX(20px)",
                   transition: "all 0.8s ease-out",
+                  cursor: isTransitioning ? "not-allowed" : "pointer",
                 } as React.CSSProperties
               }
             >
@@ -424,7 +473,14 @@ const Quadrado: React.FC = () => {
         <div style={styles.mobileNavigation as React.CSSProperties}>
           <button
             onClick={prevSlide}
-            style={styles.mobileNavButton as React.CSSProperties}
+            disabled={isTransitioning}
+            style={
+              {
+                ...styles.mobileNavButton,
+                opacity: isTransitioning ? 0.5 : 1,
+                cursor: isTransitioning ? "not-allowed" : "pointer",
+              } as React.CSSProperties
+            }
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
@@ -438,7 +494,14 @@ const Quadrado: React.FC = () => {
           </button>
           <button
             onClick={nextSlide}
-            style={styles.mobileNavButton as React.CSSProperties}
+            disabled={isTransitioning}
+            style={
+              {
+                ...styles.mobileNavButton,
+                opacity: isTransitioning ? 0.5 : 1,
+                cursor: isTransitioning ? "not-allowed" : "pointer",
+              } as React.CSSProperties
+            }
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
@@ -587,10 +650,10 @@ const styles = {
     position: "relative",
     borderRadius: "15px 15px 0px 0px",
     overflow: "hidden",
-    width: "400px",
-    height: "500px",
+    width: "320px",
+    height: "420px",
     margin: "0 auto",
-    marginLeft: "-90px",
+    marginLeft: "-10px",
   },
   mainImage: {
     borderRadius: "15px 15px 0px 0px",
