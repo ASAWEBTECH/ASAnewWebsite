@@ -5,8 +5,8 @@ import { GraduationCap } from "lucide-react";
 const Quadrado: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -72,34 +72,33 @@ const Quadrado: React.FC = () => {
     },
   ];
 
+  // Preload all images when component mounts
+  useEffect(() => {
+    const preloadImages = () => {
+      quadradosData.forEach((item) => {
+        const img = new window.Image();
+        img.onload = () => {
+          setImagesLoaded(prev => new Set([...prev, item.imgSrc]));
+        };
+        img.src = item.imgSrc;
+      });
+    };
+
+    preloadImages();
+  }, []);
+
   const nextSlide = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % quadradosData.length);
-      setIsTransitioning(false);
-    }, 150);
+    setCurrentIndex((prev) => (prev + 1) % quadradosData.length);
   };
 
   const prevSlide = () => {
-    if (isTransitioning) return;
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentIndex(
-        (prev) => (prev - 1 + quadradosData.length) % quadradosData.length
-      );
-      setIsTransitioning(false);
-    }, 150);
+    setCurrentIndex(
+      (prev) => (prev - 1 + quadradosData.length) % quadradosData.length
+    );
   };
 
   const goToSlide = (index: number) => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        setCurrentIndex(index);
-        setIsTransitioning(false);
-      }, 150);
-    }
+    setCurrentIndex(index);
   };
 
   const handleViewMore = () => {
@@ -124,10 +123,11 @@ const Quadrado: React.FC = () => {
         sectionId = "pre-k-kindergarten";
     }
 
-    // Save section ID to localStorage and navigate
+    // Navigate without localStorage (since it's not supported)
     if (typeof window !== "undefined") {
-      localStorage.setItem("scrollToSection", sectionId);
-      window.location.href = "/Education";
+      // You can replace this with your routing solution
+      const url = `/Education?section=${sectionId}`;
+      window.location.href = url;
     }
   };
 
@@ -176,44 +176,43 @@ const Quadrado: React.FC = () => {
             >
               Discover our comprehensive educational programs designed to
               nurture students at every stage of their learning journey. Your
-              child’s full academic path from Pre-K to their second year of
+              child&lsquo;s full academic path from Pre-K to their second year of
               university. All in one place
             </p>
 
+            <div className="flex items-center justify-center m-4">
+              <div
+                className="w-1 h-12 sm:h-14 md:h-16 mr-4
+                bg-gradient-to-b from-red-400 to-red-600 rounded-full 
+                shadow-[0_2px_4px_rgba(239,68,68,0.2)]
+                relative animate-pulse flex-shrink-0"
+              />
 
-<div className="flex items-center justify-center m-4">
-            <div
-    className="w-1 h-12 sm:h-14 md:h-16 mr-4
-              bg-gradient-to-b from-red-400 to-red-600 rounded-full 
-              shadow-[0_2px_4px_rgba(239,68,68,0.2)]
-              relative animate-pulse flex-shrink-0"
-  />
-
-  <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
-    <div className="flex items-center gap-2 sm:gap-3">
-      <div
-        className="bg-gradient-to-br from-red-500 to-red-700 
-                  p-1.5 sm:p-2 rounded-full 
-                  shadow-[0_4px_12px_rgba(239,68,68,0.25)]
-                  cursor-pointer transition-all hover:scale-105 flex-shrink-0"
-      >
-        <GraduationCap className="w-3 h-3 sm:w-3.5 text-white" />
-      </div>
-      <h2 className="text-white text-sm sm:text-base md:text-lg 
-                    font-bold drop-shadow-md 
-                    leading-tight">
-        More than 100 Courses
-      </h2>
-    </div>
-    <p className="text-white/90 text-xs sm:text-sm
-                leading-relaxed pl-6 sm:pl-8 
-                drop-shadow-sm -mt-1
-                line-clamp-2">
-      Our educational programs are designed to provide students with the
-      skills necessary for success.
-    </p>
-  </div>
-  </div>
+              <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div
+                    className="bg-gradient-to-br from-red-500 to-red-700 
+                      p-1.5 sm:p-2 rounded-full 
+                      shadow-[0_4px_12px_rgba(239,68,68,0.25)]
+                      cursor-pointer transition-all hover:scale-105 flex-shrink-0"
+                  >
+                    <GraduationCap className="w-3 h-3 sm:w-3.5 text-white" />
+                  </div>
+                  <h2 className="text-white text-sm sm:text-base md:text-lg 
+                        font-bold drop-shadow-md 
+                        leading-tight">
+                    More than 100 Courses
+                  </h2>
+                </div>
+                <p className="text-white/90 text-xs sm:text-sm
+                    leading-relaxed pl-6 sm:pl-8 
+                    drop-shadow-sm -mt-1
+                    line-clamp-2">
+                  Our educational programs are designed to provide students with the
+                  skills necessary for success.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -252,11 +251,10 @@ const Quadrado: React.FC = () => {
             style={
               {
                 ...(isMobile ? styles.quadradoBlurMobile : styles.quadradoBlur),
-                opacity: isVisible && !isTransitioning ? 1 : 0,
-                transform:
-                  isVisible && !isTransitioning
-                    ? "translateY(0) scale(1) rotateY(0deg)"
-                    : "translateY(30px) scale(0.9) rotateY(180deg)",
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible
+                  ? "translateY(0) scale(1)"
+                  : "translateY(30px) scale(0.9)",
                 transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               } as React.CSSProperties
             }
@@ -277,18 +275,24 @@ const Quadrado: React.FC = () => {
               >
                 <h2
                   style={
-                    (isMobile
-                      ? styles.titleTextMobile
-                      : styles.titleText) as React.CSSProperties
+                    {
+                      ...(isMobile
+                        ? styles.titleTextMobile
+                        : styles.titleText),
+                      transition: "all 0.3s ease",
+                    } as React.CSSProperties
                   }
                 >
                   {currentItem.title}
                 </h2>
                 <p
                   style={
-                    (isMobile
-                      ? styles.descriptionTextMobile
-                      : styles.descriptionText) as React.CSSProperties
+                    {
+                      ...(isMobile
+                        ? styles.descriptionTextMobile
+                        : styles.descriptionText),
+                      transition: "all 0.3s ease",
+                    } as React.CSSProperties
                   }
                 >
                   {currentItem.description}
@@ -300,6 +304,7 @@ const Quadrado: React.FC = () => {
                         ? styles.viewMoreButtonMobile
                         : styles.viewMoreButton),
                       backgroundColor: currentItem.buttonColor,
+                      transition: "all 0.3s ease",
                     } as React.CSSProperties
                   }
                   onClick={handleViewMore}
@@ -333,9 +338,12 @@ const Quadrado: React.FC = () => {
               >
                 <div
                   style={
-                    (isMobile
-                      ? styles.imageContainerMobile
-                      : styles.imageContainer) as React.CSSProperties
+                    {
+                      ...(isMobile
+                        ? styles.imageContainerMobile
+                        : styles.imageContainer),
+                      transition: "all 0.3s ease",
+                    } as React.CSSProperties
                   }
                 >
                   <Image
@@ -345,9 +353,13 @@ const Quadrado: React.FC = () => {
                     width={isMobile ? 280 : 400}
                     height={isMobile ? 280 : 500}
                     style={
-                      (isMobile
-                        ? styles.mainImageMobile
-                        : styles.mainImage) as React.CSSProperties
+                      {
+                        ...(isMobile
+                          ? styles.mainImageMobile
+                          : styles.mainImage),
+                        transition: "opacity 0.3s ease",
+                        opacity: imagesLoaded.has(currentItem.imgSrc) ? 1 : 0.7,
+                      } as React.CSSProperties
                     }
                   />
                 </div>
@@ -370,6 +382,7 @@ const Quadrado: React.FC = () => {
                         : "rgba(255, 255, 255, 0.4)",
                     transform:
                       index === currentIndex ? "scale(1.2)" : "scale(1)",
+                    transition: "all 0.3s ease",
                   } as React.CSSProperties
                 }
               />
@@ -439,9 +452,6 @@ const Quadrado: React.FC = () => {
           </button>
         </div>
       )}
-
-      {/* Adicione aqui o código*/}
-      {/* Clouds at bottom */}
     </div>
   );
 };
@@ -456,59 +466,6 @@ const styles = {
     justifyContent: "center",
     padding: "40px 20px",
     minHeight: "700px",
-  },
-
-  // Clouds styling
-  cloudsTop: {
-    pointerEvents: "none",
-    position: "absolute",
-    top: "0",
-    left: "0",
-    width: "100%",
-    zIndex: "20",
-    overflow: "hidden",
-  },
-  cloudsBottom: {
-    pointerEvents: "none",
-    position: "absolute",
-    bottom: "0",
-    left: "0",
-    width: "100%",
-    zIndex: "20",
-    overflow: "hidden",
-  },
-  cloudSvg1: {
-    height: "60px",
-    display: "block",
-    width: "100vw",
-    minWidth: "100vw",
-    transform: "rotate(180deg)",
-  },
-  cloudSvg2: {
-    height: "70px",
-    position: "absolute",
-    left: "0",
-    top: "0",
-    minWidth: "100vw",
-    display: "block",
-    transform: "scaleX(-1) rotate(180deg)",
-    width: "100vw",
-  },
-  cloudSvg3: {
-    height: "60px",
-    minWidth: "100vw",
-    display: "block",
-    width: "100vw",
-  },
-  cloudSvg4: {
-    height: "70px",
-    position: "absolute",
-    left: "0",
-    top: "0",
-    minWidth: "100vw",
-    display: "block",
-    transform: "scaleX(-1)",
-    width: "100vw",
   },
 
   // Desktop styles
@@ -571,8 +528,6 @@ const styles = {
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
     border: "1px solid rgba(255, 255, 255, 0.2)",
-    perspective: "1000px",
-    transformStyle: "preserve-3d",
   },
   cardContent: {
     display: "flex",
@@ -618,7 +573,6 @@ const styles = {
     fontSize: "13px",
     fontWeight: "600",
     color: "#fff",
-    transition: "all 0.3s ease",
     boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
   },
   imageSection: {
@@ -756,7 +710,6 @@ const styles = {
     fontSize: "14px",
     fontWeight: "600",
     color: "#fff",
-    transition: "all 0.3s ease",
     boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
   },
   imageSectionMobile: {
@@ -824,7 +777,6 @@ const styles = {
     borderRadius: "50%",
     border: "none",
     cursor: "pointer",
-    transition: "all 0.3s ease",
     opacity: 0.8,
   },
   buttonText: {
