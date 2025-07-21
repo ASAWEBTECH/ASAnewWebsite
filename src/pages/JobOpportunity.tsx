@@ -250,7 +250,7 @@ const stats = [
             <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">
               <div className="absolute inset-0 z-0">
                 <Image
-              src="/fundoJob.webp"
+              src="/FundoJob.webp"
               alt="Gallery background"
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}

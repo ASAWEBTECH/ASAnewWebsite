@@ -181,10 +181,14 @@ const SchoolGallery = () => {
           >
             {/* Image Container */}
             <div className="relative overflow-hidden">
-              <img
+              <Image
                 src={activity.imageUrl}
                 alt={activity.title}
+                width={800}
+                height={400}
                 className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                style={{ objectFit: "cover" }}
+                priority={activity.id === 1}
               />
               
               {/* Top Icons Row */}
@@ -256,10 +260,10 @@ const SchoolGallery = () => {
 
       {/* Load More Button */}
       <div className="text-center mt-12">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 inline-flex items-center">
+        <a href="https://www.instagram.com/asangola?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 inline-flex items-center">
           <Instagram className="w-5 h-5 mr-2" />
           View More Activities
-        </button>
+        </a>
       </div>
     </section>
       {/* Footer */}

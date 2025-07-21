@@ -136,13 +136,13 @@ export default function Home() {
         delay={200}
       >
 
-        <div className="pointer-events-none absolute top-0 left-0 w-full z-20 overflow-hidden">
+        <div className="pointer-events-none absolute top-4 left-0 w-full z-20 overflow-hidden">
           {/* First cloud, left to right, lower opacity */}
           <svg
             viewBox="0 0 1440 220"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[120px] min-w-full"
+            className="w-full h-[60px] min-w-full"
             style={{
               display: "block",
               width: "100vw",
@@ -168,7 +168,7 @@ export default function Home() {
             viewBox="0 0 1440 220"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[140px] absolute left-0 top-0 min-w-full"
+            className="w-full h-[80px] absolute left-0 top-0 min-w-full"
             style={{
               display: "block",
               transform: "scaleX(-1) rotate(180deg)",
@@ -198,7 +198,7 @@ export default function Home() {
             viewBox="0 0 1440 220"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[120px] min-w-full"
+            className="w-full h-[100px] min-w-full"
             style={{
               display: "block",
               width: "100vw",
@@ -223,7 +223,7 @@ export default function Home() {
             viewBox="0 0 1440 220"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[140px] absolute left-0 top-0 min-w-full"
+            className="w-full h-[120px] absolute left-0 top-0 min-w-full"
             style={{
               display: "block",
               transform: "scaleX(-1)",
@@ -259,8 +259,7 @@ export default function Home() {
 
 const styles: { [key: string]: CSSProperties } = {
   sectionEducation: {
-
-    backgroundImage: `url('./FS.png')`,
+    backgroundImage: `url('./FS.webp')`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",

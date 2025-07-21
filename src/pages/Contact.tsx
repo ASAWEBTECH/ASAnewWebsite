@@ -23,7 +23,7 @@ export default function Contact() {
       <div className="relative h-[90vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/fundoContactos.webp"
+            src="/FundoContactos.webp"
             alt="Gallery background"
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}
@@ -114,7 +114,7 @@ export default function Contact() {
         {/* Contact Information Blocks - Horizontal Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {/* Address Block */}
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border border-blue-100 flex flex-col items-center text-center">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm p-8 border-2 border-blue-100 flex flex-col items-center text-center">
             <div className="bg-blue-100 p-4 rounded-full mb-4 shadow">
               <MapPin className="w-8 h-8 text-blue-600" />
             </div>
@@ -129,7 +129,7 @@ export default function Contact() {
           </div>
 
           {/* Phone Block */}
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border border-green-100 flex flex-col items-center text-center">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm p-8 border-2 border-green-100 flex flex-col items-center text-center">
             <div className="bg-green-100 p-4 rounded-full mb-4 shadow">
               <Phone className="w-8 h-8 text-green-600" />
             </div>
@@ -142,7 +142,7 @@ export default function Contact() {
           </div>
 
           {/* Email Block */}
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border border-purple-100 flex flex-col items-center text-center">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm p-8 border-2 border-purple-100 flex flex-col items-center text-center">
             <div className="bg-purple-100 p-4 rounded-full mb-4 shadow">
               <Mail className="w-8 h-8 text-purple-600" />
             </div>
@@ -155,7 +155,7 @@ export default function Contact() {
           </div>
 
           {/* Business Hours Block */}
-          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border border-orange-100 flex flex-col items-center text-center">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-sm p-8 border-2 border-orange-100 flex flex-col items-center text-center">
             <div className="bg-orange-100 p-4 rounded-full mb-4 shadow">
               <Clock className="w-8 h-8 text-orange-600" />
             </div>

@@ -296,7 +296,7 @@ function About() {
             </div>
             <div className="text-center">
               <Image
-                src="/LogoASA.png"
+                src="/LogoASA.webp"
                 alt="ASA Logo"
                 width={200}
                 height={200}
@@ -670,7 +670,7 @@ function About() {
             <div className="grid md:grid-cols-3 gap-6 items-center">
               <div className="text-center">
                 <Image
-                  src="/ministry-logo.JPG"
+                  src="/ministry-logo.jpg"
                   alt="Angolan Ministry of Education"
                   width={200}
                   height={150}
@@ -692,7 +692,7 @@ function About() {
               </div>
               <div className="text-center">
                 <Image
-                  src="/advenced.JPG"
+                  src="/advenced.jpg"
                   alt="Advanced accreditation"
                   width={200}
                   height={150}

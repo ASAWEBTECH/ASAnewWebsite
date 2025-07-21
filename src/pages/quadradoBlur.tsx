@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { GraduationCap } from "lucide-react";
 
 const Quadrado: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -12,11 +13,11 @@ const Quadrado: React.FC = () => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -45,31 +46,31 @@ const Quadrado: React.FC = () => {
   }, []);
 
   const quadradosData = [
-{
-title: "Kindergarten",
-imgSrc: "/A2.webp",
-buttonColor: "#22B14C",
-description: "Building foundation for early learning",
-},
-{
-title: "Elementary",
-imgSrc: "/A1.webp",
-buttonColor: "#00A2E8",
-description: "Developing core academic skills",
-},
-{
-title: "Middle School",
-imgSrc: "/A4.webp",
-buttonColor: "#2e2b70",
-description: "Preparing for advanced learning",
-},
-{
-title: "High School",
-imgSrc: "/A3.webp",
-buttonColor: "#FF4444",
-description: "Ready for college and career",
-},
-];
+    {
+      title: "Kindergarten",
+      imgSrc: "/A2.webp",
+      buttonColor: "#22B14C",
+      description: "Building foundation for early learning",
+    },
+    {
+      title: "Elementary",
+      imgSrc: "/A1.webp",
+      buttonColor: "#00A2E8",
+      description: "Developing core academic skills",
+    },
+    {
+      title: "Middle School",
+      imgSrc: "/A4.webp",
+      buttonColor: "#2e2b70",
+      description: "Preparing for advanced learning",
+    },
+    {
+      title: "High School",
+      imgSrc: "/A3.webp",
+      buttonColor: "#FF4444",
+      description: "Ready for college and career",
+    },
+  ];
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -84,7 +85,9 @@ description: "Ready for college and career",
     if (isTransitioning) return;
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + quadradosData.length) % quadradosData.length);
+      setCurrentIndex(
+        (prev) => (prev - 1 + quadradosData.length) % quadradosData.length
+      );
       setIsTransitioning(false);
     }, 150);
   };
@@ -101,28 +104,28 @@ description: "Ready for college and career",
 
   const handleViewMore = () => {
     const currentItem = quadradosData[currentIndex];
-    let sectionId = '';
-    
+    let sectionId = "";
+
     // Map titles to section IDs
-    switch(currentItem.title) {
+    switch (currentItem.title) {
       case "Kindergarten":
-        sectionId = 'pre-k-kindergarten';
+        sectionId = "pre-k-kindergarten";
         break;
       case "Elementary":
-        sectionId = 'elementary';
+        sectionId = "elementary";
         break;
       case "Middle School":
-        sectionId = 'middle-school';
+        sectionId = "middle-school";
         break;
       case "High School":
-        sectionId = 'high-school';
+        sectionId = "high-school";
         break;
       default:
-        sectionId = 'pre-k-kindergarten';
+        sectionId = "pre-k-kindergarten";
     }
-    
+
     // Save section ID to localStorage and navigate
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       localStorage.setItem("scrollToSection", sectionId);
       window.location.href = "/Education";
     }
@@ -175,15 +178,48 @@ description: "Ready for college and career",
       </div>
 
       {/* Main Content Container */}
-      <div style={(isMobile ? styles.contentContainerMobile : styles.contentContainer) as React.CSSProperties}>
+      <div
+        style={
+          (isMobile
+            ? styles.contentContainerMobile
+            : styles.contentContainer) as React.CSSProperties
+        }
+      >
         {/* Text Section */}
-        <div style={(isMobile ? styles.textContainerMobile : styles.textContainer) as React.CSSProperties}>
-          <div style={(isMobile ? styles.textBlurMobile : styles.textBlur) as React.CSSProperties}>
-            <h1 style={(isMobile ? styles.mainTitleMobile : styles.mainTitle) as React.CSSProperties}>Our Educational Levels</h1>
-            <p style={(isMobile ? styles.mainDescriptionMobile : styles.mainDescription) as React.CSSProperties}>
-              Discover our comprehensive educational programs designed to nurture 
-              students at every stage of their learning journey. From early childhood 
-              development to college preparation, we provide excellence in education.
+        <div
+          style={
+            (isMobile
+              ? styles.textContainerMobile
+              : styles.textContainer) as React.CSSProperties
+          }
+        >
+          <div
+            style={
+              (isMobile
+                ? styles.textBlurMobile
+                : styles.textBlur) as React.CSSProperties
+            }
+          >
+            <h1
+              style={
+                (isMobile
+                  ? styles.mainTitleMobile
+                  : styles.mainTitle) as React.CSSProperties
+              }
+            >
+              Our Educational Levels
+            </h1>
+            <p
+              style={
+                (isMobile
+                  ? styles.mainDescriptionMobile
+                  : styles.mainDescription) as React.CSSProperties
+              }
+            >
+              Discover our comprehensive educational programs designed to
+              nurture students at every stage of their learning journey. Your
+              child’s full academic path from Pre-K to their second year of
+              university. All in one place
             </p>
           </div>
         </div>
@@ -194,13 +230,17 @@ description: "Ready for college and career",
           {!isMobile && (
             <button
               onClick={prevSlide}
-              style={{
-                ...styles.arrowButton,
-                left: "-50px",
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(-50%) translateX(0)" : "translateY(-50%) translateX(-20px)",
-                transition: "all 0.8s ease-out",
-              } as React.CSSProperties}
+              style={
+                {
+                  ...styles.arrowButton,
+                  left: "-50px",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible
+                    ? "translateY(-50%) translateX(0)"
+                    : "translateY(-50%) translateX(-20px)",
+                  transition: "all 0.8s ease-out",
+                } as React.CSSProperties
+              }
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path
@@ -216,28 +256,71 @@ description: "Ready for college and career",
 
           {/* Main Card */}
           <div
-            style={{
-              ...(isMobile ? styles.quadradoBlurMobile : styles.quadradoBlur),
-              opacity: isVisible && !isTransitioning ? 1 : 0,
-              transform: isVisible && !isTransitioning
-                ? "translateY(0) scale(1) rotateY(0deg)"
-                : "translateY(30px) scale(0.9) rotateY(180deg)",
-              transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            } as React.CSSProperties}
+            style={
+              {
+                ...(isMobile ? styles.quadradoBlurMobile : styles.quadradoBlur),
+                opacity: isVisible && !isTransitioning ? 1 : 0,
+                transform:
+                  isVisible && !isTransitioning
+                    ? "translateY(0) scale(1) rotateY(0deg)"
+                    : "translateY(30px) scale(0.9) rotateY(180deg)",
+                transition: "all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              } as React.CSSProperties
+            }
           >
-            <div style={(isMobile ? styles.cardContentMobile : styles.cardContent) as React.CSSProperties}>
-              <div style={(isMobile ? styles.textSectionMobile : styles.textSection) as React.CSSProperties}>
-                <h2 style={(isMobile ? styles.titleTextMobile : styles.titleText) as React.CSSProperties}>{currentItem.title}</h2>
-                <p style={(isMobile ? styles.descriptionTextMobile : styles.descriptionText) as React.CSSProperties}>{currentItem.description}</p>
+            <div
+              style={
+                (isMobile
+                  ? styles.cardContentMobile
+                  : styles.cardContent) as React.CSSProperties
+              }
+            >
+              <div
+                style={
+                  (isMobile
+                    ? styles.textSectionMobile
+                    : styles.textSection) as React.CSSProperties
+                }
+              >
+                <h2
+                  style={
+                    (isMobile
+                      ? styles.titleTextMobile
+                      : styles.titleText) as React.CSSProperties
+                  }
+                >
+                  {currentItem.title}
+                </h2>
+                <p
+                  style={
+                    (isMobile
+                      ? styles.descriptionTextMobile
+                      : styles.descriptionText) as React.CSSProperties
+                  }
+                >
+                  {currentItem.description}
+                </p>
                 <button
-                  style={{
-                    ...(isMobile ? styles.viewMoreButtonMobile : styles.viewMoreButton),
-                    backgroundColor: currentItem.buttonColor,
-                  } as React.CSSProperties}
+                  style={
+                    {
+                      ...(isMobile
+                        ? styles.viewMoreButtonMobile
+                        : styles.viewMoreButton),
+                      backgroundColor: currentItem.buttonColor,
+                    } as React.CSSProperties
+                  }
                   onClick={handleViewMore}
                 >
-                  <span style={styles.buttonText as React.CSSProperties}>View More</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={styles.buttonIcon as React.CSSProperties}>
+                  <span style={styles.buttonText as React.CSSProperties}>
+                    View More
+                  </span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    style={styles.buttonIcon as React.CSSProperties}
+                  >
                     <path
                       d="M5 12H19M19 12L12 5M19 12L12 19"
                       stroke="white"
@@ -248,14 +331,31 @@ description: "Ready for college and career",
                   </svg>
                 </button>
               </div>
-              <div style={(isMobile ? styles.imageSectionMobile : styles.imageSection) as React.CSSProperties}>
-                <div style={(isMobile ? styles.imageContainerMobile : styles.imageContainer) as React.CSSProperties}>
+              <div
+                style={
+                  (isMobile
+                    ? styles.imageSectionMobile
+                    : styles.imageSection) as React.CSSProperties
+                }
+              >
+                <div
+                  style={
+                    (isMobile
+                      ? styles.imageContainerMobile
+                      : styles.imageContainer) as React.CSSProperties
+                  }
+                >
                   <Image
-                  src={currentItem.imgSrc}
-                  alt={currentItem.title}
-                  width={isMobile ? 280 : 300}
-                  height={isMobile ? 280 : 400}
-                  style={(isMobile ? styles.mainImageMobile : styles.mainImage) as React.CSSProperties}
+                    src={currentItem.imgSrc}
+                    alt={currentItem.title}
+                    priority
+                    width={isMobile ? 280 : 400}
+                    height={isMobile ? 280 : 500}
+                    style={
+                      (isMobile
+                        ? styles.mainImageMobile
+                        : styles.mainImage) as React.CSSProperties
+                    }
                   />
                 </div>
               </div>
@@ -268,11 +368,17 @@ description: "Ready for college and career",
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                style={{
-                  ...styles.dot,
-                  backgroundColor: index === currentIndex ? "#fff" : "rgba(255, 255, 255, 0.4)",
-                  transform: index === currentIndex ? "scale(1.2)" : "scale(1)",
-                } as React.CSSProperties}
+                style={
+                  {
+                    ...styles.dot,
+                    backgroundColor:
+                      index === currentIndex
+                        ? "#fff"
+                        : "rgba(255, 255, 255, 0.4)",
+                    transform:
+                      index === currentIndex ? "scale(1.2)" : "scale(1)",
+                  } as React.CSSProperties
+                }
               />
             ))}
           </div>
@@ -281,13 +387,17 @@ description: "Ready for college and career",
           {!isMobile && (
             <button
               onClick={nextSlide}
-              style={{
-                ...styles.arrowButton,
-                right: "-50px",
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(-50%) translateX(0)" : "translateY(-50%) translateX(20px)",
-                transition: "all 0.8s ease-out",
-              } as React.CSSProperties}
+              style={
+                {
+                  ...styles.arrowButton,
+                  right: "-50px",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible
+                    ? "translateY(-50%) translateX(0)"
+                    : "translateY(-50%) translateX(20px)",
+                  transition: "all 0.8s ease-out",
+                } as React.CSSProperties
+              }
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path
@@ -306,7 +416,10 @@ description: "Ready for college and career",
       {/* Mobile Navigation Buttons */}
       {isMobile && (
         <div style={styles.mobileNavigation as React.CSSProperties}>
-          <button onClick={prevSlide} style={styles.mobileNavButton as React.CSSProperties}>
+          <button
+            onClick={prevSlide}
+            style={styles.mobileNavButton as React.CSSProperties}
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
                 d="M15 18L9 12L15 6"
@@ -317,7 +430,10 @@ description: "Ready for college and career",
               />
             </svg>
           </button>
-          <button onClick={nextSlide} style={styles.mobileNavButton as React.CSSProperties}>
+          <button
+            onClick={nextSlide}
+            style={styles.mobileNavButton as React.CSSProperties}
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path
                 d="M9 18L15 12L9 6"
@@ -330,6 +446,37 @@ description: "Ready for college and career",
           </button>
         </div>
       )}
+
+      {/* Adicione aqui o código*/}
+      <div
+        className="self-start ml-4 sm:ml-10 md:ml-20 lg:ml-40 -mt-10 sm:-mt-16 md:-mt-20 lg:-mt-24 
+                flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 
+                rounded-2xl p-2 shadow-[0_20px_40px_rgba(0,0,0,0.2)] max-w-full md:max-w-lg 
+                w-full transition-all duration-1000 ease-out opacity-100 translate-y-0"
+      >
+        <div
+          className="w-1 h-24 bg-gradient-to-b from-red-400 to-red-600 rounded-full 
+                  shadow-[0_4px_8px_rgba(239,68,68,0.3)] relative animate-pulse"
+        />
+
+        <div className="flex flex-col gap-3 flex-1">
+          <div className="flex items-center gap-4">
+            <div
+              className="bg-gradient-to-br from-red-500 to-red-700 p-3 rounded-full 
+                      shadow-[0_6px_20px_rgba(239,68,68,0.3)] cursor-pointer transition-all"
+            >
+              <GraduationCap className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="text-white text-base sm:text-lg md:text-xl font-extrabold  drop-shadow-md">
+              More than 100 Courses
+            </h2>
+          </div>
+          <p className="text-white/90 text-xs sm:text-sm leading-relaxed pl-14 drop-shadow-sm max-w-md -mt-3">
+            Our educational programs are designed to provide students with the
+            skills necessary for success.
+          </p>
+        </div>
+      </div>
 
       {/* Clouds at bottom */}
       <div style={styles.cloudsBottom as React.CSSProperties}>
@@ -387,7 +534,7 @@ const styles = {
     padding: "40px 20px",
     minHeight: "700px",
   },
-  
+
   // Clouds styling
   cloudsTop: {
     pointerEvents: "none",
@@ -440,10 +587,11 @@ const styles = {
     transform: "scaleX(-1)",
     width: "100vw",
   },
-  
+
   // Desktop styles
   contentContainer: {
     display: "flex",
+    marginTop: "-60px",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
@@ -490,6 +638,7 @@ const styles = {
     margin: "0",
   },
   quadradoBlur: {
+    marginTop: "100px",
     width: "540px",
     height: "420px",
     borderRadius: "20px",
@@ -539,7 +688,7 @@ const styles = {
     alignItems: "center",
     gap: "6px",
     padding: "8px 16px",
-    borderRadius: "25px",
+    borderRadius: "6px",
     border: "none",
     cursor: "pointer",
     fontSize: "13px",
@@ -560,9 +709,10 @@ const styles = {
     position: "relative",
     borderRadius: "15px 15px 0px 0px",
     overflow: "hidden",
-    width: "300px",
-    height: "400px",
+    width: "400px",
+    height: "500px",
     margin: "0 auto",
+    marginLeft: "-90px",
   },
   mainImage: {
     borderRadius: "15px 15px 0px 0px",

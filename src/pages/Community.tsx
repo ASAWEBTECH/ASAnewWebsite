@@ -257,7 +257,7 @@ function Community() {
             </div>
             <div className="relative">
               <Image
-                src="/Skillsimg.JPG"
+                src="/Skillsimg.jpg"
                 alt="Skills for Success"
                 width={600}
                 height={550}
