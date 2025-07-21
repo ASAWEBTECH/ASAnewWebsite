@@ -15,11 +15,11 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
 
   // Lista de títulos para cada slide
   const slideTitles: string[] = [
-    "ACADEMIC EXCELLENCE WITH REAL RESULTS",
-    "MODERN TECHNOLOGY FOR BETTER LEARNING",
-    "ACTIVE PHYSICAL AND SPORTS DEVELOPMENT",
-    "SAFE, WELCOMING AND INCLUSIVE ENVIRONMENT",
-    "COMPLETE PREPARATION FOR A BRIGHT FUTURE",
+    "Academic Excellence with Real Results",
+    "Modern Technology for Better Learning",
+    "Active Physical and Sports Development",
+    "Safe, Welcoming and Inclusive Environment",
+    "Complete Preparation for a Bright Future",
   ];
 
   // Descrição fixa
@@ -103,7 +103,7 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
           <div className="w-10 xs:w-14 sm:w-20 h-0.5 sm:h-1 bg-[#ff9f00] mb-2 sm:mb-4" />
           <h1
             className={`font-bold font-poppins mb-4 sm:mb-6 leading-relaxed transition-all duration-1000 ease-out
-      text-lg xs:text-2xl sm:text-4xl md:text-4xl max-w-7xl p-4  bg-gradient-to-tr from-[#2e2b70]/90 to-[#221f52]/10 shadow-2xl
+      text-lg xs:text-2xl sm:text-4xl md:text-5xl max-w-xl
       ${
         isLoaded && textVisible
           ? "opacity-100 translate-x-0 translate-y-0"
