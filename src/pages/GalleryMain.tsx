@@ -41,7 +41,7 @@ const SchoolGallery = () => {
       title: "United Youth Taekwondo Tournament",
       date: "05-28-2024",
       description: "The first edition of the United Youth Taekwondo Tournament brought together over 40 young athletes at the Pavilion",
-      imageUrl: "/m3.png",
+      imageUrl: "/m3.webp",
       photoInstagramUrl: "https://www.instagram.com/p/example3",
       videoInstagramUrl: "https://www.instagram.com/p/video3"
     },

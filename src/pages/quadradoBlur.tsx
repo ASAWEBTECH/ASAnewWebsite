@@ -135,48 +135,6 @@ const Quadrado: React.FC = () => {
 
   return (
     <div style={styles.mainContainer as React.CSSProperties} ref={containerRef}>
-      {/* Clouds at top */}
-      <div style={styles.cloudsTop as React.CSSProperties}>
-        <svg
-          viewBox="0 0 1440 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={styles.cloudSvg1 as React.CSSProperties}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-            fill="white"
-            opacity="0.25"
-          />
-          <path
-            d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-            fill="white"
-            opacity="0.12"
-          />
-        </svg>
-        <svg
-          viewBox="0 0 1440 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={styles.cloudSvg2 as React.CSSProperties}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-            fill="white"
-            opacity="0.45"
-          />
-          <path
-            d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-            fill="white"
-            opacity="0.25"
-          />
-        </svg>
-      </div>
-
       {/* Main Content Container */}
       <div
         style={
@@ -221,6 +179,41 @@ const Quadrado: React.FC = () => {
               child’s full academic path from Pre-K to their second year of
               university. All in one place
             </p>
+
+
+<div className="flex items-center justify-center m-4">
+            <div
+    className="w-1 h-12 sm:h-14 md:h-16 mr-4
+              bg-gradient-to-b from-red-400 to-red-600 rounded-full 
+              shadow-[0_2px_4px_rgba(239,68,68,0.2)]
+              relative animate-pulse flex-shrink-0"
+  />
+
+  <div className="flex flex-col gap-1 sm:gap-2 flex-1 min-w-0">
+    <div className="flex items-center gap-2 sm:gap-3">
+      <div
+        className="bg-gradient-to-br from-red-500 to-red-700 
+                  p-1.5 sm:p-2 rounded-full 
+                  shadow-[0_4px_12px_rgba(239,68,68,0.25)]
+                  cursor-pointer transition-all hover:scale-105 flex-shrink-0"
+      >
+        <GraduationCap className="w-3 h-3 sm:w-3.5 text-white" />
+      </div>
+      <h2 className="text-white text-sm sm:text-base md:text-lg 
+                    font-bold drop-shadow-md 
+                    leading-tight">
+        More than 100 Courses
+      </h2>
+    </div>
+    <p className="text-white/90 text-xs sm:text-sm
+                leading-relaxed pl-6 sm:pl-8 
+                drop-shadow-sm -mt-1
+                line-clamp-2">
+      Our educational programs are designed to provide students with the
+      skills necessary for success.
+    </p>
+  </div>
+  </div>
           </div>
         </div>
 
@@ -448,77 +441,7 @@ const Quadrado: React.FC = () => {
       )}
 
       {/* Adicione aqui o código*/}
-      <div
-        className="self-start ml-4 sm:ml-10 md:ml-20 lg:ml-40 -mt-10 sm:-mt-16 md:-mt-20 lg:-mt-24 
-                flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 
-                rounded-2xl p-2 shadow-[0_20px_40px_rgba(0,0,0,0.2)] max-w-full md:max-w-lg 
-                w-full transition-all duration-1000 ease-out opacity-100 translate-y-0"
-      >
-        <div
-          className="w-1 h-24 bg-gradient-to-b from-red-400 to-red-600 rounded-full 
-                  shadow-[0_4px_8px_rgba(239,68,68,0.3)] relative animate-pulse"
-        />
-
-        <div className="flex flex-col gap-3 flex-1">
-          <div className="flex items-center gap-4">
-            <div
-              className="bg-gradient-to-br from-red-500 to-red-700 p-3 rounded-full 
-                      shadow-[0_6px_20px_rgba(239,68,68,0.3)] cursor-pointer transition-all"
-            >
-              <GraduationCap className="w-4 h-4 text-white" />
-            </div>
-            <h2 className="text-white text-base sm:text-lg md:text-xl font-extrabold  drop-shadow-md">
-              More than 100 Courses
-            </h2>
-          </div>
-          <p className="text-white/90 text-xs sm:text-sm leading-relaxed pl-14 drop-shadow-sm max-w-md -mt-3">
-            Our educational programs are designed to provide students with the
-            skills necessary for success.
-          </p>
-        </div>
-      </div>
-
       {/* Clouds at bottom */}
-      <div style={styles.cloudsBottom as React.CSSProperties}>
-        <svg
-          viewBox="0 0 1440 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={styles.cloudSvg3 as React.CSSProperties}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-            fill="white"
-            opacity="0.25"
-          />
-          <path
-            d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-            fill="white"
-            opacity="0.12"
-          />
-        </svg>
-        <svg
-          viewBox="0 0 1440 220"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={styles.cloudSvg4 as React.CSSProperties}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-            fill="white"
-            opacity="0.45"
-          />
-          <path
-            d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-            fill="white"
-            opacity="0.25"
-          />
-        </svg>
-      </div>
     </div>
   );
 };
@@ -607,6 +530,7 @@ const styles = {
     paddingRight: "40px",
   },
   textBlur: {
+    marginTop: "80px",
     borderRadius: "20px",
     backgroundColor: "rgba(255, 255, 255, 0.15)",
     backdropFilter: "blur(20px)",
@@ -688,7 +612,7 @@ const styles = {
     alignItems: "center",
     gap: "6px",
     padding: "8px 16px",
-    borderRadius: "6px",
+    borderRadius: "10px",
     border: "none",
     cursor: "pointer",
     fontSize: "13px",

@@ -107,13 +107,11 @@ export default function Home() {
       </div>
 
       {/* Education Section */}
-      <AnimatedSection
+      <section
         className="relative"
-        style={styles.sectionEducation}
-        delay={300}
-      >
+        style={styles.sectionEducation}>
           <Quadrado />
-      </AnimatedSection>
+      </section>
 
       {/* Newsletter Section */}
       <AnimatedSection delay={100}>
@@ -130,122 +128,13 @@ export default function Home() {
       </div>
 
       {/* Community Section */}
-      <AnimatedSection
+      <section
         style={styles.sectionCommunity}
         className="bg-gradient-to-br from-blue-50 to-indigo-50"
-        delay={200}
       >
 
-        <div className="pointer-events-none absolute top-4 left-0 w-full z-20 overflow-hidden">
-          {/* First cloud, left to right, lower opacity */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[60px] min-w-full"
-            style={{
-              display: "block",
-              width: "100vw",
-              minWidth: "100vw",
-              transform: "rotate(180deg)",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.18"
-            />
-          </svg>
-          {/* Second cloud, right to left, higher opacity, mirrored */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[80px] absolute left-0 top-0 min-w-full"
-            style={{
-              display: "block",
-              transform: "scaleX(-1) rotate(180deg)",
-              width: "100vw",
-              minWidth: "100vw",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.65"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-          </svg>
-        </div>
-
         <HeroSection />
-        <div className="pointer-events-none absolute bottom-16 left-0 w-full z-20 overflow-hidden">
-          {/* First cloud, left to right, lower opacity */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[100px] min-w-full"
-            style={{
-              display: "block",
-              width: "100vw",
-              minWidth: "100vw",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.18"
-            />
-          </svg>
-          {/* Second cloud, right to left, higher opacity, mirrored */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[120px] absolute left-0 top-0 min-w-full"
-            style={{
-              display: "block",
-              transform: "scaleX(-1)",
-              width: "100vw",
-              minWidth: "100vw",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.65"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-          </svg>
-        </div>
-      </AnimatedSection>
+      </section>
 
       {/* FAQ Section */}
       <AnimatedSection delay={150}>
