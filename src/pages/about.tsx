@@ -3,9 +3,22 @@ import { Phone, MapPin, GraduationCap, Award,RotateCcw } from "lucide-react";
 import { Header } from "../components/Header";
 import Image from "next/image";
 import Footer from "../components/Footer";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 function About() {
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
+  // Animações para seções principais
+  const missionSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const philosophySectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const nondiscriminationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const welcomeSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const programsSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const supportSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const curriculumSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const campusSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const enrollmentSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const locationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const accreditationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
 
   // Staff data array
   /* const staffMembers = [
@@ -174,72 +187,76 @@ function About() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-16">
-      <div className="max-w-7xl mx-auto px-4 py-16">
-  {/* Our Mission Section */}
-  <div className="mb-16">
-    {/* Mission Title and Description - Full Width */}
-    <div className="mb-12">
-      <h2 className="text-4xl font-bold text-[#2e2b70] mb-6 text-center">
-        Our Mission
-      </h2>
-      <p className="text-lg text-gray-700 leading-relaxed mb-8 text-left">
-        The mission of the American Schools of Angola is to nurture and
-        develop successful global citizens and culturally sensitive leaders
-        who are proud well-adjusted lifelong learners; inspired to be
-        extraordinary; and whom create a better world for all.
-      </p>
-    </div>
-
-    {/* Content Grid - Video and 360 Visit Card */}
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-      {/* Video Section */}
-      <div className="w-full">
-        <div className="p-4 bg-white rounded-lg shadow-sm">
-          <iframe
-            className="w-full aspect-video rounded-lg overflow-hidden"
-            src="https://www.youtube.com/embed/CBWzCOrX2s0?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&playlist=CBWzCOrX2s0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="YouTube Video"
-          ></iframe>
+      {/* Our Mission Section */}
+      <div
+        ref={missionSectionAnimation.ref}
+        className={`mb-16 transition-all duration-1000 ease-out ${missionSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      >
+        {/* Mission Title and Description - Full Width */}
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-[#2e2b70] mb-6 text-center">
+            Our Mission
+          </h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 text-left">
+            The mission of the American Schools of Angola is to nurture and
+            develop successful global citizens and culturally sensitive leaders
+            who are proud well-adjusted lifelong learners; inspired to be
+            extraordinary; and whom create a better world for all.
+          </p>
         </div>
-      </div>
 
-      {/* 360 Visit Experience Card */}
-      <div className="w-full">
-        <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-100 h-full flex flex-col justify-center">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-[#2e2b70] mb-4">
-              Visit Our School with a 360° Experience
-            </h3>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              Take an immersive virtual tour of our campus and discover our 
-              state-of-the-art facilities, classrooms, and learning environments. 
-              Experience our school like never before from anywhere in the world.
-            </p>
-            <a 
-              href="https://ths.li/oxHuJ" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-lg transition-all duration-500 ease-in-out hover:bg-red-700 transform hover:scale-105 ${
-              isHeaderLoaded ? "opacity-100 translate-x-0 translate-y-0" : "opacity-0 translate-x-12 translate-y-4"
-              }`}
-              style={{ transitionDelay: "900ms" }}
-            >
-              <button className="flex items-center gap-2">
-                <RotateCcw className="w-5 h-5" />
-                <span>360° Visit Experience</span>
-              </button>
-            </a>
+        {/* Content Grid - Video and 360 Visit Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* Video Section */}
+          <div className="w-full">
+            <div className="p-4 bg-white rounded-lg shadow-sm">
+              <iframe
+                className="w-full aspect-video rounded-lg overflow-hidden"
+                src="https://www.youtube.com/embed/CBWzCOrX2s0?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&loop=1&playlist=CBWzCOrX2s0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="YouTube Video"
+              ></iframe>
+            </div>
+          </div>
+
+          {/* 360 Visit Experience Card */}
+          <div className="w-full">
+            <div className="p-6 bg-white rounded-lg shadow-sm border border-gray-100 h-full flex flex-col justify-center">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-[#2e2b70] mb-4">
+                  Visit Our School with a 360° Experience
+                </h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Take an immersive virtual tour of our campus and discover our 
+                  state-of-the-art facilities, classrooms, and learning environments. 
+                  Experience our school like never before from anywhere in the world.
+                </p>
+                <a 
+                  href="https://ths.li/oxHuJ" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-block px-6 py-3 bg-red-600 text-white font-semibold rounded-lg transition-all duration-500 ease-in-out hover:bg-red-700 transform hover:scale-105 ${
+                  isHeaderLoaded ? "opacity-100 translate-x-0 translate-y-0" : "opacity-0 translate-x-12 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: "900ms" }}
+                >
+                  <button className="flex items-center gap-2">
+                    <RotateCcw className="w-5 h-5" />
+                    <span>360° Visit Experience</span>
+                  </button>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
         {/* School Philosophy Section */}
-        <div className="bg-blue-50 p-8 rounded-xl mb-16">
+        <div
+          ref={philosophySectionAnimation.ref}
+          className={`bg-blue-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${philosophySectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
             Our School Philosophy is Student-Centered
           </h2>
@@ -281,7 +298,10 @@ function About() {
         </div>
 
         {/* Non-Discrimination Policy & Logo Section */}
-        <div className="bg-white p-8 rounded-xl border border-gray-200 mb-16">
+        <div
+          ref={nondiscriminationSectionAnimation.ref}
+          className={`bg-white p-8 rounded-xl border border-gray-200 mb-16 transition-all duration-1000 ease-out ${nondiscriminationSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl font-bold text-[#2e2b70] mb-4">
@@ -326,7 +346,10 @@ function About() {
         </div>
 
         {/* Welcome Message Section */}
-        <div className="bg-indigo-50 text-white p-8 rounded-xl mb-16">
+        <div
+          ref={welcomeSectionAnimation.ref}
+          className={`bg-indigo-50 text-white p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${welcomeSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-3xl text-[#2e2b70] font-bold mb-6 text-center">
             Welcome Message
           </h2>
@@ -353,7 +376,10 @@ function About() {
         </div>
 
         {/* Programs & Services Section */}
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          ref={programsSectionAnimation.ref}
+          className={`grid md:grid-cols-2 gap-8 mb-16 transition-all duration-1000 ease-out ${programsSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           {/* Student-Centered Programs */}
           <div className="bg-blue-50 p-8 rounded-xl">
             <h3 className="text-2xl font-bold text-blue-900 mb-6">
@@ -410,7 +436,10 @@ function About() {
         </div>
 
         {/* Student Support Services */}
-        <div className="bg-purple-50 p-8 rounded-xl mb-16">
+        <div
+          ref={supportSectionAnimation.ref}
+          className={`bg-purple-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${supportSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-2xl font-bold text-purple-900 mb-6 text-center">
             Student Support Services
           </h2>
@@ -447,7 +476,10 @@ function About() {
         </div>
 
         {/* Curriculum & Activities */}
-        <div className="bg-orange-50 p-8 rounded-xl mb-16">
+        <div
+          ref={curriculumSectionAnimation.ref}
+          className={`bg-orange-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${curriculumSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-2xl font-bold text-orange-900 mb-6 text-center">
             Beyond Academic Studies
           </h2>
@@ -545,7 +577,10 @@ function About() {
         </div>*/}
 
         {/* Campus Life */}
-        <div className="bg-yellow-50 p-8 rounded-xl mb-16">
+        <div
+          ref={campusSectionAnimation.ref}
+          className={`bg-yellow-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${campusSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-2xl font-bold text-yellow-900 mb-6 text-center">
             Campus Life
           </h2>
@@ -575,7 +610,10 @@ function About() {
         </div>
 
         {/* Enrollment Section */}
-        <div className="bg-blue-50 p-8 rounded-xl mb-16">
+        <div
+          ref={enrollmentSectionAnimation.ref}
+          className={`bg-blue-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${enrollmentSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-3xl font-bold text-blue-900 mb-6">
             Flexible Enrollment
           </h2>
@@ -591,7 +629,10 @@ function About() {
         </div>
 
         {/* Location Section */}
-        <div className="bg-gray-50 p-8 rounded-xl">
+        <div
+          ref={locationSectionAnimation.ref}
+          className={`bg-gray-50 p-8 rounded-xl transition-all duration-1000 ease-out ${locationSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="flex items-start gap-4 mb-6">
             <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
             <div>
@@ -614,7 +655,10 @@ function About() {
         </div>
 
         {/* Accreditation Section */}
-        <div className="mt-16 bg-white p-8 rounded-xl border border-gray-200">
+        <div
+          ref={accreditationSectionAnimation.ref}
+          className={`mt-16 bg-white p-8 rounded-xl border border-gray-200 transition-all duration-1000 ease-out ${accreditationSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
             Accreditation
           </h2>

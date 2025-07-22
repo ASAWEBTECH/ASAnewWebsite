@@ -13,6 +13,7 @@ import {
 import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Image from "next/image";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 function Community() {
   const skills = [
@@ -108,6 +109,13 @@ function Community() {
   ];
 
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
+  // Animação para o texto do header
+  const heroAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  // Animações para seções principais
+  const skillsSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const beInspiringSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const supportSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const childDevSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
 
   useEffect(() => {
     // Trigger header animations after component mounts
@@ -152,8 +160,12 @@ function Community() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#221f52]/80 to-[#2e2b70]/30" />
         </div>
-
-        <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-10">
+        <div
+          ref={heroAnimation.ref}
+          className={`relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-10 transition-all duration-1000 ease-out ${
+            heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h1
             className={`text-4xl font-bold mb-4 leading-tight transition-all duration-1200 ease-out ${
               isHeaderLoaded
@@ -177,7 +189,6 @@ function Community() {
             community.
           </p>
         </div>
-
         <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
           {/* First cloud, left to right, lower opacity */}
           <svg
@@ -237,7 +248,10 @@ function Community() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div>
+            <div
+              ref={skillsSectionAnimation.ref}
+              className={`transition-all duration-1000 ease-out ${skillsSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            >
               <h2 className="text-4xl font-bold text-[#2e2b70] mb-6">
                 Skills for Success
               </h2>
@@ -290,7 +304,10 @@ function Community() {
       {/* Be Inspiring Section */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div
+            ref={beInspiringSectionAnimation.ref}
+            className={`text-center mb-16 transition-all duration-1000 ease-out ${beInspiringSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
             <h2 className="text-4xl font-bold text-[#2e2b70] mb-4">
               Be Inspiring
             </h2>
@@ -375,7 +392,10 @@ function Community() {
                 className="mx-auto mb-2"
               />
             </div>
-            <div>
+            <div
+              ref={supportSectionAnimation.ref}
+              className={`transition-all duration-1000 ease-out ${supportSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            >
               <h2 className="text-4xl font-bold text-[#2e2b70] mb-6">
                 Student Support Services
               </h2>
@@ -511,7 +531,10 @@ function Community() {
         className="py-20 bg-gradient-to-br from-purple-50 to-pink-50"
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+          <div
+            ref={childDevSectionAnimation.ref}
+            className={`text-center mb-16 transition-all duration-1000 ease-out ${childDevSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          >
             <h2 className="text-4xl font-bold text-[#2e2b70] mb-4">
               Child Development Center
             </h2>

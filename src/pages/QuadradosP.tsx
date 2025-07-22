@@ -110,11 +110,11 @@ function QuadradosP() {
     },
     {
       src: "/advenced.jpg", 
-      alt: "Advenced"
+      alt: "AdvancED"
     },
     {
       src: "/asu-logo.png",
-      alt: "ASU"
+      alt: "Arizona State University"
     },
     {
       src: "/cognia.png",
@@ -122,15 +122,15 @@ function QuadradosP() {
     },
     {
       src: "/credencialimg.png",
-      alt: "Credencial"
+      alt: "National Collegiate Athletic Association"
     },
     {
       src: "/njit.png",
-      alt: "NJIT"
+      alt: "New Jersey Institute of Technology"
     },
     {
       src: "/ministry-logo.jpg",
-      alt: "Ministry"
+      alt: "Angolan Ministry of Education"
     }
   ];
 
@@ -171,7 +171,7 @@ function QuadradosP() {
               Nationally and Internationally Accredited
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our programs are recognized and accredited by leading international organizations, ensuring global recognition and quality standards.
+              Our programs are recognized and accredited by leading national and international organizations, ensuring global recognition and quality standards.
             </p>
           </div>
 
@@ -198,7 +198,7 @@ function QuadradosP() {
         }
         
         .animate-scroll-smooth {
-          animation: scroll-smooth 45s linear infinite;
+           animation: scroll-smooth 10s linear infinite;
         }
         
         .animate-scroll-smooth:hover {

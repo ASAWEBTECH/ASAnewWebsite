@@ -18,6 +18,7 @@ import DynamicCalendar from "@/components/Calendar";
 import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import { useScrollAnimation, useStaggeredAnimation } from "../hooks/useScrollAnimation";
 
 interface Subject {
   id: string;
@@ -358,6 +359,337 @@ const gradeLevels: GradeLevel[] = [
   },
 ];
 
+// Novo componente para cada seção de gradeLevel
+interface GradeLevelSectionProps {
+  gradeLevel: GradeLevel;
+  isExpanded: boolean;
+  toggleSection: (id: string) => void;
+  expandedSubjects: Set<string>;
+  toggleSubject: (id: string) => void;
+  getColorClasses: (color: string) => {
+      primary: string;
+      button: string;
+      accent: string;
+      bg: string;
+      hover: string;
+      border: string;
+    };
+}
+
+function GradeLevelSection({
+  gradeLevel,
+  isExpanded,
+  toggleSection,
+  expandedSubjects,
+  toggleSubject,
+  getColorClasses,
+}: GradeLevelSectionProps) {
+  // Hooks de animação agora são chamados no componente filho
+  const gradeAnimation = useScrollAnimation({ threshold: 0.1, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const contentAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const subjectsAnimation = useStaggeredAnimation(gradeLevel.subjects.length, { threshold: 0.1, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+
+        const colors = getColorClasses(gradeLevel.primaryColor);
+
+        return (
+          <section
+            key={gradeLevel.id}
+      id={gradeLevel.id}
+            className={`py-16 px-4 ${gradeLevel.bgColor}`}
+          >
+            {/* Image */}
+            <div 
+              ref={gradeAnimation.ref}
+              className={`relative w-screen left-1/2 right-1/2 -translate-x-1/2 group bottom-10 transition-all duration-1000 ease-out ${
+                gradeAnimation.isVisible 
+                  ? "opacity-100 translate-y-0 scale-100" 
+                  : "opacity-0 translate-y-8 scale-95"
+              }`}
+            >
+              <div
+                className="w-full"
+                style={{ maxHeight: "480px", overflow: "hidden" }}
+              >
+                <Image
+                  src={gradeLevel.mainImage}
+                  alt={`${gradeLevel.title} classroom`}
+                  style={{
+                    objectFit: "cover",
+                    objectPosition: "top",
+                    width: "100%",
+                    height: "auto",
+                    maxHeight: "480px",
+                  }}
+                  width={1920}
+                  height={480}
+                  priority={true}
+                />
+                <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
+                  {/* First cloud, left to right, lower opacity */}
+                  <svg
+                    viewBox="0 0 1440 220"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-[100px] min-w-full"
+                    style={{
+                      display: "block",
+                      width: "100vw",
+                      minWidth: "100vw",
+                    }}
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
+                      fill="white"
+                      opacity="0.35"
+                    />
+                    <path
+                      d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
+                      fill="white"
+                      opacity="0.18"
+                    />
+                  </svg>
+                  {/* Second cloud, right to left, higher opacity, mirrored */}
+                  <svg
+                    viewBox="0 0 1440 220"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-[120px] absolute left-0 top-0 min-w-full"
+                    style={{
+                      display: "block",
+                      transform: "scaleX(-1)",
+                      width: "100vw",
+                      minWidth: "100vw",
+                    }}
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
+                      fill="white"
+                      opacity="0.65"
+                    />
+                    <path
+                      d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
+                      fill="white"
+                      opacity="0.35"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className="max-w-7xl mx-auto">
+              {/* Main Program Section */}
+              <div 
+                ref={contentAnimation.ref}
+                className={`mb-16 transition-all duration-1000 ease-out ${
+                  contentAnimation.isVisible 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 translate-y-8"
+                }`}
+              >
+                <div className="flex justify-center">
+                  <div className="grid lg:grid-cols-2 gap-12 items-start w-full max-w-7xl">
+                    {/* Content */}
+                    <div className="flex flex-col items-center space-y-8 w-full">
+                      <div className="flex justify-center w-full">
+                        <div 
+                          className={`prose prose-lg text-gray-700 leading-relaxed relative w-full max-w-7xl transition-all duration-1000 ease-out ${
+                            contentAnimation.isVisible 
+                              ? "opacity-100 translate-x-0" 
+                              : "opacity-0 -translate-x-8"
+                          }`}
+                          style={{ transitionDelay: "200ms" }}
+                        >
+                          <div
+                            className={`transition-all duration-500 ease-in-out ${
+                              isExpanded
+                                ? "max-h-[700px]"
+                                : "max-h-40 overflow-hidden"
+                            } mx-auto`}
+                          >
+                            <p className="text-left mb-6">
+                              {isExpanded
+                                ? gradeLevel.fullDescription
+                                : gradeLevel.shortDescription}
+                            </p>
+                          </div>
+                          {!isExpanded && (
+                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div 
+                        className={`flex flex-wrap gap-4 justify-center transition-all duration-1000 ease-out ${
+                          contentAnimation.isVisible 
+                            ? "opacity-100 translate-y-0" 
+                            : "opacity-0 translate-y-4"
+                        }`}
+                        style={{ transitionDelay: "400ms" }}
+                      >
+                        <button
+                          onClick={() => window.open("https://asangola.openapply.com/", "_blank")}
+                          className={`${colors.button} text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105`}
+                        >
+                          ENROLL NOW
+                        </button>
+
+                        <button
+                          onClick={() => toggleSection(gradeLevel.id)}
+                          className={`flex items-center gap-2 text-gray-600 hover:${colors.accent} px-6 py-4 rounded-xl font-medium text-lg transition-all duration-300 group hover:scale-105`}
+                        >
+                          View More
+                          <ChevronDown
+                            className={`w-5 h-5 transition-transform duration-300 ${
+                              isExpanded ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Subjects Section */}
+              <div 
+                ref={subjectsAnimation.ref}
+                className={`bg-[#fbfeff] p-8 rounded-2xl shadow-lg transition-all duration-1000 ease-out ${
+                  subjectsAnimation.isVisible 
+                    ? "opacity-100 translate-y-0 scale-100" 
+                    : "opacity-0 translate-y-8 scale-95"
+                }`}
+              >
+                <div 
+                  className={`flex items-center gap-4 mb-8 transition-all duration-1000 ease-out ${
+                    subjectsAnimation.isVisible 
+                      ? "opacity-100 translate-x-0" 
+                      : "opacity-0 -translate-x-8"
+                  }`}
+                  style={{ transitionDelay: "200ms" }}
+                >
+                  <h3 className={`text-3xl font-bold ${colors.primary}`}>
+                    KEY SUBJECTS
+                  </h3>
+                  <div
+                    className={`flex-1 h-px bg-gradient-to-r ${colors.border} to-transparent`}
+                  ></div>
+                </div>
+
+                <p 
+                  className={`text-xl text-gray-600 mb-12 max-w-4xl transition-all duration-1000 ease-out ${
+                    subjectsAnimation.isVisible 
+                      ? "opacity-100 translate-y-0" 
+                      : "opacity-0 translate-y-4"
+                  }`}
+                  style={{ transitionDelay: "300ms" }}
+                >
+                  {gradeLevel.subjectsDescription ||
+                    "Key academic subjects are thoughtfully integrated into our curriculum to prepare students for an exceptional future"}
+                </p>
+
+                <div className="space-y-6">
+                  {gradeLevel.subjects.map((subject, subjectIndex) => {
+                    const isSubjectExpanded = expandedSubjects.has(subject.id);
+
+                    return (
+                      <div
+                        key={subject.id}
+                        className={`border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 ease-out ${
+                          subjectsAnimation.isVisible 
+                            ? "opacity-100 translate-x-0 scale-100" 
+                            : "opacity-0 translate-x-8 scale-95"
+                        } hover:scale-[1.02]`}
+                        style={{ transitionDelay: `${400 + subjectIndex * 150}ms` }}
+                      >
+                        <button
+                          onClick={() => toggleSubject(subject.id)}
+                          className="w-full p-6 bg-gray-50 hover:bg-gray-100 transition-colors duration-300 flex items-center justify-between group"
+                        >
+                          <div className="flex items-center gap-4">
+                            <div
+                              className={`p-3 ${colors.bg} rounded-xl ${colors.accent} group-hover:${colors.hover} transition-all duration-300 group-hover:scale-110 group-hover:rotate-6`}
+                            >
+                              {subject.icon}
+                            </div>
+                            <div className="text-left">
+                              <h4
+                                className={`text-xl font-semibold ${colors.primary} mb-1 group-hover:scale-105 transition-transform duration-300`}
+                              >
+                                {subject.name}
+                              </h4>
+                              <p className="text-gray-600">
+                                {subject.description}
+                              </p>
+                            </div>
+                          </div>
+                          <ChevronDown
+                            className={`w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-indigo-600 group-hover:scale-110 ${
+                              isSubjectExpanded ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+
+                        <div
+                          className={`transition-all duration-500 ease-in-out ${
+                            isSubjectExpanded
+                              ? "max-h-96 opacity-100"
+                              : "max-h-0 opacity-0"
+                          } overflow-hidden`}
+                        >
+                          <div className="p-6 pt-0">
+                            <p 
+                              className={`text-gray-700 mb-6 leading-relaxed transition-all duration-500 ease-out ${
+                                isSubjectExpanded 
+                                  ? "opacity-100 translate-y-0" 
+                                  : "opacity-0 translate-y-4"
+                              }`}
+                            >
+                              {subject.description}
+                            </p>
+
+                            <div className="grid md:grid-cols-3 gap-6">
+                              {subject.images.map((image, imageIndex) => (
+                                <div
+                                  key={imageIndex}
+                                  className={`group cursor-pointer transition-all duration-700 ease-out ${
+                                    isSubjectExpanded 
+                                      ? "opacity-100 translate-y-0 scale-100" 
+                                      : "opacity-0 translate-y-8 scale-95"
+                                  }`}
+                                  style={{ transitionDelay: `${imageIndex * 100}ms` }}
+                                >
+                                  <div className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-2">
+                                    <Image
+                                      src={image.url}
+                                      alt={image.label}
+                                      width={400}
+                                      height={300}
+                                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:rotate-1"
+                                    />
+                                  </div>
+                                  <p
+                                    className={`text-center mt-3 font-medium text-gray-800 group-hover:${colors.accent} transition-all duration-300 group-hover:scale-105`}
+                                  >
+                                    {image.label}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+}
+
 export default function Education() {
   // Inicializa o mês atual do sistema
 
@@ -367,6 +699,11 @@ export default function Education() {
   const [expandedSubjects, setExpandedSubjects] = useState<Set<string>>(
     new Set()
   );
+
+  // Animation hooks
+  const academicExcellenceAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const calendarAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
+  const logosAnimation = useScrollAnimation({ threshold: 0.3, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
 
   const toggleSection = (sectionId: string) => {
     const newExpanded = new Set(expandedSections);
@@ -542,16 +879,44 @@ export default function Education() {
         </div>
       </div>
 
-      <section className="w-full bg-white/80 py-12 px-4 md:px-0 font-poppins border-b border-gray-100">
+      <section
+        ref={academicExcellenceAnimation.ref}
+        className={`w-full bg-white/80 py-12 px-4 md:px-0 font-poppins border-b border-gray-100 transition-all duration-1000 ease-out ${
+          academicExcellenceAnimation.isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
+        }`}
+      >
         <div className="max-w-7xl mx-auto text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2e2b70] mb-2">
+          <h2
+            className={`text-3xl md:text-4xl font-bold text-[#2e2b70] mb-2 transition-all duration-1000 ease-out ${
+              academicExcellenceAnimation.isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
             Academic Excellence
           </h2>
-          <p className="text-lg text-gray-700">
-            We do education differently so it’s important to explain key parts
+          <p
+            className={`text-lg text-gray-700 transition-all duration-1000 ease-out ${
+              academicExcellenceAnimation.isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "400ms" }}
+          >
+            We do education differently so it&lsquo;s important to explain key parts
             of our whole-child program.
           </p>
-          <div className="text-base text-gray-600 space-y-3 text-left mx-auto max-w-2xl">
+          <div
+            className={`text-base text-gray-600 space-y-3 text-left mx-auto max-w-2xl transition-all duration-1000 ease-out ${
+              academicExcellenceAnimation.isVisible
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+            }`}
+            style={{ transitionDelay: "600ms" }}
+          >
             <p>
               <span className="font-semibold text-[#2e2b70]">
                 Our population:
@@ -587,286 +952,94 @@ export default function Education() {
         </div>
       </section>
 
-      {gradeLevels.map((gradeLevel) => {
-        const isExpanded = expandedSections.has(gradeLevel.id);
-        const colors = getColorClasses(gradeLevel.primaryColor);
-
-        return (
-          <section
-            key={gradeLevel.id}
-            id={gradeLevel.id} // Adicione o ID aqui
-            className={`py-16 px-4 ${gradeLevel.bgColor}`}
-          >
-            {/* Image */}
-            <div className="relative w-screen left-1/2 right-1/2 -translate-x-1/2 group bottom-10">
-              <div
-                className="w-full"
-                style={{ maxHeight: "480px", overflow: "hidden" }}
-              >
-                <Image
-                  src={gradeLevel.mainImage}
-                  alt={`${gradeLevel.title} classroom`}
-                  style={{
-                    objectFit: "cover",
-                    objectPosition: "top",
-                    width: "100%",
-                    height: "auto",
-                    maxHeight: "480px",
-                  }}
-                  width={1920}
-                  height={480}
-                  priority={true}
-                />
-                <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
-                  {/* First cloud, left to right, lower opacity */}
-                  <svg
-                    viewBox="0 0 1440 220"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-full h-[100px] min-w-full"
-                    style={{
-                      display: "block",
-                      width: "100vw",
-                      minWidth: "100vw",
-                    }}
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-                      fill="white"
-                      opacity="0.35"
-                    />
-                    <path
-                      d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-                      fill="white"
-                      opacity="0.18"
-                    />
-                  </svg>
-                  {/* Second cloud, right to left, higher opacity, mirrored */}
-                  <svg
-                    viewBox="0 0 1440 220"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-full h-[120px] absolute left-0 top-0 min-w-full"
-                    style={{
-                      display: "block",
-                      transform: "scaleX(-1)",
-                      width: "100vw",
-                      minWidth: "100vw",
-                    }}
-                    preserveAspectRatio="none"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-                      fill="white"
-                      opacity="0.65"
-                    />
-                    <path
-                      d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-                      fill="white"
-                      opacity="0.35"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="max-w-7xl mx-auto">
-              {/* Main Program Section */}
-              <div className="mb-16">
-                <div className="flex justify-center">
-                  <div className="grid lg:grid-cols-2 gap-12 items-start w-full max-w-7xl">
-                    {/* Content */}
-                    <div className="flex flex-col items-center space-y-8 w-full">
-                      <div className="flex justify-center w-full">
-                        <div className="prose prose-lg text-gray-700 leading-relaxed relative w-full max-w-7xl">
-                          <div
-                            className={`transition-all duration-500 ease-in-out ${
-                              isExpanded
-                                ? "max-h-[700px]"
-                                : "max-h-40 overflow-hidden"
-                            } mx-auto`}
-                          >
-                            <p className="text-left mb-6">
-                              {isExpanded
-                                ? gradeLevel.fullDescription
-                                : gradeLevel.shortDescription}
-                            </p>
-                          </div>
-                          {!isExpanded && (
-                            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex flex-wrap gap-4 justify-center">
-                        <button
-                          className={`${colors.button} text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1`}
-                        >
-                          ENROLL NOW
-                        </button>
-
-                        <button
-                          onClick={() => toggleSection(gradeLevel.id)}
-                          className={`flex items-center gap-2 text-gray-600 hover:${colors.accent} px-6 py-4 rounded-xl font-medium text-lg transition-colors duration-300 group`}
-                        >
-                          View More
-                          <ChevronDown
-                            className={`w-5 h-5 transition-transform duration-300 ${
-                              isExpanded ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Key Subjects Section */}
-              <div className="bg-[#fbfeff] p-8 rounded-2xl shadow-lg">
-                <div className="flex items-center gap-4 mb-8">
-                  <h3 className={`text-3xl font-bold ${colors.primary}`}>
-                    KEY SUBJECTS
-                  </h3>
-                  <div
-                    className={`flex-1 h-px bg-gradient-to-r ${colors.border} to-transparent`}
-                  ></div>
-                </div>
-
-                <p className="text-xl text-gray-600 mb-12 max-w-4xl">
-                  {gradeLevel.subjectsDescription ||
-                    "Key academic subjects are thoughtfully integrated into our curriculum to prepare students for an exceptional future"}
-                </p>
-
-                <div className="space-y-6">
-                  {gradeLevel.subjects.map((subject) => {
-                    const isSubjectExpanded = expandedSubjects.has(subject.id);
-
-                    return (
-                      <div
-                        key={subject.id}
-                        className="border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-                      >
-                        <button
-                          onClick={() => toggleSubject(subject.id)}
-                          className="w-full p-6 bg-gray-50 hover:bg-gray-100 transition-colors duration-300 flex items-center justify-between group"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div
-                              className={`p-3 ${colors.bg} rounded-xl ${colors.accent} group-hover:${colors.hover} transition-colors duration-300`}
-                            >
-                              {subject.icon}
-                            </div>
-                            <div className="text-left">
-                              <h4
-                                className={`text-xl font-semibold ${colors.primary} mb-1`}
-                              >
-                                {subject.name}
-                              </h4>
-                              <p className="text-gray-600">
-                                {subject.description}
-                              </p>
-                            </div>
-                          </div>
-                          <ChevronDown
-                            className={`w-6 h-6 text-gray-400 transition-transform duration-300 ${
-                              isSubjectExpanded ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-
-                        <div
-                          className={`transition-all duration-500 ease-in-out ${
-                            isSubjectExpanded
-                              ? "max-h-96 opacity-100"
-                              : "max-h-0 opacity-0"
-                          } overflow-hidden`}
-                        >
-                          <div className="p-6 pt-0">
-                            <p className="text-gray-700 mb-6 leading-relaxed">
-                              {subject.description}
-                            </p>
-
-                            <div className="grid md:grid-cols-3 gap-6">
-                              {subject.images.map((image, imageIndex) => (
-                                <div
-                                  key={imageIndex}
-                                  className="group cursor-pointer"
-                                >
-                                  <div className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-300">
-                                    <Image
-                                      src={image.url}
-                                      alt={image.label}
-                                      width={400}
-                                      height={300}
-                                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                    />
-                                  </div>
-                                  <p
-                                    className={`text-center mt-3 font-medium text-gray-800 group-hover:${colors.accent} transition-colors duration-300`}
-                                  >
-                                    {image.label}
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      {/* Renderizar cada seção de gradeLevel usando o componente filho */}
+      {gradeLevels.map((gradeLevel) => (
+        <GradeLevelSection
+          key={gradeLevel.id}
+          gradeLevel={gradeLevel}
+          isExpanded={expandedSections.has(gradeLevel.id)}
+          toggleSection={toggleSection}
+          expandedSubjects={expandedSubjects}
+          toggleSubject={toggleSubject}
+          getColorClasses={getColorClasses}
+        />
+      ))}
 
       <div
         id="calendar"
-        className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex flex-col items-center justify-center"
+        ref={calendarAnimation.ref}
+        className={`min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex flex-col items-center justify-center transition-all duration-1000 ease-out ${
+          calendarAnimation.isVisible 
+            ? "opacity-100 translate-y-0" 
+            : "opacity-0 translate-y-8"
+        }`}
       >
         <div className="max-w-7xl w-full flex flex-col md:flex-row items-start justify-between gap-8">
-  {/* Texts and Button on the left */}
-  <div className="flex-1 order-2 md:order-1">
-    <h3 className="text-2xl md:text-3xl font-bold text-indigo-900 mb-2">
-      Academic Calendar
-    </h3>
-    <p className="text-gray-700 mb-4 max-w-lg">
-      Our academic calendar is updated annually to keep you informed about all important dates throughout the school year. Key events and holidays are highlighted with different colors, and a legend is provided in the calendar header for easy reference. Stay up to date with semester start and end dates, exam periods, school breaks, and special activities. With just one click, you can download the full calendar for your convenience. Make sure to check back regularly for any updates or changes, and never miss an important school event!
-    </p>
-    <div className="mt-6">
-      <span className="mb-3 block text-lg font-semibold text-indigo-800">
-        Download the full calendar with a single click!
-      </span>
-      <a
-        href="https://dl.dropboxusercontent.com/scl/fi/res2em40rq4fh4gjbxl6s/Academic-Calendar-25-26-3.pdf?rlkey=j6hr94iqs6v0xwi5teafc93s3&st=4cmz5dvf"
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button
-          className="bg-[#ff141f] hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition-colors duration-200 flex items-center gap-2 text-lg"
-          type="button"
-        >
-          <Download className="w-5 h-5" />
-          Download Calendar
-        </button>
-      </a>
-    </div>
-  </div>
+          {/* Texts and Button on the left */}
+          <div 
+            className={`flex-1 order-2 md:order-1 transition-all duration-1000 ease-out ${
+              calendarAnimation.isVisible 
+                ? "opacity-100 translate-x-0" 
+                : "opacity-0 -translate-x-8"
+            }`}
+            style={{ transitionDelay: "200ms" }}
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-indigo-900 mb-2">
+              Academic Calendar
+            </h3>
+            <p className="text-gray-700 mb-4 max-w-lg">
+              Our academic calendar is updated annually to keep you informed about all important dates throughout the school year. Key events and holidays are highlighted with different colors, and a legend is provided in the calendar header for easy reference. Stay up to date with semester start and end dates, exam periods, school breaks, and special activities. With just one click, you can download the full calendar for your convenience. Make sure to check back regularly for any updates or changes, and never miss an important school event!
+            </p>
+            <div 
+              className={`mt-6 transition-all duration-1000 ease-out ${
+                calendarAnimation.isVisible 
+                  ? "opacity-100 translate-y-0" 
+                  : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: "400ms" }}
+            >
+              <span className="mb-3 block text-lg font-semibold text-indigo-800">
+                Download the full calendar with a single click!
+              </span>
+              <a
+                href="https://dl.dropboxusercontent.com/scl/fi/res2em40rq4fh4gjbxl6s/Academic-Calendar-25-26-3.pdf?rlkey=j6hr94iqs6v0xwi5teafc93s3&st=4cmz5dvf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button
+                  className="bg-[#ff141f] hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 flex items-center gap-2 text-lg hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
+                  type="button"
+                >
+                  <Download className="w-5 h-5" />
+                  Download Calendar
+                </button>
+              </a>
+            </div>
+          </div>
 
-  {/* Calendar on the right */}
-  <div className="flex-1 order-1 md:order-2">
-    <DynamicCalendar />
-  </div>
-</div>
-
+          {/* Calendar on the right */}
+          <div 
+            className={`flex-1 order-1 md:order-2 transition-all duration-1000 ease-out ${
+              calendarAnimation.isVisible 
+                ? "opacity-100 translate-x-0 scale-100" 
+                : "opacity-0 translate-x-8 scale-95"
+            }`}
+            style={{ transitionDelay: "300ms" }}
+          >
+            <DynamicCalendar />
+          </div>
+        </div>
       </div>
 
-      <div className="flex justify-center pb-5 mt-20">
+      <div 
+        ref={logosAnimation.ref}
+        className={`flex justify-center pb-5 mt-20 transition-all duration-1000 ease-out ${
+          logosAnimation.isVisible 
+            ? "opacity-100 translate-y-0 scale-100" 
+            : "opacity-0 translate-y-8 scale-95"
+        }`}
+      >
         <Image
           src="/importantLogos.jpg"
           alt="Important Logos"
@@ -876,6 +1049,7 @@ export default function Education() {
             justifySelf: "center",
             paddingBottom: "20px",
           }}
+          className="hover:scale-105 transition-transform duration-500"
         />
       </div>
       <Footer />

@@ -134,12 +134,12 @@ export function Header() {
                 </li>
               ))}
             </ul>
-            <a
-              href="https://asangola.openapply.com/"
+            <button
+              onClick={() => window.open("https://asangola.openapply.com/", "_blank")}
               className="ml-2 xl:ml-4 inline-flex items-center px-2 py-1 xl:px-3 border border-transparent text-xs xl:text-sm font-medium rounded-full text-white bg-[#ff9f00] hover:bg-[#ffbb47] transition-colors duration-200"
             >
               Admissions
-            </a>
+            </button>
           </nav>
           </div>
 
