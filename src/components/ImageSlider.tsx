@@ -376,7 +376,7 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
             />
             <span className="text-white font-semibold text-sm">Visual Art</span>
             <span className="text-white text-xs opacity-80 hidden sm:block">
-              Artistic expression through various mediums.
+              Artistic expression through various creative mediums and techniques.
             </span>
           </div>
         </div>
