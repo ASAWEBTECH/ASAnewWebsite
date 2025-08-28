@@ -2,20 +2,11 @@ import React, { useState, useEffect } from "react";
 import {
   ChevronDown,
   BookOpen,
-  Users,
-  Music,
-  Palette,
-  Calculator,
-  Microscope,
-  Atom,
-  Languages,
-  Trophy,
-  Briefcase,
-  GraduationCap,
-  Download,
-  Activity,
-  Cpu,
   Globe,
+  Music,
+  Activity,
+  GraduationCap,
+  Download
 } from "lucide-react";
 import DynamicCalendar from "@/components/Calendar";
 import { Header } from "../components/Header";
@@ -132,7 +123,7 @@ const gradeLevels: GradeLevel[] = [
         name: "World Language & Culture",
         description:
           "Introduction to language learning and cultural awareness through interactive activities.",
-        icon: <Languages className="w-6 h-6" />,
+        icon: <Globe className="w-6 h-6" />,
         images: [
           {
             url: "/elem3.webp",
@@ -145,7 +136,7 @@ const gradeLevels: GradeLevel[] = [
         name: "Robotics & Technology",
         description:
           "Hands-on experience with basic programming, robotics, and digital tools to develop technological literacy.",
-        icon: <Cpu className="w-6 h-6" />,
+        icon: <Activity className="w-6 h-6" />,
         images: [
           {
             url: "/elem2.webp",
@@ -271,8 +262,6 @@ interface GradeLevelSectionProps {
   gradeLevel: GradeLevel;
   isExpanded: boolean;
   toggleSection: (id: string) => void;
-  expandedSubjects: Set<string>;
-  toggleSubject: (id: string) => void;
   getColorClasses: (color: string) => {
       primary: string;
       button: string;
@@ -287,59 +276,15 @@ function GradeLevelSection({
   gradeLevel,
   isExpanded,
   toggleSection,
-  expandedSubjects,
-  toggleSubject,
   getColorClasses,
 }: GradeLevelSectionProps) {
-  // Hooks de animação agora são chamados no componente filho
   const gradeAnimation = useScrollAnimation({ threshold: 0.1, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const contentAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const subjectsAnimation = useStaggeredAnimation(gradeLevel.subjects.length, { threshold: 0.1, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
 
-        const colors = getColorClasses(gradeLevel.primaryColor);
+  const colors = getColorClasses(gradeLevel.primaryColor);
 
-        const styles = {
-          container: {
-            maxWidth: "100%",
-            padding: "2rem",
-            margin: "0 auto",
-          },
-          sectionContainer: {
-            display: "flex",
-            flexDirection: "column",
-            gap: "2rem",
-            marginBottom: "4rem",
-            width: "100%",
-          },
-          contentWrapper: {
-            display: "grid",
-            gridTemplateColumns: "1fr minmax(0, 2fr)", // Ajusta para dar mais espaço ao texto
-            gap: "2rem",
-            alignItems: "start",
-            width: "100%",
-          },
-          textContent: {
-            display: "flex",
-            flexDirection: "column",
-            gap: "1rem",
-            maxWidth: "none", // Remove limitação de largura
-            width: "100%",
-          },
-          description: {
-            fontSize: "1rem",
-            lineHeight: "1.75",
-            color: "#4A5568",
-            textAlign: "justify", // Melhora a distribuição do texto
-          },
-          subjectsGrid: {
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "1rem",
-            width: "100%",
-          },
-        };
-
-        return (
+  return (
           <section
             key={gradeLevel.id}
       id={gradeLevel.id}
@@ -583,12 +528,7 @@ function GradeLevelSection({
 }
 
 export default function Education() {
-  // Inicializa o mês atual do sistema
-
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
-    new Set()
-  );
-  const [expandedSubjects, setExpandedSubjects] = useState<Set<string>>(
     new Set()
   );
 
@@ -605,16 +545,6 @@ export default function Education() {
       newExpanded.add(sectionId);
     }
     setExpandedSections(newExpanded);
-  };
-
-  const toggleSubject = (subjectId: string) => {
-    const newExpanded = new Set(expandedSubjects);
-    if (newExpanded.has(subjectId)) {
-      newExpanded.delete(subjectId);
-    } else {
-      newExpanded.add(subjectId);
-    }
-    setExpandedSubjects(newExpanded);
   };
 
   const getColorClasses = (color: string) => {
@@ -853,8 +783,6 @@ export default function Education() {
           gradeLevel={gradeLevel}
           isExpanded={expandedSections.has(gradeLevel.id)}
           toggleSection={toggleSection}
-          expandedSubjects={expandedSubjects}
-          toggleSubject={toggleSubject}
           getColorClasses={getColorClasses}
         />
       ))}

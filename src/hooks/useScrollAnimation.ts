@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -11,31 +11,28 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // Salva o valor atual do ref
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (options.triggerOnce) {
-            observer.unobserve(entry.target);
-          }
+          if (options.triggerOnce) observer.disconnect();
         } else if (!options.triggerOnce) {
           setIsVisible(false);
         }
       },
       {
         threshold: options.threshold || 0.1,
-        rootMargin: options.rootMargin || '0px 0px -10% 0px',
+        rootMargin: options.rootMargin || "0px 0px -10% 0px",
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      if (node) observer.unobserve(node);
     };
   }, [options.threshold, options.rootMargin, options.triggerOnce]);
 
@@ -47,29 +44,28 @@ export const useStaggeredAnimation = (itemCount: number, options: UseScrollAnima
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const node = ref.current; // Salva o valor atual do ref
+    if (!node) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          if (options.triggerOnce !== false) {
-            observer.unobserve(entry.target);
-          }
+          if (options.triggerOnce) observer.disconnect();
+        } else if (!options.triggerOnce) {
+          setIsVisible(false);
         }
       },
       {
         threshold: options.threshold || 0.1,
-        rootMargin: options.rootMargin || '0px 0px -10% 0px',
+        rootMargin: options.rootMargin || "0px 0px -10% 0px",
       }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(node);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      if (node) observer.unobserve(node);
     };
   }, [options.threshold, options.rootMargin, options.triggerOnce]);
 
