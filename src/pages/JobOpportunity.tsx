@@ -256,7 +256,7 @@ const stats = [
               style={{ objectFit: "cover", objectPosition: "center" }}
               priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#221f52]/80 to-[#2e2b70]/30" />
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/75 to-gray-200/10" />
               </div>
       
               <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">

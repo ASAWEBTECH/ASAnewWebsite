@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,6 +22,22 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -46,25 +62,27 @@ export function Header() {
 
   return (
     <div>
-    <header className="absolute w-full top-2 sm:top-4 md:top-6 z-50">
+    <header className="absolute w-full z-50">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0 -ml-20 mt-4 sm:mt-6 md:mt-8 lg:mt-10">
+        <div className="flex justify-between items-start"> {/* Changed to items-start */}
+          {/* Logo section */}
+          <div className="flex-shrink-0 lg:-ml-20 mt-2 md:block w-full lg:w-auto">
             <Link href="/" passHref>
-              <Image
-              src="/fundo.png"
-              className="h-28 w-auto sm:h-24 md:h-24 lg:h-28 xl:h-52 transition-all duration-300"
-              alt="Logo"
-              width={520}
-              height={520}
-              priority
-              />
+              <div className="flex justify-center lg:justify-start">
+                <Image
+                  src={isMobile ? "/LogoASA.webp" : "/fundo.png"}
+                  className="h-20 w-auto sm:h-24 md:h-28 lg:h-32 xl:h-44 transition-all duration-300"
+                  alt="Logo"
+                  width={520}
+                  height={520}
+                  priority
+                />
+              </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-<div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-2 px-3 xl:py-3 xl:px-4 rounded-lg lg:-mr-8 xl:-mr-16 hover:shadow-lg">
+          <div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-2 px-3 xl:py-3 xl:px-4 rounded-lg lg:-mr-8 xl:-mr-16 hover:shadow-lg mt-8 lg:mt-10"> {/* Adjusted margin top */}
           <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
             <ul className="flex space-x-2 xl:space-x-4">
               {navigationItems.map((item, index) => (
@@ -143,8 +161,8 @@ export function Header() {
           </nav>
           </div>
 
-          {/* Tablet Navigation (md screens) */}
-          <div className="bg-[#0071c6]/80 shadow-md hidden md:flex lg:hidden items-center py-2 px-3 rounded-lg -mr-4">
+          {/* Tablet Navigation */}
+          <div className="bg-[#0071c6]/80 shadow-md hidden md:flex lg:hidden items-center py-2 px-3 rounded-lg mt-8"> {/* Adjusted margin top */}
           <nav className="flex items-center space-x-1">
             <ul className="flex space-x-1">
               {navigationItems.map((item, index) => (
@@ -224,7 +242,7 @@ export function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden absolute right-4 top-8"> {/* Adjusted top position */}
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-1.5 sm:p-2 rounded-md text-white hover:text-[#ffac1e] hover:bg-[#0071c6]/80 focus:outline-none"
@@ -241,7 +259,7 @@ export function Header() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} mt-2`}>
+      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'} mt-20`}>
         <div className="mx-3 sm:mx-4 px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-[#0071c6]/80 rounded-lg shadow-lg">
           {navigationItems.map((item, index) => (
             <div key={index}>

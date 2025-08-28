@@ -84,7 +84,7 @@ const SchoolGallery = () => {
             style={{ objectFit: "cover", objectPosition: "center" }}
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#221f52]/80 to-[#2e2b70]/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-200/10" />
         </div>
         <div
           ref={heroAnimation.ref}

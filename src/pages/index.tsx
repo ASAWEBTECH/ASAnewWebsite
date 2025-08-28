@@ -1,7 +1,7 @@
 import { CSSProperties, useRef, useEffect, useState } from "react";
-import Quadrado from "./quadradoBlur";
+import Quadrado from "../components/quadradoBlur";
 import { ImageSlider } from "../components/ImageSlider";
-import QuadradosP from "./QuadradosP";
+import QuadradosP from "../components/QuadradosP";
 import { Header } from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import NewsletterSection from "../components/NewsletterSection";
@@ -117,11 +117,11 @@ export default function Home() {
       <AnimatedSection delay={100}>
         <NewsletterSection />
       </AnimatedSection>
-      <div className="w-full mx-auto mt-10 flex justify-center items-center">
-        <h2 className="inline-block bg-white rounded-full px-10 py-4 text-xl ml-8 sm:text-2xl md:text-2xl lg:text-5xl font-bold text-left text-[#2e2b70] mb-8 shadow-lg">
+      <div className="w-full mx-auto mt-10 flex flex-col md:flex-row justify-center items-center px-4 md:px-8">
+        <h2 className="w-full md:w-auto bg-white rounded-full px-6 md:px-10 py-3 md:py-4 text-xl sm:text-2xl lg:text-5xl font-bold text-center md:text-left text-[#2e2b70] mb-4 md:mb-0 shadow-lg">
           Upcoming Events
         </h2>
-        <p className="text-base sm:text-lg text-gray-700 text-left px-8 mb-8">
+        <p className="w-full md:w-auto text-base sm:text-lg text-gray-700 text-center md:text-left px-4 md:px-8">
           Stay tuned for our upcoming events and activities. We have a lot of
           exciting things planned!
         </p>

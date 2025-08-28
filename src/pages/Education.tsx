@@ -13,6 +13,9 @@ import {
   Briefcase,
   GraduationCap,
   Download,
+  Activity,
+  Cpu,
+  Globe,
 } from "lucide-react";
 import DynamicCalendar from "@/components/Calendar";
 import { Header } from "../components/Header";
@@ -58,65 +61,41 @@ const gradeLevels: GradeLevel[] = [
       "Each subject in our Pre-K and Kindergarten program is designed to foster foundational skills and creativity through engaging, age-appropriate activities.",
     subjects: [
       {
-        id: "language-arts",
-        name: "Language Arts & Literature",
+        id: "early-literacy",
+        name: "Early Literacy & Language",
         description:
-          "Building strong reading, writing, and communication skills through interactive storytelling, phonics, and creative expression activities.",
+          "Foundation in reading, writing, and communication skills through interactive storytelling, phonics, and creative activities.",
         icon: <BookOpen className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8613092/pexels-photo-8613092.jpeg?auto=compress&cs=tinysrgb&w=400",
+            url: "/k1.webp",
             label: "Reading Circle",
           },
-          {
-            url: "https://images.pexels.com/photos/8471831/pexels-photo-8471831.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Writing Practice",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613068/pexels-photo-8613068.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Storytelling Time",
-          },
         ],
       },
       {
-        id: "mathematics",
-        name: "Early Mathematics",
+        id: "arts-music",
+        name: "Arts & Music",
         description:
-          "Developing number sense, basic counting, patterns, and problem-solving skills through hands-on manipulatives and engaging activities.",
-        icon: <Calculator className="w-6 h-6" />,
+          "Creative expression through visual arts, music, movement, and dramatic play to develop motor skills and artistic abilities.",
+        icon: <Music className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471822/pexels-photo-8471822.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Number Games",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613097/pexels-photo-8613097.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Pattern Activities",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613074/pexels-photo-8613074.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Math Manipulatives",
-          },
-        ],
-      },
-      {
-        id: "creative-arts",
-        name: "Creative Arts & Music",
-        description:
-          "Fostering creativity and self-expression through art, music, drama, and movement activities that develop fine motor skills and imagination.",
-        icon: <Palette className="w-6 h-6" />,
-        images: [
-          {
-            url: "https://images.pexels.com/photos/8471908/pexels-photo-8471908.jpeg?auto=compress&cs=tinysrgb&w=400",
+            url: "/k2.webp",
             label: "Art Creation",
           },
+        ],
+      },
+      {
+        id: "physical-development",
+        name: "Physical Education",
+        description:
+          "Development of motor skills, coordination, and healthy habits through structured physical activities and creative movement.",
+        icon: <Activity className="w-6 h-6" />,
+        images: [
           {
-            url: "https://images.pexels.com/photos/8613039/pexels-photo-8613039.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Music Time",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471915/pexels-photo-8471915.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Creative Play",
+            url: "/k3.webp",
+            label: "Motor Skills Development",
           },
         ],
       },
@@ -136,65 +115,41 @@ const gradeLevels: GradeLevel[] = [
       "In Elementary School, subjects are designed to be engaging and relevant, helping students to connect their learning to the world around them.",
     subjects: [
       {
-        id: "core-academics",
-        name: "Core Academic Subjects",
+        id: "core-subjects",
+        name: "Core Academics",
         description:
-          "Comprehensive instruction in reading, writing, mathematics, science, and social studies with emphasis on critical thinking and problem-solving.",
+          "Comprehensive instruction in Mathematics, English Language Arts, and Science with focus on fundamental concepts and critical thinking.",
         icon: <BookOpen className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471691/pexels-photo-8471691.jpeg?auto=compress&cs=tinysrgb&w=400",
+            url: "/elem1.webp",
             label: "Interactive Learning",
           },
+        ],
+      },
+      {
+        id: "world-language",
+        name: "World Language & Culture",
+        description:
+          "Introduction to language learning and cultural awareness through interactive activities.",
+        icon: <Languages className="w-6 h-6" />,
+        images: [
           {
-            url: "https://images.pexels.com/photos/8613028/pexels-photo-8613028.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Group Projects",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471832/pexels-photo-8471832.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Individual Study",
+            url: "/elem3.webp",
+            label: "Language Learning",
           },
         ],
       },
       {
-        id: "stem-exploration",
-        name: "STEM Exploration",
+        id: "robotics-tech",
+        name: "Robotics & Technology",
         description:
-          "Hands-on science, technology, engineering, and mathematics activities that encourage experimentation and discovery.",
-        icon: <Microscope className="w-6 h-6" />,
+          "Hands-on experience with basic programming, robotics, and digital tools to develop technological literacy.",
+        icon: <Cpu className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471906/pexels-photo-8471906.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Science Experiments",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613101/pexels-photo-8613101.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Technology Integration",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471834/pexels-photo-8471834.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Engineering Challenges",
-          },
-        ],
-      },
-      {
-        id: "social-development",
-        name: "Social & Emotional Learning",
-        description:
-          "Building character, empathy, and social skills through collaborative projects, community service, and peer interaction.",
-        icon: <Users className="w-6 h-6" />,
-        images: [
-          {
-            url: "https://images.pexels.com/photos/8613095/pexels-photo-8613095.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Team Building",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471838/pexels-photo-8471838.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Community Projects",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613070/pexels-photo-8613070.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Peer Collaboration",
+            url: "/elem2.webp",
+            label: "Programming Basics",
           },
         ],
       },
@@ -215,65 +170,41 @@ const gradeLevels: GradeLevel[] = [
       "Middle School subjects challenge students to think critically and creatively, preparing them for the demands of high school and beyond.",
     subjects: [
       {
-        id: "advanced-academics",
-        name: "Advanced Academic Courses",
+        id: "advanced-core",
+        name: "Advanced Core Studies",
         description:
-          "Rigorous coursework in mathematics, sciences, literature, and social studies designed to challenge and prepare students for high school.",
+          "Rigorous academics in Mathematics, Sciences, and Literature with emphasis on analytical and research skills.",
         icon: <GraduationCap className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8613032/pexels-photo-8613032.jpeg?auto=compress&cs=tinysrgb&w=400",
+            url: "/mid1.webp",
             label: "Advanced Mathematics",
           },
+        ],
+      },
+      {
+        id: "angolan-history",
+        name: "Angolan History & Social Studies",
+        description:
+          "Deep exploration of Angolan heritage, culture, and its place in global context through interactive learning.",
+        icon: <Globe className="w-6 h-6" />,
+        images: [
           {
-            url: "https://images.pexels.com/photos/8471840/pexels-photo-8471840.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Literature Analysis",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613099/pexels-photo-8613099.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Research Projects",
+            url: "/mid2.webp",
+            label: "Cultural Heritage",
           },
         ],
       },
       {
-        id: "leadership-programs",
-        name: "Leadership & Service",
+        id: "taekwondo-pe",
+        name: "Taekwondo & Physical Education",
         description:
-          "Student government, peer mentoring, and community service programs that develop leadership skills and civic responsibility.",
-        icon: <Trophy className="w-6 h-6" />,
+          "Comprehensive physical development program combining martial arts discipline with traditional sports activities.",
+        icon: <Activity className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471844/pexels-photo-8471844.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Student Leadership",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613036/pexels-photo-8613036.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Community Service",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471846/pexels-photo-8471846.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Peer Mentoring",
-          },
-        ],
-      },
-      {
-        id: "creative-expression",
-        name: "Arts & Creative Expression",
-        description:
-          "Visual arts, performing arts, music, and digital media programs that encourage creativity and self-expression.",
-        icon: <Music className="w-6 h-6" />,
-        images: [
-          {
-            url: "https://images.pexels.com/photos/8471848/pexels-photo-8471848.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Visual Arts",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613041/pexels-photo-8613041.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Performing Arts",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471850/pexels-photo-8471850.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Digital Media",
+            url: "/mid3.webp",
+            label: "Martial Arts Discipline",
           },
         ],
       },
@@ -293,65 +224,41 @@ const gradeLevels: GradeLevel[] = [
       "High School subjects offer depth and rigor, with opportunities for students to pursue advanced studies and specialized interests.",
     subjects: [
       {
-        id: "college-prep",
-        name: "College Preparatory Courses",
+        id: "advanced-placement",
+        name: "Advanced Placement Studies",
         description:
-          "Advanced Placement and honors courses across all disciplines, designed to prepare students for college-level work and earn college credit.",
-        icon: <Atom className="w-6 h-6" />,
+          "College-level courses in Mathematics, Sciences, and English Literature preparing students for university success.",
+        icon: <GraduationCap className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471852/pexels-photo-8471852.jpeg?auto=compress&cs=tinysrgb&w=400",
+            url: "/high.jpg",
             label: "AP Sciences",
           },
+        ],
+      },
+      {
+        id: "literary-club",
+        name: "Literary Club & Advanced Writing",
+        description:
+          "Advanced writing, literary analysis, and creative expression through our dedicated literary program.",
+        icon: <BookOpen className="w-6 h-6" />,
+        images: [
           {
-            url: "https://images.pexels.com/photos/8613043/pexels-photo-8613043.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Advanced Mathematics",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471854/pexels-photo-8471854.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "College Writing",
+            url: "/high2.jpg",
+            label: "Creative Writing",
           },
         ],
       },
       {
-        id: "career-pathways",
-        name: "Career Pathway Programs",
+        id: "performing-arts",
+        name: "Performing Arts",
         description:
-          "Specialized programs in business, technology, healthcare, and other fields that provide real-world experience and industry certifications.",
-        icon: <Briefcase className="w-6 h-6" />,
+          "Comprehensive program in theater, music, and dance, culminating in professional-level productions.",
+        icon: <Music className="w-6 h-6" />,
         images: [
           {
-            url: "https://images.pexels.com/photos/8471856/pexels-photo-8471856.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Business Programs",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613045/pexels-photo-8613045.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Technology Training",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471858/pexels-photo-8471858.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Internship Programs",
-          },
-        ],
-      },
-      {
-        id: "global-studies",
-        name: "Global Studies & Languages",
-        description:
-          "World languages, international studies, and cultural exchange programs that prepare students for global citizenship.",
-        icon: <Languages className="w-6 h-6" />,
-        images: [
-          {
-            url: "https://images.pexels.com/photos/8471860/pexels-photo-8471860.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Language Learning",
-          },
-          {
-            url: "https://images.pexels.com/photos/8613047/pexels-photo-8613047.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Cultural Exchange",
-          },
-          {
-            url: "https://images.pexels.com/photos/8471862/pexels-photo-8471862.jpeg?auto=compress&cs=tinysrgb&w=400",
-            label: "Global Projects",
+            url: "/high3.jpg",
+            label: "Creative Writing",
           },
         ],
       },
@@ -391,6 +298,47 @@ function GradeLevelSection({
 
         const colors = getColorClasses(gradeLevel.primaryColor);
 
+        const styles = {
+          container: {
+            maxWidth: "100%",
+            padding: "2rem",
+            margin: "0 auto",
+          },
+          sectionContainer: {
+            display: "flex",
+            flexDirection: "column",
+            gap: "2rem",
+            marginBottom: "4rem",
+            width: "100%",
+          },
+          contentWrapper: {
+            display: "grid",
+            gridTemplateColumns: "1fr minmax(0, 2fr)", // Ajusta para dar mais espaço ao texto
+            gap: "2rem",
+            alignItems: "start",
+            width: "100%",
+          },
+          textContent: {
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            maxWidth: "none", // Remove limitação de largura
+            width: "100%",
+          },
+          description: {
+            fontSize: "1rem",
+            lineHeight: "1.75",
+            color: "#4A5568",
+            textAlign: "justify", // Melhora a distribuição do texto
+          },
+          subjectsGrid: {
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "1rem",
+            width: "100%",
+          },
+        };
+
         return (
           <section
             key={gradeLevel.id}
@@ -424,6 +372,7 @@ function GradeLevelSection({
                   height={480}
                   priority={true}
                 />
+                
                 <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
                   {/* First cloud, left to right, lower opacity */}
                   <svg
@@ -490,12 +439,11 @@ function GradeLevelSection({
                 }`}
               >
                 <div className="flex justify-center">
-                  <div className="grid lg:grid-cols-2 gap-12 items-start w-full max-w-7xl">
-                    {/* Content */}
+                  <div className="w-full max-w-7xl px-4"> {/* Removido grid, adicionado width full */}
                     <div className="flex flex-col items-center space-y-8 w-full">
                       <div className="flex justify-center w-full">
                         <div 
-                          className={`prose prose-lg text-gray-700 leading-relaxed relative w-full max-w-7xl transition-all duration-1000 ease-out ${
+                          className={`prose prose-lg text-gray-700 leading-relaxed w-full transition-all duration-1000 ease-out ${
                             contentAnimation.isVisible 
                               ? "opacity-100 translate-x-0" 
                               : "opacity-0 -translate-x-8"
@@ -507,9 +455,9 @@ function GradeLevelSection({
                               isExpanded
                                 ? "max-h-[700px]"
                                 : "max-h-40 overflow-hidden"
-                            } mx-auto`}
+                            }`}
                           >
-                            <p className="text-left mb-6">
+                            <p className="text-justify mb-6 w-full"> {/* Adicionado text-justify e w-full */}
                               {isExpanded
                                 ? gradeLevel.fullDescription
                                 : gradeLevel.shortDescription}
@@ -522,7 +470,7 @@ function GradeLevelSection({
                       </div>
 
                       <div 
-                        className={`flex flex-wrap gap-4 justify-center transition-all duration-1000 ease-out ${
+                        className={`flex flex-wrap gap-4 justify-center w-full transition-all duration-1000 ease-out ${
                           contentAnimation.isVisible 
                             ? "opacity-100 translate-y-0" 
                             : "opacity-0 translate-y-4"
@@ -590,99 +538,43 @@ function GradeLevelSection({
                     "Key academic subjects are thoughtfully integrated into our curriculum to prepare students for an exceptional future"}
                 </p>
 
-                <div className="space-y-6">
-                  {gradeLevel.subjects.map((subject, subjectIndex) => {
-                    const isSubjectExpanded = expandedSubjects.has(subject.id);
-
-                    return (
-                      <div
-                        key={subject.id}
-                        className={`border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-500 ease-out ${
-                          subjectsAnimation.isVisible 
-                            ? "opacity-100 translate-x-0 scale-100" 
-                            : "opacity-0 translate-x-8 scale-95"
-                        } hover:scale-[1.02]`}
-                        style={{ transitionDelay: `${400 + subjectIndex * 150}ms` }}
-                      >
-                        <button
-                          onClick={() => toggleSubject(subject.id)}
-                          className="w-full p-6 bg-gray-50 hover:bg-gray-100 transition-colors duration-300 flex items-center justify-between group"
-                        >
-                          <div className="flex items-center gap-4">
-                            <div
-                              className={`p-3 ${colors.bg} rounded-xl ${colors.accent} group-hover:${colors.hover} transition-all duration-300 group-hover:scale-110 group-hover:rotate-6`}
-                            >
-                              {subject.icon}
-                            </div>
-                            <div className="text-left">
-                              <h4
-                                className={`text-xl font-semibold ${colors.primary} mb-1 group-hover:scale-105 transition-transform duration-300`}
-                              >
-                                {subject.name}
-                              </h4>
-                              <p className="text-gray-600">
-                                {subject.description}
-                              </p>
-                            </div>
-                          </div>
-                          <ChevronDown
-                            className={`w-6 h-6 text-gray-400 transition-all duration-300 group-hover:text-indigo-600 group-hover:scale-110 ${
-                              isSubjectExpanded ? "rotate-180" : ""
-                            }`}
-                          />
-                        </button>
-
-                        <div
-                          className={`transition-all duration-500 ease-in-out ${
-                            isSubjectExpanded
-                              ? "max-h-96 opacity-100"
-                              : "max-h-0 opacity-0"
-                          } overflow-hidden`}
-                        >
-                          <div className="p-6 pt-0">
-                            <p 
-                              className={`text-gray-700 mb-6 leading-relaxed transition-all duration-500 ease-out ${
-                                isSubjectExpanded 
-                                  ? "opacity-100 translate-y-0" 
-                                  : "opacity-0 translate-y-4"
-                              }`}
-                            >
-                              {subject.description}
-                            </p>
-
-                            <div className="grid md:grid-cols-3 gap-6">
-                              {subject.images.map((image, imageIndex) => (
-                                <div
-                                  key={imageIndex}
-                                  className={`group cursor-pointer transition-all duration-700 ease-out ${
-                                    isSubjectExpanded 
-                                      ? "opacity-100 translate-y-0 scale-100" 
-                                      : "opacity-0 translate-y-8 scale-95"
-                                  }`}
-                                  style={{ transitionDelay: `${imageIndex * 100}ms` }}
-                                >
-                                  <div className="aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-2">
-                                    <Image
-                                      src={image.url}
-                                      alt={image.label}
-                                      width={400}
-                                      height={300}
-                                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:rotate-1"
-                                    />
-                                  </div>
-                                  <p
-                                    className={`text-center mt-3 font-medium text-gray-800 group-hover:${colors.accent} transition-all duration-300 group-hover:scale-105`}
-                                  >
-                                    {image.label}
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {gradeLevel.subjects.map((subject, index) => (
+                    <div
+                      key={subject.id}
+                      className={`flex flex-col transition-all duration-500 ease-out ${
+                        subjectsAnimation.isVisible 
+                          ? "opacity-100 translate-y-0" 
+                          : "opacity-0 translate-y-8"
+                      }`}
+                      style={{ transitionDelay: `${400 + index * 150}ms` }}
+                    >
+                      {/* Subject Header - Now better aligned */}
+                      <div className="flex flex-col items-center text-center mb-6">
+                        <div className={`p-3 ${colors.bg} rounded-xl ${colors.accent} mb-4`}>
+                          {subject.icon}
                         </div>
+                        <h4 className={`text-xl font-semibold ${colors.primary} mb-2`}>
+                          {subject.name}
+                        </h4>
+                        <p className="text-gray-600 text-sm px-4">
+                          {subject.description}
+                        </p>
                       </div>
-                    );
-                  })}
+
+                      {/* Subject Image - Full width and consistent height */}
+                      <div className="w-full aspect-video rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <Image
+                          src={subject.images[0].url}
+                          alt={subject.images[0].label}
+                          width={400}
+                          height={300}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                          style={{ aspectRatio: "16/9" }}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -795,7 +687,7 @@ export default function Education() {
             style={{ objectFit: "cover", objectPosition: "center" }}
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#221f52]/80 to-[#2e2b70]/30" />
+                   <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" />
         </div>
 
         <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">
@@ -881,15 +773,15 @@ export default function Education() {
 
       <section
         ref={academicExcellenceAnimation.ref}
-        className={`w-full bg-white/80 py-12 px-4 md:px-0 font-poppins border-b border-gray-100 transition-all duration-1000 ease-out ${
+        className={`w-full bg-white/80 py-12 font-poppins border-b border-gray-100 transition-all duration-1000 ease-out ${
           academicExcellenceAnimation.isVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-8"
         }`}
       >
-        <div className="max-w-7xl mx-auto text-center space-y-6">
+        <div className="max-w-7xl mx-auto text-center px-4">
           <h2
-            className={`text-3xl md:text-4xl font-bold text-[#2e2b70] mb-2 transition-all duration-1000 ease-out ${
+            className={`text-3xl md:text-4xl font-bold text-[#2e2b70] mb-6 transition-all duration-1000 ease-out ${
               academicExcellenceAnimation.isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
@@ -899,55 +791,57 @@ export default function Education() {
             Academic Excellence
           </h2>
           <p
-            className={`text-lg text-gray-700 transition-all duration-1000 ease-out ${
+            className={`text-lg text-gray-700 mb-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
               academicExcellenceAnimation.isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            We do education differently so it&lsquo;s important to explain key parts
+            We do education differently so it&apos;s important to explain key parts
             of our whole-child program.
           </p>
           <div
-            className={`text-base text-gray-600 space-y-3 text-left mx-auto max-w-2xl transition-all duration-1000 ease-out ${
+            className={`text-base text-gray-600 space-y-6 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
               academicExcellenceAnimation.isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            <p>
-              <span className="font-semibold text-[#2e2b70]">
-                Our population:
-              </span>{" "}
-              ASA is an international school serving students from countries
-              worldwide.
-            </p>
-            <p>
-              Students must qualify at{" "}
-              <span className="font-semibold">
-                B2 English language proficiency standard by grade 10
-              </span>
-              . We provide additional help and support for new enrolled students
-              to reach our required level of proficiency.
-            </p>
-            <ul className="list-disc list-inside ml-2 space-y-1">
-              <li>
-                Grade 9 students at A2-B2 level will attend two additional
-                evening courses through our adult English Language Institute
-              </li>
-              <li>We offer language instruction courses in middle school</li>
-              <li>Elementary years use sheltered immersion to teach English</li>
-            </ul>
-            <p>
-              ASA academic year semesters start in{" "}
-              <span className="font-semibold">August</span> and{" "}
-              <span className="font-semibold">January</span>. Our teachers go on
-              vacation in June and our administrative team joins them in July.
-              Our physical classrooms have extended vacations in December and
-              mid-June throughout July.
-            </p>
+            <div className="text-justify">
+              <p className="mb-4">
+                <span className="font-semibold text-[#2e2b70]">
+                  Our population:
+                </span>{" "}
+                ASA is an international school serving students from countries
+                worldwide.
+              </p>
+              <p className="mb-4">
+                Students must qualify at{" "}
+                <span className="font-semibold">
+                  B2 English language proficiency standard by grade 10
+                </span>
+                . We provide additional help and support for new enrolled students
+                to reach our required level of proficiency.
+              </p>
+              <ul className="list-disc list-inside space-y-2 mb-4 text-left pl-4">
+                <li>
+                  Grade 9 students at A2-B2 level will attend two additional
+                  evening courses through our adult English Language Institute
+                </li>
+                <li>We offer language instruction courses in middle school</li>
+                <li>Elementary years use sheltered immersion to teach English</li>
+              </ul>
+              <p>
+                ASA academic year semesters start in{" "}
+                <span className="font-semibold">August</span> and{" "}
+                <span className="font-semibold">January</span>. Our teachers go on
+                vacation in June and our administrative team joins them in July.
+                Our physical classrooms have extended vacations in December and
+                mid-June throughout July.
+              </p>
+            </div>
           </div>
         </div>
       </section>
