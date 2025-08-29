@@ -15,7 +15,7 @@ const navigationItems = [
     ]
   },
   { label: 'Job Opportunities', href: '../JobOpportunity' },
-  { label: 'Contact', href: '../Contact' },
+  { label: 'Contacts', href: '../Contact' },
 ];
 
 export function Header() {
