@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, HelpCircle } from "lucide-react";
 import AnimationWrapper from "./animation-wrapper";
+import Link from "next/link";
 
 interface FaqItem {
   question: string;
@@ -45,40 +46,91 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-4 md:py-16 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section className="py-16 md:py-24 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 opacity-90" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.png')] opacity-[0.02]" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <AnimationWrapper delay={0.1}>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#2e2b70] mb-12 text-center">
-            FAQ
-          </h2>
+          <div className="text-center mb-16">
+            <div className="items-center justify-center gap-3 mb-4">
+              <HelpCircle style={{ justifySelf: "center"}} className="w-8 h-8 text-[#2e2b70] mb-6" />
+              <h2 className="text-4xl md:text-5xl font-bold text-[#2e2b70]">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Find answers to common questions about our curriculum, admission process, and school life
+            </p>
+          </div>
         </AnimationWrapper>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
             <AnimationWrapper key={index} delay={0.1 + index * 0.1}>
-              <div className="border-b border-gray-200 py-5">
+              <div 
+                className={`
+                  bg-white rounded-xl shadow-sm border border-gray-100 
+                  transition-all duration-300 hover:shadow-md
+                  ${openIndex === index ? 'ring-2 ring-[#2e2b70]/20' : ''}
+                `}
+              >
                 <button
-                  className="flex w-full justify-between items-center text-left focus:outline-none"
+                  className="flex w-full justify-between items-center text-left p-6 focus:outline-none"
                   onClick={() => toggleFaq(index)}
                 >
-                  <h3 className="text-xl font-medium text-slate-800">{faq.question}</h3>
+                  <h3 className={`
+                    text-lg font-semibold transition-colors duration-300
+                    ${openIndex === index ? 'text-[#2e2b70]' : 'text-gray-800'}
+                  `}>
+                    {faq.question}
+                  </h3>
                   <ChevronDown
-                    className={`flex-shrink-0 w-5 h-5 text-slate-500 transition-transform duration-300 ${
-                      openIndex === index ? "transform rotate-180" : ""
-                    }`}
+                    className={`
+                      flex-shrink-0 w-5 h-5 transition-all duration-300
+                      ${openIndex === index ? 
+                        'transform rotate-180 text-[#2e2b70]' : 
+                        'text-gray-400'
+                      }
+                    `}
                   />
                 </button>
                 <div
-                  className={`mt-3 overflow-hidden transition-all duration-300 ${
-                    openIndex === index ? "max-h-96" : "max-h-0"
-                  }`}
+                  className={`
+                    overflow-hidden transition-all duration-300 ease-in-out
+                    ${openIndex === index ? 'max-h-96' : 'max-h-0'}
+                  `}
                 >
-                  <p className="text-slate-600 pb-4">{faq.answer}</p>
+                  <div className="p-6 pt-0">
+                    <div className="h-px bg-gray-100 -mx-6 mb-4" />
+                    <p className="text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
               </div>
             </AnimationWrapper>
           ))}
         </div>
+
+        {/* Contact CTA */}
+        <AnimationWrapper delay={0.3}>
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-4">
+              Still have questions? We&apos;re here to help.
+            </p>
+            <Link
+              href="/Contact"
+              className="inline-flex items-center justify-center px-6 py-3 
+                border border-transparent text-base font-medium rounded-md
+                text-white bg-[#2e2b70] hover:bg-[#23225a] 
+                transition-colors duration-300"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </AnimationWrapper>
       </div>
     </section>
   );

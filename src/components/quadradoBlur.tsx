@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { GraduationCap } from "lucide-react";
 import { useRouter } from "next/router";
+import styles from '../styles/QuadradoBlur.module.css';
 
 const Quadrado: React.FC = () => {
   const [currentIndex] = useState(0);
@@ -102,7 +103,7 @@ const Quadrado: React.FC = () => {
     router.push("/Education");
   };
 
-  const styles = {
+  const componentStyles = {
     mainContainer: {
       position: "relative",
       width: "100%",
@@ -191,6 +192,9 @@ const Quadrado: React.FC = () => {
       fontWeight: "600",
       color: "#fff",
       boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
+      transition: "all 0.3s ease-in-out", // Add transition
+      transform: "scale(1)", // Add initial scale
+      width: "auto", // Add initial width
     },
 
     infoSection: {
@@ -225,114 +229,77 @@ const Quadrado: React.FC = () => {
     },
   };
 
-  const responsiveStyle = `
-    .card-animate {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .card-animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card-animate-delay-1 { transition-delay: 0.2s; }
-    .card-animate-delay-2 { transition-delay: 0.4s; }
-    .card-animate-delay-3 { transition-delay: 0.6s; }
-    .card-animate-delay-4 { transition-delay: 0.8s; }
-
-    @media (max-width: 767px) {
-      .cards-container {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-        margin: 5rem auto 0;
-        gap: 7rem !important;
-      }
-      
-      .single-card {
-        max-width: 100% !important;
-        margin-bottom: 2rem;
-      }
-      
-      .card-image {
-        height: 380px !important;
-        top: -60px !important;
-      }
-    }
-  `;
-
   return (
-    <>
-      <style>{responsiveStyle}</style>
-      <div
-        className="quadrado-main-container"
-        style={styles.mainContainer as React.CSSProperties}
-        ref={containerRef}
-      >
-        <div className="mt-28" style={styles.cardsContainer}>
-          {quadradosData().map((item, index) => (
-            <div 
-              key={index} 
-              className={`card-animate card-animate-delay-${index + 1} ${isVisible ? 'visible' : ''}`}
-              style={styles.singleCard as React.CSSProperties}
-            >
-              <div style={styles.imageContainer as React.CSSProperties}>
-                <Image
-                  src={item.imgSrc}
-                  alt={item.title}
-                  fill
-                  style={{ 
-                    objectFit: "contain",
-                    objectPosition: "center bottom"
+    <div
+      className="quadrado-main-container"
+      style={componentStyles.mainContainer as React.CSSProperties}
+      ref={containerRef}
+    >
+      <div className="mt-28" style={componentStyles.cardsContainer}>
+        {quadradosData().map((item, index) => (
+          <div 
+            key={index} 
+            className={`${styles['card-animate']} ${styles[`card-animate-delay-${index + 1}`]} ${
+              isVisible ? styles.visible : ''
+            }`}
+            style={componentStyles.singleCard as React.CSSProperties}
+          >
+            <div style={componentStyles.imageContainer as React.CSSProperties}>
+              <Image
+                src={item.imgSrc}
+                alt={item.title}
+                fill
+                style={{ 
+                  objectFit: "contain",
+                  objectPosition: "center bottom"
+                }}
+                sizes="(max-width: 768px) 240px, (max-width: 480px) 200px, 320px"
+                priority={index === 0}
+              />
+            </div>
+            <div style={{
+              ...componentStyles.contentWrapper as React.CSSProperties,
+              background: 'linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%)',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              borderRadius: '0 0 20px 20px'
+            }}>
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <h3 style={componentStyles.titleText}>{item.title}</h3>
+                <p style={componentStyles.descriptionText}>{item.description}</p>
+                <button
+                  onClick={() => handleViewMore(item.title)}
+                  className={styles['view-more-button']}
+                  style={{
+                    ...componentStyles.viewMoreButton,
+                    backgroundColor: item.buttonColor,
                   }}
-                  sizes="(max-width: 768px) 240px, (max-width: 480px) 200px, 320px"
-                  priority={index === 0}
-                />
-              </div>
-              <div style={{
-                ...styles.contentWrapper as React.CSSProperties,
-                background: 'linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%)',
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                borderRadius: '0 0 20px 20px'
-              }}>
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <h3 style={styles.titleText}>{item.title}</h3>
-                  <p style={styles.descriptionText}>{item.description}</p>
-                  <button
-                    onClick={() => handleViewMore(item.title)}
-                    style={{
-                      ...styles.viewMoreButton,
-                      backgroundColor: item.buttonColor,
-                    }}
-                  >
-                    View More
-                  </button>
-                </div>
+                >
+                  View More
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div style={styles.infoSection}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-            <GraduationCap size={24} color="white" />
-            <span style={{ color: 'white', fontSize: '18px', fontWeight: '500' }}>
-              Over 100 Specialized Courses
-            </span>
           </div>
-          <h2 style={styles.mainTitle}>Our Educational Levels</h2>
-          <p style={styles.mainDescription}>
-            From early childhood to college preparation, we provide comprehensive
-            education tailored to each development stage.
-          </p>
-          {/* Additional content as needed */}
-        </div>
+        ))}
       </div>
-    </>
+
+      <div style={componentStyles.infoSection}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
+          <GraduationCap size={24} color="white" />
+          <span style={{ color: 'white', fontSize: '18px', fontWeight: '500' }}>
+            Over 100 Specialized Courses
+          </span>
+        </div>
+        <h2 style={componentStyles.mainTitle}>Our Educational Levels</h2>
+        <p style={componentStyles.mainDescription}>
+          From early childhood to college preparation, we provide comprehensive
+          education tailored to each development stage.
+        </p>
+        {/* Additional content as needed */}
+      </div>
+    </div>
   );
 };
 

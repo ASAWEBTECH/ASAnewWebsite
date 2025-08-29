@@ -101,7 +101,7 @@ export default function HeroSection() {
                 paginate(-1);
               }
             }}
-            className="absolute inset-0"
+            className="absolute inset-0 z-10"
           >
             <div 
               className="absolute inset-0 bg-cover bg-center"
@@ -156,7 +156,7 @@ export default function HeroSection() {
           <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
         </button>
 
-        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, index) => (
             <button
               key={index}

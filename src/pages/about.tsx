@@ -11,7 +11,6 @@ function About() {
   const missionSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const philosophySectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const nondiscriminationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
-  const welcomeSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const programsSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const supportSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const curriculumSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
@@ -342,36 +341,6 @@ function About() {
               students and educators. To be extraordinary. In a time in our
               history where only extraordinary will be enough.
             </p>
-          </div>
-        </div>
-
-        {/* Welcome Message Section */}
-        <div
-          ref={welcomeSectionAnimation.ref}
-          className={`bg-indigo-50 text-white p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${welcomeSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <h2 className="text-3xl text-[#2e2b70] font-bold mb-6 text-center">
-            Welcome Message
-          </h2>
-          <p className="text-lg text-[#2e2b70] leading-relaxed text-center max-w-4xl mx-auto mb-6">
-            It&apos;s an exciting new year to belong to our community. Wishing
-            our students and families a great academic year!
-          </p>
-          <div className="text-center">
-            <Image
-              src="/AcademicDirector.webp"
-              alt="Students participating in activities"
-              width={500}
-              height={400}
-              className="rounded-lg shadow-lg mx-auto"
-            />
-          </div>
-          <div className="text-center">
-            <p className="font-semibold text-[#2e2b70]">Best regards,</p>
-            <p className="text-xl font-bold text-[#2e2b70]">
-              Dr. Babita Parashar
-            </p>
-            <p className="text-lg text-[#2e2b70]">Academic Director</p>
           </div>
         </div>
 

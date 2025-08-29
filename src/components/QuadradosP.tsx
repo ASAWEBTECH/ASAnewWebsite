@@ -16,29 +16,17 @@ function FeatureBox({
   delay: string;
 }) {
   return (
-    <div className={`group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col items-center text-center relative overflow-hidden ${delay}`}>
-      {/* Animated background gradient */}
+    <div className={`group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden ${delay}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
-      {/* Floating particles effect */}
-      <div className="absolute top-4 right-4 w-2 h-2 bg-blue-200 rounded-full animate-bounce delay-100"></div>
-      <div className="absolute top-8 left-6 w-1 h-1 bg-indigo-300 rounded-full animate-pulse delay-300"></div>
-      <div className="absolute bottom-12 right-8 w-1.5 h-1.5 bg-purple-200 rounded-full animate-bounce delay-500"></div>
-      
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 rounded-full mb-6 transform transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 relative z-10">
-        <Icon className="w-10 h-10 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 rounded-full mb-4 transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 relative z-10">
+        <Icon className="w-6 h-6 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" />
       </div>
       
-      <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-800 transition-colors duration-300 relative z-10">{title}</h3>
-      <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 relative z-10">{description}</p>
+      <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-800 transition-colors duration-300 relative z-10">{title}</h3>
+      <p className="text-sm text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 relative z-10">{description}</p>
       
-      {/* Enhanced bottom accent */}
-      <div className="absolute bottom-0 left-0 w-full h-2 transition-all duration-300 group-hover:h-3" style={{ backgroundColor: bgColor }}>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-      </div>
-      
-      {/* Glowing border effect */}
-      <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-200 transition-all duration-500"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 transition-all duration-300 group-hover:h-2" style={{ backgroundColor: bgColor }}></div>
     </div>
   );
 }
@@ -49,23 +37,25 @@ type AccreditationLogoProps = {
   delay: string;
 };
 
- function AccreditationLogo({ src, alt }: AccreditationLogoProps) {
+// Update the AccreditationLogo component to include labels
+function AccreditationLogo({ src, alt }: AccreditationLogoProps) {
   return (
-    <div className={`flex-shrink-0 mx-8 hover:opacity-100 transition-all duration-300 transform flex flex-col items-center`}>
-      <Image 
-        src={src}
-        alt={alt}
-        width={80}
-        height={60}
-        className="max-w-full max-h-full object-contain transition-all duration-300"
-      />
-      <span className="text-sm text-gray-600 font-medium text-center mt-2">
+    <div className="flex-shrink-0 w-[180px] mx-3 hover:opacity-100 transition-all duration-300 transform flex flex-col items-center">
+      <div className="h-[80px] flex items-center justify-center mb-2">
+        <Image 
+          src={src}
+          alt={alt}
+          width={100}
+          height={80}
+          className="max-w-full h-auto object-contain transition-all duration-300"
+        />
+      </div>
+      <span className="text-xs text-gray-600 font-medium text-center whitespace-normal px-2">
         {alt}
       </span>
     </div>
   );
 }
-
 
 function QuadradosP() {
   const features = [
@@ -131,23 +121,57 @@ function QuadradosP() {
     {
       src: "/ministry-logo.jpg",
       alt: "Angolan Ministry of Education"
+    },
+        {
+      src: "/resiliart.png",
+      alt: "ResiliART Angola"
+    },
+        {
+      src: "/unesco.png",
+      alt: "UNESCO"
+    },
+        {
+      src: "/bienal.png",
+      alt: "Bienal de Luanda"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
+      <p style={{justifySelf: "center"}} className="text-center text-[#2e2b70]">Academic Director Message</p>
+      <h1 className="text-5xl font-bold text-center text-[#2e2b70] mb-12">Welcome Message</h1>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20 animate-fade-up">
-          <h2 className="text-4xl md:text-5xl font-bold bg-[#2e2b70] bg-clip-text text-transparent mb-6">
-            Our Educational Features
-          </h2>
-          <div className="w-24 h-1 bg-[#2e2b70] mx-auto mb-6 rounded-full"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover what makes our educational approach unique and effective for modern learners
-          </p>
+        {/* Welcome Message Section */}
+        <div className="bg-white rounded-3xl shadow-xl p-8 mb-16">
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="md:w-1/3">
+              <Image
+                src="/AcademicDirector.webp"
+                alt="Dr. Babita Parashar"
+                width={400}
+                height={500}
+                className="rounded-2xl shadow-lg"
+              />
+              <div className="text-center mt-4">
+                <p className="font-semibold text-gray-800">Dr. Babita Parashar</p>
+                <p className="text-gray-600 text-sm">Academic Director</p>
+              </div>
+            </div>
+            <div className="md:w-2/3">
+              <h2 className="text-3xl font-bold text-[#2e2b70] mb-6">Dear All,</h2>
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>Welcome to <strong>American Schools of Angola</strong>. As we begin our Academic year 2025-26, we are renewing our assurance that each of our learner is nurtured to reach their highest potential. The transformative role of empathetic and compassionate teachers goes above and beyond that any assessment test can measure; we are proud to be transforming lives day by day.</p>
+                <p>Aligning curricular practices with <strong>United Nations Development Goals (UNSDG)</strong> in our everyday classroom, we have performing arts, visual arts, sports, community connect, STEM and Social Emotional Learning forming the core fabric of our holistic development approach.</p>
+                <p>With our unique Early College High School program, our high school students are pursuing dual enrolment course and getting ready for their higher education journey while still enjoying the warmth of being at home.</p>
+                <p><strong>Arizona State University</strong>, <strong>Bienal de Luanda</strong>, <strong>ResiliART</strong>, <strong>UNESCO</strong>, <strong>United Youth Taekwondo Initiative</strong>, <strong>K-Pop</strong> collaborations are a testament of global vision that <strong>American Schools of Angola</strong> stands for.</p>
+                <p>As we stay committed towards excellence, let us all strive to <span className="font-semibold text-[#2e2b70]">#Be Extraordinary</span>.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+
+        {/* Features Grid - Reduced size */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {features.map((feature, index) => (
             <FeatureBox
               key={index}
@@ -160,27 +184,13 @@ function QuadradosP() {
           ))}
         </div>
 
-        {/* Accreditation Section */}
-        <div className="bg-white rounded-3xl shadow-xl p-8 relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-transparent to-purple-50 opacity-50"></div>
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
-          
-          <div className="text-center mb-8 relative z-10">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">
-              Nationally and Internationally Accredited
-            </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our programs are recognized and accredited by leading national and international organizations, ensuring global recognition and quality standards.
-            </p>
-          </div>
-
-          {/* Scrolling logos */}
-          <div className="relative overflow-hidden">
-            <div className="flex animate-scroll-smooth">
-              {[...accreditations, ...accreditations, ...accreditations].map((accreditation, index) => (
+        {/* Simplified Accreditation Section */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden"> {/* Increased padding */}
+          <div className="relative overflow-hidden w-full">
+            <div className="flex animate-scroll-smooth whitespace-nowrap items-center"> {/* Added items-center */}
+              {[...accreditations, ...accreditations, ...accreditations, ...accreditations].map((accreditation, index) => (
                 <AccreditationLogo 
-                  key={index} 
+                  key={`${accreditation.alt}-${index}`}
                   src={accreditation.src}
                   alt={accreditation.alt}
                   delay={`delay-${(index % 10) * 50}`}
@@ -198,7 +208,10 @@ function QuadradosP() {
         }
         
         .animate-scroll-smooth {
-           animation: scroll-smooth 10s linear infinite;
+          animation: scroll-smooth 80s linear infinite; // Increased duration to 80s for slower movement
+          width: fit-content;
+          display: flex;
+          padding: 1rem 0; // Added padding for labels
         }
         
         .animate-scroll-smooth:hover {

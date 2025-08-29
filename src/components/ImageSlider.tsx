@@ -285,7 +285,7 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
 
         {/* Indicadores de slides */}
 
-        <div className="absolute bottom-8 sm:bottom-48 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-8 sm:bottom-32 left-1/2 -translate-x-1/2 flex gap-2">
           {images.map((_, index) => (
             <button
               key={index}
