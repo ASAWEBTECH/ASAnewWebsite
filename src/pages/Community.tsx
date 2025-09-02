@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
 import Image from "next/image";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import SEO from '../components/SEO';
 
 function Community() {
   const skills = [
@@ -145,6 +146,12 @@ function Community() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <SEO 
+        title="Community"
+        description="Join our vibrant educational community. Support services, child development center, and inclusive environment fostering global citizenship and cultural sensitivity."
+        keywords="school community Angola, student support services, child development center, international school community"
+        canonical="https://asangola.com/Community"
+      />
       {/* Header */}
       <Header />
 

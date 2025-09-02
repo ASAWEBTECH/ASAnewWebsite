@@ -4,6 +4,7 @@ import Image from 'next/image';
 import {Header} from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import SEO from '../components/SEO';
 
 const SchoolGallery = () => {
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
@@ -71,6 +72,12 @@ const SchoolGallery = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO 
+        title="Media Gallery"
+        description="Explore life at American Schools of Angola through our photo and video gallery. See our students' achievements, events, and daily activities."
+        keywords="school gallery Angola, ASA events, student activities, school photos Luanda"
+        canonical="https://asangola.com/GalleryMain"
+      />
       {/* Header */}
       <Header />
       

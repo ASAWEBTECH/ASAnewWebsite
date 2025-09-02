@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import {Header} from '../components/Header';
 import Image from 'next/image';
 import { HardHat } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function JobOpportunities() {
   const [selectedDepartment, setSelectedDepartment] = useState<string | null>(null);
@@ -245,6 +246,12 @@ const stats = [
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200">
+            <SEO 
+        title="Career Opportunities"
+        description="Join our team at American Schools of Angola. Explore teaching, administrative, and support staff positions in an international educational environment."
+        keywords="teaching jobs Angola, international school careers, education jobs Luanda, school staff positions"
+        canonical="https://asangola.com/JobOpportunity"
+      />
             <Header />
             {/* Hero Section */}
             <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">

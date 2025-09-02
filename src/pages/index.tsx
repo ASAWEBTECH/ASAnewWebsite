@@ -7,6 +7,7 @@ import HeroSection from "../components/HeroSection";
 import NewsletterSection from "../components/NewsletterSection";
 import Fac from "../components/faq-section";
 import Footer from "../components/Footer";
+import SEO from '../components/SEO';
 
 // Hook personalizado para animações de visibilidade
 const useIntersectionObserver = (options = {}) => {
@@ -94,7 +95,13 @@ export default function Home() {
   ];
 
   return (
-    <main>
+    <>
+      <SEO 
+        title="Home"
+        description="American Schools of Angola offers Pre-K to early college United States curriculum. Excellence in education with modern technology, active physical development, and a safe, inclusive environment."
+        keywords="American school Angola, international school Luanda, US curriculum Angola, pre-k Angola, kindergarten Luanda, elementary school Angola, high school Luanda"
+        canonical="https://asangola.com"
+      />
       <Header />
 
       {/* Hero Section - sempre visível no topo */}
@@ -142,7 +149,7 @@ export default function Home() {
       </AnimatedSection>
 
       <Footer />
-    </main>
+    </>
   );
 }
 

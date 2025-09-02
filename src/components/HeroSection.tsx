@@ -8,6 +8,8 @@ interface Slide {
   subtitle: string;
   image: string;
   description: string;
+  day?: number;
+  month?: string;
 }
 
 const slides: Slide[] = [
@@ -15,20 +17,26 @@ const slides: Slide[] = [
     title: "Unesco Day Lecture",
     subtitle: "In celebration of United Nations Day",
     image: "/news1.webp",
-    description: "In celebration of United Nations Day, our students had the incredible opportunity to participate in a special lecture dedicated to the values and mission of UNESCO. The session highlighted the importance of global cooperation, cultural preservation, and the pursuit of peace in building a better future for all nations.The lecture was an inspiring moment for our students to learn about the role of the United Nations in addressing global challenges, such as education for all, climate change, and human rights. It also encouraged them to reflect on their own roles as young global citizens and the impact they can make in their communities. Through engaging discussions and thought-provoking insights, the event fostered a deeper understanding of how we can all contribute to a more inclusive, sustainable, and peaceful world. Our students left the session feeling motivated and empowered to embody these values in their everyday lives."
+    description: "In celebration of United Nations Day, our students had the incredible opportunity to participate in a special lecture dedicated to the values and mission of UNESCO. The session highlighted the importance of global cooperation, cultural preservation, and the pursuit of peace in building a better future for all nations.The lecture was an inspiring moment for our students to learn about the role of the United Nations in addressing global challenges, such as education for all, climate change, and human rights. It also encouraged them to reflect on their own roles as young global citizens and the impact they can make in their communities. Through engaging discussions and thought-provoking insights, the event fostered a deeper understanding of how we can all contribute to a more inclusive, sustainable, and peaceful world. Our students left the session feeling motivated and empowered to embody these values in their everyday lives.",
+    day: 24,
+    month: "Oct"
   },
   {
     title: "Breast Cancer Awareness Drive",
     subtitle: "As part of our commitment to promoting health and wellness",
     image: "/news2.webp",
-    description: "As part of our commitment to promoting health and wellness, we organized a meaningful Breast Cancer Awareness Drive aimed at educating and empowering our community. This event served as an opportunity to highlight the importance of early detection, regular screenings, and the steps we can all take to support those affected by breast cancer. Through informative talks, interactive workshops, and personal stories shared by survivors, participants gained valuable insights into the realities of breast cancer and the critical role awareness plays in saving lives. The event also featured fundraising efforts, with proceeds directed toward research and support for individuals and families navigating this journey. We are proud of the participation and enthusiasm shown by everyone involved, and we remain committed to fostering a community that values health, compassion, and action. Together, we can make a difference in the fight against breast cancer."
+    description: "As part of our commitment to promoting health and wellness, we organized a meaningful Breast Cancer Awareness Drive aimed at educating and empowering our community. This event served as an opportunity to highlight the importance of early detection, regular screenings, and the steps we can all take to support those affected by breast cancer. Through informative talks, interactive workshops, and personal stories shared by survivors, participants gained valuable insights into the realities of breast cancer and the critical role awareness plays in saving lives. The event also featured fundraising efforts, with proceeds directed toward research and support for individuals and families navigating this journey. We are proud of the participation and enthusiasm shown by everyone involved, and we remain committed to fostering a community that values health, compassion, and action. Together, we can make a difference in the fight against breast cancer.",
+    day: 12,
+    month: "Nov"
   },
-{
-  title: "Break Time, Big Smiles",
-  subtitle: "Because growing also means having fun along the way",
-  image: "/news3.webp",
-  description: "Sometimes, the best ideas come during a good laugh. Our team takes regular fun breaks to recharge, connect, and spark creativity. Here, growth isn't just about careers — it's about enjoying the journey together."
-}
+  {
+    title: "Break Time, Big Smiles",
+    subtitle: "Because growing also means having fun along the way",
+    image: "/news3.webp",
+    description: "Sometimes, the best ideas come during a good laugh. Our team takes regular fun breaks to recharge, connect, and spark creativity. Here, growth isn't just about careers — it's about enjoying the journey together.",
+    day: 3,
+    month: "Dec"
+  }
 ];
 
 export default function HeroSection() {
@@ -103,6 +111,25 @@ export default function HeroSection() {
             }}
             className="absolute inset-0 z-10"
           >
+            {/* Calendário do evento - Updated position to top right */}
+            <div className="absolute top-8 right-8 md:top-12 md:right-12 z-20">
+              <div className="flex items-center">
+                <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg flex flex-col items-center justify-center px-4 py-2 w-20 h-24 border-2 border-[#2e2b70] relative hover:transform hover:scale-105 transition-all duration-300">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#2e2b70] rounded-full w-8 h-8 flex items-center justify-center shadow-md">
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
+                      <rect x="4" y="7" width="16" height="13" rx="2" fill="#fff"/>
+                      <rect x="4" y="7" width="16" height="13" rx="2" stroke="#2e2b70" strokeWidth="2"/>
+                      <rect x="7" y="3" width="2" height="4" rx="1" fill="#2e2b70"/>
+                      <rect x="15" y="3" width="2" height="4" rx="1" fill="#2e2b70"/>
+                    </svg>
+                  </div>
+                  <span className="text-4xl font-extrabold text-[#2e2b70] mt-6 leading-none">{slides[currentIndex].day}</span>
+                  <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide">{slides[currentIndex].month}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Conteúdo do slide */}
             <div 
               className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${slides[currentIndex].image})` }}

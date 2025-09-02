@@ -13,6 +13,7 @@ import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import { useScrollAnimation, useStaggeredAnimation } from "../hooks/useScrollAnimation";
+import SEO from '../components/SEO';
 
 interface Subject {
   id: string;
@@ -605,276 +606,284 @@ export default function Education() {
   }, []); // Empty dependency array to run only once on mount
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      {/* Hero Section */}
-      <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/fundoEducation.webp"
-            alt="Gallery background"
-            fill
-            style={{ objectFit: "cover", objectPosition: "center" }}
-            priority
-          />
-                   <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" />
-        </div>
+    <>
+      <SEO 
+        title="Education Programs"
+        description="Comprehensive US-based curriculum from Pre-K to High School. Advanced Placement courses, STEM programs, and personalized learning paths for academic excellence."
+        keywords="US curriculum Angola, international education Luanda, Advanced Placement courses, STEM education Angola, PreK-12 education"
+        canonical="https://asangola.com/Education"
+      />
+      <div className="min-h-screen">
+        <Header />
+        {/* Hero Section */}
+        <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/fundoEducation.webp"
+              alt="Gallery background"
+              fill
+              style={{ objectFit: "cover", objectPosition: "center" }}
+              priority
+            />
+                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" />
+          </div>
 
-        <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">
-          <h1
-            className={`text-4xl font-bold mb-4 leading-tight transition-all duration-1200 ease-out ${
-              isHeaderLoaded
-                ? "opacity-100 translate-x-0 translate-y-0"
-                : "opacity-0 -translate-x-16 translate-y-6"
-            }`}
-            style={{ transitionDelay: "300ms" }}
-          >
-            Empowering minds through knowledge and inspiration
-          </h1>
-          <p
-            className={`text-xl text-white text-left transition-all duration-1000 ease-out ${
-              isHeaderLoaded
-                ? "opacity-100 translate-x-0 translate-y-0"
-                : "opacity-0 -translate-x-12 translate-y-4"
-            }`}
-            style={{ transitionDelay: "600ms" }}
-          >
-            Our commitment to education nurtures curiosity, encourages growth,
-            and prepares every student to shape the future with confidence and
-            purpose.
-          </p>
-        </div>
+          <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">
+            <h1
+              className={`text-4xl font-bold mb-4 leading-tight transition-all duration-1200 ease-out ${
+                isHeaderLoaded
+                  ? "opacity-100 translate-x-0 translate-y-0"
+                  : "opacity-0 -translate-x-16 translate-y-6"
+              }`}
+              style={{ transitionDelay: "300ms" }}
+            >
+              Empowering minds through knowledge and inspiration
+            </h1>
+            <p
+              className={`text-xl text-white text-left transition-all duration-1000 ease-out ${
+                isHeaderLoaded
+                  ? "opacity-100 translate-x-0 translate-y-0"
+                  : "opacity-0 -translate-x-12 translate-y-4"
+              }`}
+              style={{ transitionDelay: "600ms" }}
+            >
+              Our commitment to education nurtures curiosity, encourages growth,
+              and prepares every student to shape the future with confidence and
+              purpose.
+            </p>
+          </div>
 
-        {/* Cloud effect at the bottom */}
-        <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
-          {/* First cloud, left to right, lower opacity */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[250px] min-w-full"
-            style={{
-              display: "block",
-              width: "100vw",
-              minWidth: "100vw",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.18"
-            />
-          </svg>
-          {/* Second cloud, right to left, higher opacity, mirrored */}
-          <svg
-            viewBox="0 0 1440 220"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-[270px] absolute left-0 top-0 min-w-full"
-            style={{
-              display: "block",
-              transform: "scaleX(-1)",
-              width: "100vw",
-              minWidth: "100vw",
-            }}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <path
-              d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
-              fill="white"
-              opacity="0.65"
-            />
-            <path
-              d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
-              fill="white"
-              opacity="0.35"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <section
-        ref={academicExcellenceAnimation.ref}
-        className={`w-full bg-white/80 py-12 font-poppins border-b border-gray-100 transition-all duration-1000 ease-out ${
-          academicExcellenceAnimation.isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto text-center px-4">
-          <h2
-            className={`text-3xl md:text-4xl font-bold text-[#2e2b70] mb-6 transition-all duration-1000 ease-out ${
-              academicExcellenceAnimation.isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: "200ms" }}
-          >
-            Academic Excellence
-          </h2>
-          <p
-            className={`text-lg text-gray-700 mb-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-              academicExcellenceAnimation.isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: "400ms" }}
-          >
-            We do education differently so it&apos;s important to explain key parts
-            of our whole-child program.
-          </p>
-          <div
-            className={`text-base text-gray-600 space-y-6 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
-              academicExcellenceAnimation.isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: "600ms" }}
-          >
-            <div className="text-justify">
-              <p className="mb-4">
-                <span className="font-semibold text-[#2e2b70]">
-                  Our population:
-                </span>{" "}
-                ASA is an international school serving students from countries
-                worldwide.
-              </p>
-              <p className="mb-4">
-                Students must qualify at{" "}
-                <span className="font-semibold">
-                  B2 English language proficiency standard by grade 10
-                </span>
-                . We provide additional help and support for new enrolled students
-                to reach our required level of proficiency.
-              </p>
-              <ul className="list-disc list-inside space-y-2 mb-4 text-left pl-4">
-                <li>
-                  Grade 9 students at A2-B2 level will attend two additional
-                  evening courses through our adult English Language Institute
-                </li>
-                <li>We offer language instruction courses in middle school</li>
-                <li>Elementary years use sheltered immersion to teach English</li>
-              </ul>
-              <p>
-                ASA academic year semesters start in{" "}
-                <span className="font-semibold">August</span> and{" "}
-                <span className="font-semibold">January</span>. Our teachers go on
-                vacation in June and our administrative team joins them in July.
-                Our physical classrooms have extended vacations in December and
-                mid-June throughout July.
-              </p>
-            </div>
+          {/* Cloud effect at the bottom */}
+          <div className="pointer-events-none absolute bottom-[-2px] left-0 w-full z-20 overflow-hidden">
+            {/* First cloud, left to right, lower opacity */}
+            <svg
+              viewBox="0 0 1440 220"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-[250px] min-w-full"
+              style={{
+                display: "block",
+                width: "100vw",
+                minWidth: "100vw",
+              }}
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
+                fill="white"
+                opacity="0.35"
+              />
+              <path
+                d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
+                fill="white"
+                opacity="0.18"
+              />
+            </svg>
+            {/* Second cloud, right to left, higher opacity, mirrored */}
+            <svg
+              viewBox="0 0 1440 220"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-[270px] absolute left-0 top-0 min-w-full"
+              style={{
+                display: "block",
+                transform: "scaleX(-1)",
+                width: "100vw",
+                minWidth: "100vw",
+              }}
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M0,160 Q360,220 720,160 T1440,160 V220 H0 Z"
+                fill="white"
+                opacity="0.65"
+              />
+              <path
+                d="M0,200 Q360,260 720,200 T1440,200 V220 H0 Z"
+                fill="white"
+                opacity="0.35"
+              />
+            </svg>
           </div>
         </div>
-      </section>
 
-      {/* Renderizar cada seção de gradeLevel usando o componente filho */}
-      {gradeLevels.map((gradeLevel) => (
-        <GradeLevelSection
-          key={gradeLevel.id}
-          gradeLevel={gradeLevel}
-          isExpanded={expandedSections.has(gradeLevel.id)}
-          toggleSection={toggleSection}
-          getColorClasses={getColorClasses}
-        />
-      ))}
-
-      <div
-        id="calendar"
-        ref={calendarAnimation.ref}
-        className={`min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex flex-col items-center justify-center transition-all duration-1000 ease-out ${
-          calendarAnimation.isVisible 
-            ? "opacity-100 translate-y-0" 
-            : "opacity-0 translate-y-8"
-        }`}
-      >
-        <div className="max-w-7xl w-full flex flex-col md:flex-row items-start justify-between gap-8">
-          {/* Texts and Button on the left */}
-          <div 
-            className={`flex-1 order-2 md:order-1 transition-all duration-1000 ease-out ${
-              calendarAnimation.isVisible 
-                ? "opacity-100 translate-x-0" 
-                : "opacity-0 -translate-x-8"
-            }`}
-            style={{ transitionDelay: "200ms" }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-indigo-900 mb-2">
-              Academic Calendar
-            </h3>
-            <p className="text-gray-700 mb-4 max-w-lg">
-              Our academic calendar is updated annually to keep you informed about all important dates throughout the school year. Key events and holidays are highlighted with different colors, and a legend is provided in the calendar header for easy reference. Stay up to date with semester start and end dates, exam periods, school breaks, and special activities. With just one click, you can download the full calendar for your convenience. Make sure to check back regularly for any updates or changes, and never miss an important school event!
-            </p>
-            <div 
-              className={`mt-6 transition-all duration-1000 ease-out ${
-                calendarAnimation.isVisible 
-                  ? "opacity-100 translate-y-0" 
+        <section
+          ref={academicExcellenceAnimation.ref}
+          className={`w-full bg-white/80 py-12 font-poppins border-b border-gray-100 transition-all duration-1000 ease-out ${
+            academicExcellenceAnimation.isVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="max-w-7xl mx-auto text-center px-4">
+            <h2
+              className={`text-3xl md:text-4xl font-bold text-[#2e2b70] mb-6 transition-all duration-1000 ease-out ${
+                academicExcellenceAnimation.isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              Academic Excellence
+            </h2>
+            <p
+              className={`text-lg text-gray-700 mb-8 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
+                academicExcellenceAnimation.isVisible
+                  ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              <span className="mb-3 block text-lg font-semibold text-indigo-800">
-                Download the full calendar with a single click!
-              </span>
-              <a
-                href="https://dl.dropboxusercontent.com/scl/fi/res2em40rq4fh4gjbxl6s/Academic-Calendar-25-26-3.pdf?rlkey=j6hr94iqs6v0xwi5teafc93s3&st=4cmz5dvf"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button
-                  className="bg-[#ff141f] hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 flex items-center gap-2 text-lg hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
-                  type="button"
-                >
-                  <Download className="w-5 h-5" />
-                  Download Calendar
-                </button>
-              </a>
+              We do education differently so it&apos;s important to explain key parts
+              of our whole-child program.
+            </p>
+            <div
+              className={`text-base text-gray-600 space-y-6 max-w-4xl mx-auto transition-all duration-1000 ease-out ${
+                academicExcellenceAnimation.isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+              style={{ transitionDelay: "600ms" }}
+            >
+              <div className="text-justify">
+                <p className="mb-4">
+                  <span className="font-semibold text-[#2e2b70]">
+                    Our population:
+                  </span>{" "}
+                  ASA is an international school serving students from countries
+                  worldwide.
+                </p>
+                <p className="mb-4">
+                  Students must qualify at{" "}
+                  <span className="font-semibold">
+                    B2 English language proficiency standard by grade 10
+                  </span>
+                  . We provide additional help and support for new enrolled students
+                  to reach our required level of proficiency.
+                </p>
+                <ul className="list-disc list-inside space-y-2 mb-4 text-left pl-4">
+                  <li>
+                    Grade 9 students at A2-B2 level will attend two additional
+                    evening courses through our adult English Language Institute
+                  </li>
+                  <li>We offer language instruction courses in middle school</li>
+                  <li>Elementary years use sheltered immersion to teach English</li>
+                </ul>
+                <p>
+                  ASA academic year semesters start in{" "}
+                  <span className="font-semibold">August</span> and{" "}
+                  <span className="font-semibold">January</span>. Our teachers go on
+                  vacation in June and our administrative team joins them in July.
+                  Our physical classrooms have extended vacations in December and
+                  mid-June throughout July.
+                </p>
+              </div>
             </div>
           </div>
+        </section>
 
-          {/* Calendar on the right */}
-          <div 
-            className={`flex-1 order-1 md:order-2 transition-all duration-1000 ease-out ${
-              calendarAnimation.isVisible 
-                ? "opacity-100 translate-x-0 scale-100" 
-                : "opacity-0 translate-x-8 scale-95"
-            }`}
-            style={{ transitionDelay: "300ms" }}
-          >
-            <DynamicCalendar />
+        {/* Renderizar cada seção de gradeLevel usando o componente filho */}
+        {gradeLevels.map((gradeLevel) => (
+          <GradeLevelSection
+            key={gradeLevel.id}
+            gradeLevel={gradeLevel}
+            isExpanded={expandedSections.has(gradeLevel.id)}
+            toggleSection={toggleSection}
+            getColorClasses={getColorClasses}
+          />
+        ))}
+
+        <div
+          id="calendar"
+          ref={calendarAnimation.ref}
+          className={`min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex flex-col items-center justify-center transition-all duration-1000 ease-out ${
+            calendarAnimation.isVisible 
+              ? "opacity-100 translate-y-0" 
+              : "opacity-0 translate-y-8"
+          }`}
+        >
+          <div className="max-w-7xl w-full flex flex-col md:flex-row items-start justify-between gap-8">
+            {/* Texts and Button on the left */}
+            <div 
+              className={`flex-1 order-2 md:order-1 transition-all duration-1000 ease-out ${
+                calendarAnimation.isVisible 
+                  ? "opacity-100 translate-x-0" 
+                  : "opacity-0 -translate-x-8"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-indigo-900 mb-2">
+                Academic Calendar
+              </h3>
+              <p className="text-gray-700 mb-4 max-w-lg">
+                Our academic calendar is updated annually to keep you informed about all important dates throughout the school year. Key events and holidays are highlighted with different colors, and a legend is provided in the calendar header for easy reference. Stay up to date with semester start and end dates, exam periods, school breaks, and special activities. With just one click, you can download the full calendar for your convenience. Make sure to check back regularly for any updates or changes, and never miss an important school event!
+              </p>
+              <div 
+                className={`mt-6 transition-all duration-1000 ease-out ${
+                  calendarAnimation.isVisible 
+                    ? "opacity-100 translate-y-0" 
+                    : "opacity-0 translate-y-4"
+                }`}
+                style={{ transitionDelay: "400ms" }}
+              >
+                <span className="mb-3 block text-lg font-semibold text-indigo-800">
+                  Download the full calendar with a single click!
+                </span>
+                <a
+                  href="https://dl.dropboxusercontent.com/scl/fi/res2em40rq4fh4gjbxl6s/Academic-Calendar-25-26-3.pdf?rlkey=j6hr94iqs6v0xwi5teafc93s3&st=4cmz5dvf"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button
+                    className="bg-[#ff141f] hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition-all duration-300 flex items-center gap-2 text-lg hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
+                    type="button"
+                  >
+                    <Download className="w-5 h-5" />
+                    Download Calendar
+                  </button>
+                </a>
+              </div>
+            </div>
+
+            {/* Calendar on the right */}
+            <div 
+              className={`flex-1 order-1 md:order-2 transition-all duration-1000 ease-out ${
+                calendarAnimation.isVisible 
+                  ? "opacity-100 translate-x-0 scale-100" 
+                  : "opacity-0 translate-x-8 scale-95"
+              }`}
+              style={{ transitionDelay: "300ms" }}
+            >
+              <DynamicCalendar />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div 
-        ref={logosAnimation.ref}
-        className={`flex justify-center pb-5 mt-20 transition-all duration-1000 ease-out ${
-          logosAnimation.isVisible 
-            ? "opacity-100 translate-y-0 scale-100" 
-            : "opacity-0 translate-y-8 scale-95"
-        }`}
-      >
-        <Image
-          src="/importantLogos.jpg"
-          alt="Important Logos"
-          width={700}
-          height={700}
-          style={{
-            justifySelf: "center",
-            paddingBottom: "20px",
-          }}
-          className="hover:scale-105 transition-transform duration-500"
-        />
+        <div 
+          ref={logosAnimation.ref}
+          className={`flex justify-center pb-5 mt-20 transition-all duration-1000 ease-out ${
+            logosAnimation.isVisible 
+              ? "opacity-100 translate-y-0 scale-100" 
+              : "opacity-0 translate-y-8 scale-95"
+          }`}
+        >
+          <Image
+            src="/importantLogos.jpg"
+            alt="Important Logos"
+            width={700}
+            height={700}
+            style={{
+              justifySelf: "center",
+              paddingBottom: "20px",
+            }}
+            className="hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }

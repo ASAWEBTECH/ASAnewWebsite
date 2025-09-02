@@ -96,23 +96,31 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
       <style>{responsiveStyle}</style>
       <div className="relative h-[400px] sm:h-[550px] md:h-[650px] lg:h-[750px] overflow-hidden">
         {images.map((image, index) => (
-          <div
+            <div
             key={image}
             className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
-          >
-            {/* Imagem de fundo com Next.js Image */}
+            >
             <Image
               src={image}
               alt={`Slide ${index + 1}`}
               fill
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              priority={index === 0}
+              quality={100}
+              sizes="100vw"
+              style={{
+              objectFit: "cover",
+              objectPosition: "center",
+              }}
+              className="transition-transform duration-[1.5s] ease-out"
+              priority={
+              index === currentIndex ||
+              index === (currentIndex + 1) % images.length
+              }
             />
-            {/* Gradiente sobre a imagem */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/65 to-gray-200/10" />
-          </div>
+            {/* Professional gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
+            </div>
         ))}
 
         {/* <div className="absolute inset-0 bg-black/10 sm:hidden">

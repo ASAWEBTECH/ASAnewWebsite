@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
+import SEO from '../components/SEO';
 
 export default function Contact() {
   const [isHeaderLoaded, setIsHeaderLoaded] = useState(false);
@@ -18,6 +19,12 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with American Schools of Angola. Find our location, contact information, and business hours. We're here to answer your questions."
+        keywords="contact ASA, American Schools Angola contact, school admissions Angola, international school contact"
+        canonical="https://asangola.com/Contact"
+      />
       <Header />
       {/* Header Section - Animação apenas de entrada */}
       <div className="relative h-[90vh] flex items-center">

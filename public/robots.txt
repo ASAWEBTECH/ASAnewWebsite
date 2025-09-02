@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://asangolanew.vercel.app/
+
+# Sitemaps
+Sitemap: https://asangolanew.vercel.app/sitemap.xml

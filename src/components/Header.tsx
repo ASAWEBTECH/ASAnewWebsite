@@ -66,7 +66,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Updated padding */}
         <div className="flex justify-between items-start">
           {/* Logo section - Adjusted margin-top */}
-          <div className="flex-shrink-0 lg:ml-0 md:block w-full lg:w-auto">
+          <div className="flex-shrink-0 lg:ml-0 md:block w-full lg:w-auto lg:-mt-4">
             <Link href="/" passHref>
               <div className="flex justify-center lg:justify-start">
                 <Image
@@ -82,7 +82,7 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Adjusted margin-top to align with logo */}
-          <div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-2 px-4 rounded-lg hover:shadow-lg mt-12 lg:mt-14">
+          <div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-2 px-4 rounded-lg hover:shadow-lg mt-8 lg:mt-10">
           <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
             <ul className="flex space-x-2 xl:space-x-4">
               {navigationItems.map((item, index) => (
