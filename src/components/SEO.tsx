@@ -47,8 +47,8 @@ export default function SEO({
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       
       {/* Language */}
-      <meta property="og:locale" content="en_US" />
-      <meta httpEquiv="content-language" content="en-us" />
+      <meta property="og:locale" content="pt_PT" />
+      <meta httpEquiv="content-language" content="pt" />
     </Head>
   );
 }

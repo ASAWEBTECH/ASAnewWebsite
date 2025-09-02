@@ -617,16 +617,27 @@ export default function Education() {
         <Header />
         {/* Hero Section */}
         <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">
-          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0">
             <Image
               src="/fundoEducation.webp"
               alt="Gallery background"
               fill
-              style={{ objectFit: "cover", objectPosition: "center" }}
+              quality={100}
+              sizes="100vw"
+              style={{ 
+              objectFit: "cover", 
+              objectPosition: "center",
+              width: "100%",
+              height: "100%"
+              }}
               priority
+              className="transform scale-100 hover:scale-105 transition-transform duration-700"
             />
-                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" />
-          </div>
+            <div 
+              className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" 
+              style={{ mixBlendMode: 'multiply' }}
+            />
+            </div>
 
           <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">
             <h1

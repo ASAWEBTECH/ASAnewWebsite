@@ -95,13 +95,22 @@ function About() {
       <div className="relative h-[90vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/aboutASAimg.jpg"
-            alt="Gallery background"
+            src="/aboutASAimg.webp"
+            alt="Gallery background" 
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}
+            quality={100} 
             priority
+            sizes="100vw"
+            className="transform-gpu"
+            loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 to-gray-200/10" />
+          <div 
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(128,128,128,0.05))'
+            }}
+          />
         </div>
 
         <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">

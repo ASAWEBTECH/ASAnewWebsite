@@ -90,8 +90,11 @@ const SchoolGallery = () => {
             fill
             style={{ objectFit: "cover", objectPosition: "center" }}
             priority
+            quality={100}
+            sizes="100vw"
+            className="filter brightness-95"
           />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-200/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-gray-200/10" />
         </div>
         <div
           ref={heroAnimation.ref}
