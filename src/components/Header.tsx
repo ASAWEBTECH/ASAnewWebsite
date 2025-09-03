@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const navigationItems = [
   { label: 'Education', href: '../Education' },
@@ -23,6 +24,7 @@ export function Header() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -60,6 +62,13 @@ export function Header() {
     }
   };
 
+  // Add this helper function to check if link is active
+  const isLinkActive = (href: string) => {
+    const pathWithoutSlash = router.pathname.replace('/', '');
+    const hrefWithoutSlash = href.replace('/', '').replace('..', '');
+    return pathWithoutSlash === hrefWithoutSlash;
+  };
+
   return (
     <div>
     <header className="absolute w-full z-50">
@@ -82,9 +91,9 @@ export function Header() {
           </div>
 
           {/* Desktop Navigation - Adjusted margin-top to align with logo */}
-          <div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-2 px-4 rounded-lg hover:shadow-lg mt-8 lg:mt-10">
-          <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4">
-            <ul className="flex space-x-2 xl:space-x-4">
+          <div className="bg-gradient-to-r from-[#0071c6] to-[#004d8a] shadow-md hidden lg:flex items-center py-1.5 px-4 rounded-full hover:shadow-lg mt-10">
+          <nav className="hidden lg:flex items-center">
+            <ul className="flex items-center gap-0.5">
               {navigationItems.map((item, index) => (
                 <li key={index} className="relative">
                   {item.dropdown ? (
@@ -101,14 +110,21 @@ export function Header() {
                     >
                       <a
                         href={item.href}
-                        className={`px-2 py-1 xl:px-3 text-sm xl:text-base font-normal font-poppins transition-colors duration-200
+                        className={`px-3.5 py-1.5 text-[14px] font-normal font-poppins transition-colors duration-200 flex items-center
                           ${
-                            hoveredIndex === index
-                              ? 'text-[#ffac1e] '
-                              : 'text-white-700 hover:text-[#ffac1e]'
+                            isLinkActive(item.href)
+                              ? 'text-[#ffac1e]'
+                              : hoveredIndex === index
+                              ? 'text-[#ffac1e]'
+                              : 'text-white hover:text-[#ffac1e]'
                           }`}
                       >
                         {item.label}
+                        <ChevronDown 
+                          className={`ml-1 w-3.5 h-3.5 transition-transform duration-200
+                            ${hoveredIndex === index ? 'rotate-180' : 'rotate-0'}
+                          `}
+                        />
                       </a>
                       {showDropdown && hoveredIndex === index && (
                         <div className="absolute top-full left-0 mt-1 w-64 bg-[#ff9f00] rounded-lg shadow-lg z-50">
@@ -137,11 +153,13 @@ export function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className={`px-2 py-1 xl:px-3 text-sm xl:text-base font-normal font-poppins transition-colors duration-200
+                      className={`px-3.5 py-1.5 text-[14px] font-normal font-poppins transition-colors duration-200
                         ${
-                          hoveredIndex === index
-                            ? 'text-[#ffac1e] '
-                            : 'text-white-700 hover:text-[#ffac1e]'
+                          isLinkActive(item.href)
+                            ? 'text-[#ffac1e]'
+                            : hoveredIndex === index
+                            ? 'text-[#ffac1e]'
+                            : 'text-white hover:text-[#ffac1e]'
                         }`}
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
@@ -154,7 +172,7 @@ export function Header() {
             </ul>
             <button
               onClick={() => window.open("https://asangola.openapply.com/", "_blank")}
-              className="ml-2 xl:ml-4 inline-flex items-center px-2 py-1 xl:px-3 border border-transparent text-xs xl:text-sm font-medium rounded-full text-white bg-[#ff9f00] hover:bg-[#ffbb47] transition-colors duration-200"
+              className="ml-3.5 px-3.5 py-1.5 text-[14px] font-medium rounded-full text-white bg-[#ff9f00] hover:bg-[#ffbb47] transition-colors duration-200"
             >
               Admissions
             </button>
@@ -181,14 +199,23 @@ export function Header() {
                     >
                       <a
                         href={item.href}
-                        className={`px-2 py-1 text-xs font-normal font-poppins transition-colors duration-200
+                        className={`px-2 py-1 text-xs font-normal font-poppins transition-colors duration-200 flex items-center
                           ${
-                            hoveredIndex === index
-                              ? 'text-[#ffac1e] '
+                            isLinkActive(item.href)
+                              ? 'text-[#ffac1e]'
+                              : hoveredIndex === index
+                              ? 'text-[#ffac1e]'
                               : 'text-white-700 hover:text-[#ffac1e]'
                           }`}
                       >
                         {item.label}
+                        {item.dropdown && (
+                          <ChevronDown 
+                            className={`ml-1 w-3 h-3 transition-transform duration-200
+                              ${hoveredIndex === index ? 'rotate-180' : 'rotate-0'}
+                            `}
+                          />
+                        )}
                       </a>
                       {showDropdown && hoveredIndex === index && (
                         <div className="absolute top-full left-0 mt-1 w-56 bg-[#ff9f00] rounded-lg shadow-lg z-50">
@@ -219,8 +246,10 @@ export function Header() {
                       href={item.href}
                       className={`px-2 py-1 text-xs font-normal font-poppins transition-colors duration-200
                         ${
-                          hoveredIndex === index
-                            ? 'text-[#ffac1e] '
+                          isLinkActive(item.href)
+                            ? 'text-[#ffac1e]'
+                            : hoveredIndex === index
+                            ? 'text-[#ffac1e]'
                             : 'text-white-700 hover:text-[#ffac1e]'
                         }`}
                       onMouseEnter={() => setHoveredIndex(index)}
@@ -265,10 +294,18 @@ export function Header() {
             <div key={index}>
               <a
                 href={item.href}
-                className="block px-3 py-2 rounded-md text-sm sm:text-base font-medium text-white hover:text-[#ffac1e] hover:bg-[#0071c6]/90"
+                className={`block px-3 py-2 rounded-md text-sm sm:text-base font-medium flex items-center justify-between
+                  ${
+                    isLinkActive(item.href)
+                      ? 'text-[#ffac1e] bg-[#0071c6]/90'
+                      : 'text-white hover:text-[#ffac1e] hover:bg-[#0071c6]/90'
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
+                {item.dropdown && (
+                  <ChevronDown className="w-4 h-4" />
+                )}
               </a>
               {item.dropdown && (
                 <div className="ml-4 mt-1 space-y-1">

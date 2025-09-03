@@ -137,50 +137,69 @@ function QuadradosP() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
-      <div className="text-center mb-16">
-        <p className="text-lg font-medium text-[#2e2b70]/80 mb-2">Academic Director&apos;s Message</p>
-        <h1 className="text-5xl font-bold text-[#2e2b70] mb-4 relative">
-          Welcome Message
-          <span className="block w-24 h-1 bg-[#2e2b70] mx-auto mt-4"></span>
-        </h1>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 px-4">
+      {/* Updated Welcome Message Section */}
       <div className="max-w-7xl mx-auto">
-        {/* Welcome Message Section */}
-        <div className="bg-white rounded-3xl shadow-xl p-10 mb-16">
-          <div className="flex flex-col md:flex-row gap-12 items-stretch">
-            <div className="md:w-1/3">
-              <div className="relative h-full rounded-2xl shadow-lg">
-          <Image
-            src="/AcademicDirector.webp"
-            alt="Dr. Babita Parashar"
-            fill
-            className="rounded-2xl object-cover"
-            style={{ objectPosition: 'center' }}
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent h-32">
-            <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-              <p className="font-semibold text-white text-2xl drop-shadow-lg">Dr. Babita Parashar</p>
-              <p className="text-white text-lg font-medium drop-shadow-lg">Academic Director</p>
-            </div>
-          </div>
+        <div className="relative mb-24">
+          <div className="flex flex-col md:flex-row gap-16 items-start">
+            {/* Smaller Image Column */}
+            <div className="md:w-[450px] flex-shrink-0">
+              <div className="relative h-[600px] rounded-3xl overflow-hidden">
+                <Image
+                  src="/AcademicDirector.webp"
+                  alt="Dr. Babita Parashar"
+                  fill
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, 450px"
+                  placeholder="blur"
+                  blurDataURL="/AcademicDirector.webp"
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                  style={{ 
+                    objectPosition: 'center 15%',
+                    imageRendering: 'crisp-edges'
+                  }}
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-center backdrop-blur-[2px] bg-black/10">
+                  <h3 className="font-bold text-2xl text-white mb-1 drop-shadow-sm">Dr. Babita Parashar</h3>
+                  <p className="text-[#ffac1e] text-lg font-medium drop-shadow-sm">Academic Director</p>
+                </div>
               </div>
             </div>
-            <div className="md:w-2/3">
-              <h2 className="text-3xl font-bold text-[#2e2b70] mb-8 border-b pb-4">Dear All,</h2>
-              <div className="space-y-6 text-gray-600 leading-relaxed">
-            <p>Welcome to <strong className="text-[#2e2b70]">American Schools of Angola</strong>. As we begin our Academic year {(() => {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth();
-            // Academic year starts in August (month 7)
-            const academicStartYear = currentMonth >= 7 ? currentYear : currentYear - 1;
-            return `${academicStartYear}-${(academicStartYear + 1).toString().slice(-2)}`;
-            })()}, we are renewing our assurance that each of our learner is nurtured to reach their highest potential. The transformative role of empathetic and compassionate teachers goes above and beyond that any assessment test can measure; we are proud to be transforming lives day by day.</p>
-          <p>Aligning curricular practices with <strong className="text-[#2e2b70]">United Nations Development Goals (UNSDG)</strong> in our everyday classroom, we have performing arts, visual arts, sports, community connect, STEM and Social Emotional Learning forming the core fabric of our holistic development approach.</p>
-          <p>With our unique Early College High School program, our high school students are pursuing dual enrolment course and getting ready for their higher education journey while still enjoying the warmth of being at home.</p>
-          <p><strong className="text-[#2e2b70]">Arizona State University</strong>, <strong className="text-[#2e2b70]">Bienal de Luanda</strong>, <strong className="text-[#2e2b70]">ResiliART</strong>, <strong className="text-[#2e2b70]">UNESCO</strong>, <strong className="text-[#2e2b70]">United Youth Taekwondo Initiative</strong>, <strong className="text-[#2e2b70]">K-Pop</strong> collaborations are a testament of global vision that <strong className="text-[#2e2b70]">American Schools of Angola</strong> stands for.</p>
-          <p className="font-medium text-[#2e2b70] text-lg">#Be Extraordinary</p>
+
+            {/* Content Column with full text */}
+            <div className="flex-1">
+              <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full mb-0">
+                <span className="text-[#2e2b70] text-sm font-medium">Academic Director&apos;s Message</span>
+              </div>
+              
+              <h1 className="text-4xl font-bold text-[#2e2b70] mb-4 leading-tight">
+                Welcome to American Schools of Angola
+              </h1>
+
+              {/* Update the text content with escaped entities */}
+              <div className="prose prose-lg max-w-none space-y-6 text-gray-600">
+                <p className="text-xl font-medium text-[#2e2b70]">Dear All,</p>
+                <p>Welcome to <strong className="text-[#2e2b70]">American Schools of Angola</strong>. 
+                   As we begin our Academic year {(() => {
+                    const currentDate = new Date();
+                    const currentYear = currentDate.getFullYear();
+                    const currentMonth = currentDate.getMonth();
+                    const academicStartYear = currentMonth >= 7 ? currentYear : currentYear - 1;
+                    return `${academicStartYear}-${(academicStartYear + 1).toString().slice(-2)}`;
+                   })()}, we are renewing our assurance that each of our learner is nurtured to reach their highest potential.</p>
+                <p>The transformative role of empathetic and compassionate teachers goes above and beyond that any assessment test can measure; we are proud to be transforming lives day by day.</p>
+                <p>Aligning curricular practices with <strong className="text-[#2e2b70]">United Nations Development Goals (UNSDG)</strong> in our everyday classroom, we have performing arts, visual arts, sports, community connect, STEM and Social Emotional Learning forming the core fabric of our holistic development approach.</p>
+                <p>With our unique Early College High School program, our high school students are pursuing dual enrolment course and getting ready for their higher education journey while still enjoying the warmth of being at home.</p>
+                <div className="border-l-4 border-[#2e2b70] pl-6 my-8">
+                  <p className="text-lg italic text-[#2e2b70]">
+                    &ldquo;Our collaborations with Arizona State University, Bienal de Luanda, ResiliART, UNESCO, 
+                    United Youth Taekwondo Initiative, and K-Pop are a testament to the global vision that 
+                    American Schools of Angola stands for.&rdquo;
+                  </p>
+                </div>
+                <p className="text-xl font-semibold text-[#2e2b70]">#BeExtraordinary</p>
               </div>
             </div>
           </div>

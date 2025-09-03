@@ -104,7 +104,7 @@ const NewsletterSection: React.FC = () => {
           {/* Right side: Newsletter image */}
             <div className="w-full md:w-1/2 h-64 md:h-auto relative overflow-hidden flex items-center justify-center">
               <Image
-              src="/newsletter.png"
+              src="/newsletter.webp"
               alt="Newsletter"
               width={820}
               height={820}

@@ -15,16 +15,16 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
 
   // Lista de títulos para cada slide
   const slideTitles: string[] = [
-    "Academic Excellence with Real Results",
-    "Modern Technology for Better Learning",
-    "Active Physical and Sports Development",
-    "Safe, Welcoming and Inclusive Environment",
-    "Complete Preparation for a Bright Future",
+    "Excellence in International Education",
+    "Advanced Technology Integration",
+    "Comprehensive Athletic Development",
+    "Nurturing a Global Learning Community",
+    "Building Tomorrow's Leaders Today",
   ];
 
   // Descrição fixa
   const fixedDescription =
-    "We offer Pre-K to early college United States curriculum.";
+    "Providing exceptional American curriculum education from Pre-Kindergarten through High School.";
 
   // Garantir que temos título para todas as imagens
   const getCurrentTitle = (index: number): string => {
@@ -137,36 +137,35 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
         </div> */}
 
         <div className="absolute inset-0 flex items-center justify-center md:justify-start">
-          <div className="text-left text-white max-w-4xl px-2 sm:px-4 mt-10 sm:mt-16 pl-2 sm:pl-6 md:pl-40 flex flex-col items-start w-full">
-            {/* Title with slide-in from left animation */}
-            <h1 className="font-bold font-poppins mb-1 leading-relaxed text-xs xs:text-sm sm:text-base md:text-xl max-w-[180px] xs:max-w-xs sm:max-w-md md:max-w-xl">
-              Welcome to American Schools of Angola
-            </h1>
-            <div className="w-10 xs:w-14 sm:w-20 h-0.5 sm:h-1 bg-[#ff9f00] mb-2 sm:mb-4" />
-            <h1
-              className={`font-bold font-poppins mb-4 sm:mb-6 leading-relaxed transition-all duration-1000 ease-out
-      text-lg xs:text-2xl sm:text-4xl md:text-5xl max-w-xl
-      ${
-        isLoaded && textVisible
-          ? "opacity-100 translate-x-0 translate-y-0"
-          : "opacity-0 -translate-x-20 translate-y-4"
-      }`}
+          <div className="text-left text-white max-w-3xl px-4 sm:px-6 mt-8 sm:mt-16 pl-4 sm:pl-6 md:pl-32 flex flex-col items-start w-full">
+            {/* Remove the institution name and keep only the accent line */}
+            <div className="w-8 xs:w-12 sm:w-16 h-0.5 bg-[#ff9f00] mb-3 sm:mb-4" />
+
+            {/* Main title */}
+            <h2
+              className={`font-bold font-poppins mb-4 sm:mb-6 leading-tight transition-all duration-1000 ease-out
+    text-xl xs:text-2xl sm:text-3xl md:text-4xl max-w-2xl tracking-normal
+    ${
+      isLoaded && textVisible
+        ? "opacity-100 translate-x-0 translate-y-0"
+        : "opacity-0 -translate-x-20 translate-y-4"
+    }`}
               style={{
                 transitionDelay: "200ms",
               }}
             >
               {currentTitle}
-            </h1>
+            </h2>
 
-            {/* Fixed Description with slide-in from left animation (delayed) */}
+            {/* Description - reduced size */}
             <p
               className={`transition-all font-poppins duration-1000 ease-out
-      text-xs xs:text-sm sm:text-lg md:text-xl max-w-xl
-      ${
-        isLoaded && textVisible
-          ? "opacity-100 translate-x-0 translate-y-0"
-          : "opacity-0 -translate-x-16 translate-y-3"
-      }`}
+    text-xs xs:text-sm sm:text-base md:text-lg max-w-xl leading-relaxed tracking-wide
+    ${
+      isLoaded && textVisible
+        ? "opacity-100 translate-x-0 translate-y-0"
+        : "opacity-0 -translate-x-16 translate-y-3"
+    }`}
               style={{
                 transitionDelay: "500ms",
               }}
@@ -174,13 +173,11 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               {fixedDescription}
             </p>
 
-            {/* Buttons container with fade-in and slide-up animation */}
-            <div className="flex flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start flex-wrap justify-center">
+            {/* Smaller buttons */}
+            <div className="flex flex-row gap-4 mt-6 w-full items-stretch sm:items-center sm:justify-start flex-wrap">
               <div
                 className={`flex gap-4 transition-all duration-1000 ease-out ${
-                  isLoaded
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
+                  isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{
                   transitionDelay: "800ms",
@@ -189,10 +186,13 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
                 <AnimatedButton />
               </div>
               <button
-                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold border border-white/20 transform hover:scale-105 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white 
+               px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-sm sm:text-base font-semibold
+               transform hover:scale-105 transition-all duration-300
+               border border-white/20 min-w-[120px] sm:min-w-[200px] h-[44px] sm:h-[52px]"
                 onClick={() => (window.location.href = "/about")}
               >
-                Who We Are
+                Discover Our Story
               </button>
             </div>
           </div>
@@ -322,7 +322,7 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
           className="hidden md:flex bg-[#2e2b70]/80 rounded-xl h-24 shadow-lg"
         >
           {/* Bloco 1 */}
-          <div className="info-item flex flex-col items-center flex-1 px-2 text-center">
+          <div className="info-item flex flex-col items-center flex-1 px-3 text-center">
             <Image
               src="/icon1.png"
               alt="Humanities icon"
@@ -330,9 +330,11 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               height={24}
               className="mb-1"
             />
-            <span className="text-white font-semibold text-sm">Humanities</span>
-            <span className="text-white text-xs opacity-80 hidden sm:block">
-              The study of human cultures, histories, ideas, and values.
+            <span className="text-white font-medium text-sm mb-1">
+              Humanities & Social Sciences
+            </span>
+            <span className="text-white/90 text-xs leading-relaxed hidden sm:block">
+              Cultivating critical thinking through the study of human experience and society.
             </span>
           </div>
 
@@ -340,7 +342,7 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
           <div className="divider h-10 w-px bg-white/30 mx-2" />
 
           {/* STEM */}
-          <div className="info-item flex flex-col items-center flex-1 px-2 text-center">
+          <div className="info-item flex flex-col items-center flex-1 px-3 text-center">
             <Image
               src="/icon2.png"
               alt="STEM icon"
@@ -348,16 +350,16 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               height={24}
               className="mb-1"
             />
-            <span className="text-white font-semibold text-sm">STEM</span>
-            <span className="text-white text-xs opacity-80 hidden sm:block">
-              Integration of science, technology, engineering, and mathematics.
+            <span className="text-white font-medium text-sm mb-1">STEM Education</span>
+            <span className="text-white/90 text-xs leading-relaxed hidden sm:block">
+              Advancing knowledge through integrated science and technology.
             </span>
           </div>
 
           <div className="divider h-10 w-px bg-white/30 mx-2" />
 
           {/* Technical art */}
-          <div className="info-item flex flex-col items-center flex-1 px-2 text-center">
+          <div className="info-item flex flex-col items-center flex-1 px-3 text-center">
             <Image
               src="/icon3.png"
               alt="Technical Art icon"
@@ -365,16 +367,16 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               height={24}
               className="mb-1"
             />
-            <span className="text-white font-semibold text-sm">Technical Art</span>
-            <span className="text-white text-xs opacity-80 hidden sm:block">
-              Application of techniques in digital and interactive fields.
+            <span className="text-white font-medium text-sm mb-1">Applied Technology</span>
+            <span className="text-white/90 text-xs leading-relaxed hidden sm:block">
+              Developing practical skills through innovative digital technologies.
             </span>
           </div>
 
           <div className="divider h-10 w-px bg-white/30 mx-2" />
 
           {/* Visual art */}
-          <div className="info-item flex flex-col items-center flex-1 px-2 text-center">
+          <div className="info-item flex flex-col items-center flex-1 px-3 text-center">
             <Image
               src="/icon4.png"
               alt="Visual Art icon"
@@ -382,9 +384,9 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               height={24}
               className="mb-1"
             />
-            <span className="text-white font-semibold text-sm">Visual Art</span>
-            <span className="text-white text-xs opacity-80 hidden sm:block">
-              Artistic expression through various creative mediums and techniques.
+            <span className="text-white font-medium text-sm mb-1">Creative Arts</span>
+            <span className="text-white/90 text-xs leading-relaxed hidden sm:block">
+              Fostering creative expression through diverse artistic disciplines.
             </span>
           </div>
         </div>
