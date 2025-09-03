@@ -1,8 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
+import dynamic from 'next/dynamic';
 import { GraduationCap } from "lucide-react";
 import { useRouter } from "next/router";
 import styles from '../styles/QuadradoBlur.module.css';
+
+// Lazy load the EducationCard component
+const EducationCard = dynamic(() => import('./EducationCard'), {
+  loading: () => <div className="animate-pulse bg-white/5 rounded-2xl h-[320px]" />,
+  ssr: false
+});
 
 const Quadrado: React.FC = () => {
   const [currentIndex] = useState(0);
@@ -235,69 +241,31 @@ const Quadrado: React.FC = () => {
       style={componentStyles.mainContainer as React.CSSProperties}
       ref={containerRef}
     >
-      <div className="mt-28" style={componentStyles.cardsContainer}>
+      <div className="mt-28 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 w-full max-w-[1400px] px-4 mx-auto">
         {quadradosData().map((item, index) => (
-          <div 
-            key={index} 
-            className={`${styles['card-animate']} ${styles[`card-animate-delay-${index + 1}`]} ${
-              isVisible ? styles.visible : ''
-            }`}
-            style={componentStyles.singleCard as React.CSSProperties}
-          >
-            <div style={componentStyles.imageContainer as React.CSSProperties}>
-              <Image
-                src={item.imgSrc}
-                alt={item.title}
-                fill
-                style={{ 
-                  objectFit: "contain",
-                  objectPosition: "center bottom"
-                }}
-                sizes="(max-width: 768px) 240px, (max-width: 480px) 200px, 320px"
-                priority={index === 0}
-              />
-            </div>
-            <div style={{
-              ...componentStyles.contentWrapper as React.CSSProperties,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%)',
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              borderRadius: '0 0 20px 20px'
-            }}>
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <h3 style={componentStyles.titleText}>{item.title}</h3>
-                <p style={componentStyles.descriptionText}>{item.description}</p>
-                <button
-                  onClick={() => handleViewMore(item.title)}
-                  className={styles['view-more-button']}
-                  style={{
-                    ...componentStyles.viewMoreButton,
-                    backgroundColor: item.buttonColor,
-                  }}
-                >
-                  View More
-                </button>
-              </div>
-            </div>
-          </div>
+          <EducationCard
+            key={item.title}
+            {...item}
+            index={index}
+            onViewMore={handleViewMore}
+          />
         ))}
       </div>
 
-      <div style={componentStyles.infoSection}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' }}>
-          <GraduationCap size={24} color="white" />
-          <span style={{ color: 'white', fontSize: '18px', fontWeight: '500' }}>
+      <div className="w-full max-w-[1200px] p-[60px_40px] bg-[#2e2b70] rounded-[20px] mt-10">
+        <div className="flex items-center gap-2.5 mb-4">
+          <GraduationCap size={24} className="text-white" />
+          <span className="text-white text-lg font-medium">
             Over 100 Specialized Courses
           </span>
         </div>
-        <h2 style={componentStyles.mainTitle}>Our Educational Levels</h2>
-        <p style={componentStyles.mainDescription}>
+        <h2 className="text-white text-4xl font-black mb-6 leading-tight tracking-tight">
+          Our Educational Levels
+        </h2>
+        <p className="text-white/95 text-lg leading-relaxed tracking-wide">
           From early childhood to college preparation, we provide comprehensive
           education tailored to each development stage.
         </p>
-        {/* Additional content as needed */}
       </div>
     </div>
   );

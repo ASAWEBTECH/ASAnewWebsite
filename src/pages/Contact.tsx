@@ -147,9 +147,11 @@ export default function Contact() {
             <h3 className="font-semibold text-lg mb-2 text-green-700">
               Phone
             </h3>
-            <p className="text-gray-600 font-medium">+ (244) 945 333 000</p>
-            <p className="text-gray-600 font-medium">+ (244) 929 842 625</p>
-            <p className="text-gray-600 font-medium">+ (244) 945 217 135</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-gray-600 font-medium">+ (244) 945 333 000</p>
+              <p className="text-gray-600 font-medium">+ (244) 929 842 625</p>
+              <p className="text-gray-600 font-medium">+ (244) 945 217 135</p>
+            </div>
           </div>
 
           {/* Email Block */}
@@ -175,7 +177,7 @@ export default function Contact() {
             </h3>
             <div className="w-full flex flex-col gap-2 text-gray-600 font-medium">
               <div className="flex justify-between w-full">
-                <span>Monday - Friday:</span>
+                <span>Mon-Fri:</span>
                 <span>8:00 AM - 5:30 PM</span>
               </div>
               <div className="flex justify-between w-full">

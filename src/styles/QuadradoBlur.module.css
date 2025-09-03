@@ -1,7 +1,7 @@
 .card-animate {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-animate.visible {
@@ -22,9 +22,9 @@
 }
 
 .view-more-button:hover {
-  transform: scale(1.1);
-  padding-left: 24px;
-  padding-right: 24px;
+  transform: scale(1.05);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   letter-spacing: 0.5px;
 }
 

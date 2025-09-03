@@ -14,7 +14,7 @@ const navigationItems = [
       { label: 'Child Development Center', href: '../Community#ChildDevelopment' },
     ]
   },
-  { label: 'Job Opportunities', href: '../JobOpportunity' },
+  { label: 'Opportunities', href: '../JobOpportunity' },
   { label: 'Contacts', href: '../Contact' },
 ];
 
