@@ -139,7 +139,7 @@ function QuadradosP() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4">
       <div className="text-center mb-16">
-        <p className="text-lg font-medium</div> text-[#2e2b70]/80 mb-2">Academic Director's Message</p>
+        <p className="text-lg font-medium text-[#2e2b70]/80 mb-2">Academic Director&apos;s Message</p>
         <h1 className="text-5xl font-bold text-[#2e2b70] mb-4 relative">
           Welcome Message
           <span className="block w-24 h-1 bg-[#2e2b70] mx-auto mt-4"></span>

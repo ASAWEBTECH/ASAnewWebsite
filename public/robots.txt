@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://asangolanew.vercel.app/
+Host: https://asangola.com/
 
 # Sitemaps
-Sitemap: https://asangolanew.vercel.app/sitemap.xml
+Sitemap: https://asangola.com/sitemap.xml

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from 'next/dynamic';
 import { GraduationCap } from "lucide-react";
 import { useRouter } from "next/router";
-import styles from '../styles/QuadradoBlur.module.css';
 
 // Lazy load the EducationCard component
 const EducationCard = dynamic(() => import('./EducationCard'), {
@@ -12,7 +11,7 @@ const EducationCard = dynamic(() => import('./EducationCard'), {
 
 const Quadrado: React.FC = () => {
   const [currentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
