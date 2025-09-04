@@ -132,14 +132,25 @@ export default function Home() {
       <AnimatedSection delay={100}>
         <NewsletterSection />
       </AnimatedSection>
-      <div className="w-full mx-auto mt-10 flex flex-col md:flex-row justify-center items-center px-4 md:px-8">
-        <h2 className="w-full md:w-auto bg-white rounded-full px-6 md:px-10 py-3 md:py-4 text-xl sm:text-2xl lg:text-5xl font-bold text-center md:text-left text-[#2e2b70] mb-4 md:mb-0 shadow-lg">
+      <div className="w-full bg-gradient-to-b from-gray-50 to-white py-12">
+        <div className="max-w-6xl mx-auto flex flex-col items-center gap-6 px-4">
+          <div className="flex flex-col items-center space-y-3">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#2e2b70] text-center">
           Upcoming Events
         </h2>
-        <p className="w-full md:w-auto text-base sm:text-lg text-gray-700 text-center md:text-left px-4 md:px-8">
-          Stay tuned for our upcoming events and activities. We have a lot of
-          exciting things planned!
+        <div className="w-24 h-0.5 bg-[#4642a3] rounded-full"></div>
+          </div>
+          <div className="w-full bg-white rounded-lg shadow-md p-8 border-l-4 border-[#2e2b70] ">
+        <p className="text-lg text-gray-700 leading-relaxed text-center">
+          Stay tuned for our upcoming events and activities. Join us in creating memorable educational experiences that shape tomorrow's leaders.
         </p>
+        <div className="mt-4 flex justify-center">
+          <span className="text-[#4642a3] text-sm font-medium">
+            Date of the activity in the top right corner of the slides
+          </span>
+        </div>
+          </div>
+        </div>
       </div>
 
       {/* Community Section */}

@@ -155,10 +155,11 @@ function QuadradosP() {
       {/* Updated Welcome Message Section */}
       <div className="max-w-7xl mx-auto">
         <div className="relative mb-24">
-          <div className="flex flex-col md:flex-row gap-16 items-start">
-            {/* Smaller Image Column */}
-            <div className="md:w-[450px] flex-shrink-0">
-              <div className="relative h-[600px] rounded-3xl overflow-hidden">
+          {/* Update flex container for better mobile responsiveness */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
+            {/* Update image container for mobile */}
+            <div className="w-full lg:w-[450px] flex-shrink-0">
+              <div className="relative w-full h-[400px] lg:h-[600px] rounded-3xl overflow-hidden">
                 <Image
                   src="/AcademicDirector.webp"
                   alt="Dr. Babita Parashar"
@@ -175,15 +176,15 @@ function QuadradosP() {
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8 text-center backdrop-blur-[2px] bg-black/10">
-                  <h3 className="font-bold text-2xl text-white mb-1 drop-shadow-sm">Dr. Babita Parashar</h3>
-                  <p className="text-[#ffac1e] text-lg font-medium drop-shadow-sm">Academic Director</p>
+                <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8 text-center backdrop-blur-[2px] bg-black/10">
+                  <h3 className="font-bold text-xl lg:text-2xl text-white mb-1 drop-shadow-sm">Dr. Babita Parashar</h3>
+                  <p className="text-[#ffac1e] text-base lg:text-lg font-medium drop-shadow-sm">Academic Director</p>
                 </div>
               </div>
             </div>
 
-            {/* Content Column with full text */}
-            <div className="flex-1">
+            {/* Content Column */}
+            <div className="flex-1 w-full">
               <div className="inline-flex items-center px-4 py-2 bg-blue-50 rounded-full mb-0">
                 <span className="text-[#2e2b70] text-sm font-medium">Academic Director&apos;s Message</span>
               </div>
