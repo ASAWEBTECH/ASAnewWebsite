@@ -8,6 +8,7 @@ import NewsletterSection from "../components/NewsletterSection";
 import Fac from "../components/faq-section";
 import Footer from "../components/Footer";
 import SEO from '../components/SEO';
+import Image from 'next/image';
 
 // Hook personalizado para animações de visibilidade
 const useIntersectionObserver = (options = {}) => {
@@ -114,11 +115,18 @@ export default function Home() {
       </div>
 
       {/* Education Section */}
-      <section
-        className="relative"
-        style={styles.sectionEducation}>
-          <Quadrado />
-      </section>
+      <AnimatedSection className="relative min-h-screen" delay={300}>
+        <div className="absolute inset-0 -z-10">
+          <Image
+        src="/FS.webp"
+        alt="Education section background"
+        fill
+        style={{ objectFit: 'cover' }}
+        priority
+          />
+        </div>
+        <Quadrado />
+      </AnimatedSection>
 
       {/* Newsletter Section */}
       <AnimatedSection delay={100}>

@@ -618,25 +618,28 @@ export default function Education() {
         {/* Hero Section */}
         <div className="relative h-[90vh] flex items-center w-screen left-1/2 right-1/2 -translate-x-1/2">
             <div className="absolute inset-0 z-0">
-            <Image
-              src="/fundoEducation.webp"
-              alt="Gallery background"
-              fill
-              quality={100}
-              sizes="100vw"
-              style={{ 
-              objectFit: "cover", 
-              objectPosition: "center",
-              width: "100%",
-              height: "100%"
-              }}
-              priority
-              className="transform scale-100 hover:scale-105 transition-transform duration-700"
-            />
-            <div 
-              className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" 
-              style={{ mixBlendMode: 'multiply' }}
-            />
+              <Image
+                src="/fundoEducation.webp"
+                alt="Gallery background"
+                fill
+                quality={75}
+                loading="eager"
+                sizes="100vw"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4cHRocHSUkIiMlQz4wMkE+MTM4OzYyPSk1RUtHVDg4UVpLUk1RRklKT1BeW1JQUUr/2wBDAR"
+                style={{ 
+                  objectFit: "cover", 
+                  objectPosition: "center",
+                  width: "100%",
+                  height: "100%"
+                }}
+                priority
+                className="transform scale-100 hover:scale-105 transition-transform duration-700"
+              />
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-black/70 to-gray-200/10" 
+                style={{ mixBlendMode: 'multiply' }}
+              />
             </div>
 
           <div className="relative z-10 text-left text-white pl-8 md:pl-32 max-w-3xl top-24">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Award, Cpu, BookOpen, Clock } from "lucide-react";
 import Image from "next/image";
+import { useInView } from 'react-intersection-observer';
 
 function FeatureBox({
   icon: Icon,
@@ -15,8 +16,21 @@ function FeatureBox({
   bgColor: string;
   delay: string;
 }) {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   return (
-    <div className={`group bg-white p-6 rounded-xl transition-all duration-500 transform hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden ${delay}`}>
+    <div
+      ref={ref}
+      className={`group bg-white p-6 rounded-xl transition-all duration-500 transform 
+      hover:-translate-y-1 flex flex-col items-center text-center relative overflow-hidden
+      ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      style={{
+        transitionDelay: delay + 'ms'
+      }}
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-50/30 to-transparent opacity-0 "></div>
       
       <div className="bg-gradient-to-br from-blue-50 to-indigo-100 p-4 rounded-full mb-4 relative z-10">
@@ -65,7 +79,7 @@ function QuadradosP() {
       description:
         "With this, our students stand out in the job market and global academic opportunities.",
       bgColor: "#fdaf17",
-      delay: "delay-0",
+      delay: "0",
     },
     {
       icon: Cpu,
@@ -73,7 +87,7 @@ function QuadradosP() {
       description:
         "We utilize cutting-edge technologies to ensure that students have access to the most advanced tools, combining technological innovation with quality education.",
       bgColor: "#0083cb",
-      delay: "delay-100",
+      delay: "100",
     },
     {
       icon: BookOpen,
@@ -81,7 +95,7 @@ function QuadradosP() {
       description:
         "This model offers flexibility to students, allowing them to learn autonomously while maintaining interaction with teachers and peers in face-to-face activities.",
       bgColor: "#01944d",
-      delay: "delay-200",
+      delay: "200",
     },
     {
       icon: Clock,
@@ -89,7 +103,7 @@ function QuadradosP() {
       description:
         "This method offers autonomy for each student to progress according to their understanding of the content, ensuring more effective learning tailored to their needs.",
       bgColor: "#ed1b24",
-      delay: "delay-300",
+      delay: "300",
     },
   ];
 
@@ -119,11 +133,11 @@ function QuadradosP() {
       alt: "New Jersey Institute of Technology"
     },
     {
-      src: "/ministry-logo.jpg",
+      src: "/ministry-logo.webp",
       alt: "Angolan Ministry of Education"
     },
-        {
-      src: "/resiliart.png",
+    {
+      src: "/resiliart.webp",
       alt: "ResiliART Angola"
     },
         {
@@ -131,7 +145,7 @@ function QuadradosP() {
       alt: "UNESCO"
     },
         {
-      src: "/bienal.png",
+      src: "/bienal.webp",
       alt: "Bienal de Luanda"
     }
   ];
