@@ -142,7 +142,7 @@ export default function Home() {
           </div>
           <div className="w-full bg-white rounded-lg shadow-md p-8 border-l-4 border-[#2e2b70] ">
         <p className="text-lg text-gray-700 leading-relaxed text-center">
-          Stay tuned for our upcoming events and activities. Join us in creating memorable educational experiences that shape tomorrow's leaders.
+          Stay tuned for our upcoming events and activities. Join us in creating memorable educational experiences that shape tomorrow&apos;s leaders.
         </p>
         <div className="mt-4 flex justify-center">
           <span className="text-[#4642a3] text-sm font-medium">
