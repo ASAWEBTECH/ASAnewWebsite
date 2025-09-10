@@ -2,11 +2,11 @@ import { CSSProperties, useRef, useEffect, useState } from "react";
 import Quadrado from "../components/quadradoBlur";
 import { ImageSlider } from "../components/ImageSlider";
 import QuadradosP from "../components/QuadradosP";
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import NewsletterSection from "../components/NewsletterSection";
 import Fac from "../components/faq-section";
-import Footer from "../components/Footer";
+import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import Image from 'next/image';
 

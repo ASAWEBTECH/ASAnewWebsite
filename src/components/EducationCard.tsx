@@ -80,14 +80,20 @@ const EducationCard = memo(({ title, imgSrc, buttonColor, description, index, on
                        rounded-xl p-4">
             {description}
           </p>
-          <button
+            <button
             onClick={handleClick}
-            className="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold 
-                     text-white transition-transform duration-300 hover:scale-105"
+            className="group inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-semibold 
+                 text-white transition-transform duration-300 hover:scale-105"
             style={{ backgroundColor: buttonColor }}
-          >
+            >
             View More
-          </button>
+            <span className="ml-2 transition-transform duration-300 transform translate-x-0 group-hover:translate-x-1">
+              →
+            </span>
+            <span className="ml-[-8px] opacity-0 transition-all duration-300 transform translate-x-0 group-hover:translate-x-1 group-hover:opacity-100">
+              →
+            </span>
+            </button>
         </div>
       </div>
     </div>

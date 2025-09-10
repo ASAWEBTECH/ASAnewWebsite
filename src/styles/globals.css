@@ -4,6 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global overrides */
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-white text-gray-900 antialiased;
+}
+
+/* Small helpers */
+.container-wide {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 :root {
   --background: #EEF2FF;
   --foreground: #fff;

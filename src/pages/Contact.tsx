@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import SEO from '../components/SEO';

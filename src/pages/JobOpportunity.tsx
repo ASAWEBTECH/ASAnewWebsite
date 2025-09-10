@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, Clock, Monitor, TrendingUp, Building2, GraduationCap, UserPlus } from 'lucide-react';
 import Footer from '../components/Footer';
-import {Header} from '../components/Header';
+import Header from "../components/Header";
 import Image from 'next/image';
 import { HardHat } from 'lucide-react';
 import SEO from '../components/SEO';

@@ -1,13 +1,29 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from 'next/dynamic';
-import { GraduationCap } from "lucide-react";
+import type { ComponentType } from 'react';
+import { ArrowRight, GraduationCap } from "lucide-react";
 import { useRouter } from "next/router";
 
+type EducationCardProps = {
+  title: string;
+  imgSrc: string;
+  buttonColor: string;
+  description: string;
+  index: number;
+  onViewMore: (title?: string) => void;
+};
+
 // Lazy load the EducationCard component
-const EducationCard = dynamic(() => import('./EducationCard'), {
-  loading: () => <div className="animate-pulse bg-white/5 rounded-2xl h-[320px]" />,
-  ssr: false
-});
+const EducationCard = dynamic(
+  () => import('./EducationCard').catch(err => {
+    console.error('Failed to load EducationCard:', err);
+    return () => null; // Fallback component on error
+  }),
+  {
+    loading: () => <div className="animate-pulse bg-white/5 rounded-2xl h-[320px]" />,
+    ssr: false
+  }
+)  as unknown as ComponentType<EducationCardProps>;
 
 const Quadrado: React.FC = () => {
   const [currentIndex] = useState(0);
@@ -265,6 +281,18 @@ const Quadrado: React.FC = () => {
           From early childhood to college preparation, we provide comprehensive
           education tailored to each development stage.
         </p>
+
+        {/* botão para Course Catalog */}
+        <div className="mt-6">
+          <button
+            onClick={() => router.push('/courseCatalog')}
+            className="inline-flex items-center gap-2 bg-[#ff141f] hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg shadow transition-all duration-200 group"
+            aria-label="Go to Course Catalog"
+          >
+            Course Catalog
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </button>
+        </div>
       </div>
     </div>
   );

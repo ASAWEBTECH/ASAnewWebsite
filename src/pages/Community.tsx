@@ -11,7 +11,7 @@ import {
   Brain,
 } from "lucide-react";
 import Footer from "@/components/Footer";
-import { Header } from "@/components/Header";
+import Header from "../components/Header";
 import Image from "next/image";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import SEO from '../components/SEO';

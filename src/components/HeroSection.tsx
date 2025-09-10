@@ -22,12 +22,12 @@ const slides: Slide[] = [
     month: "Oct"
   },
   {
-    title: "Breast Cancer Awareness Drive",
-    subtitle: "As part of our commitment to promoting health and wellness",
+    title: "Open House",
+    subtitle: " Early College High School -Discover the Future of Education",
     image: "/news2.webp",
-    description: "As part of our commitment to promoting health and wellness, we organized a meaningful Breast Cancer Awareness Drive aimed at educating and empowering our community. This event served as an opportunity to highlight the importance of early detection, regular screenings, and the steps we can all take to support those affected by breast cancer. Through informative talks, interactive workshops, and personal stories shared by survivors, participants gained valuable insights into the realities of breast cancer and the critical role awareness plays in saving lives. The event also featured fundraising efforts, with proceeds directed toward research and support for individuals and families navigating this journey. We are proud of the participation and enthusiasm shown by everyone involved, and we remain committed to fostering a community that values health, compassion, and action. Together, we can make a difference in the fight against breast cancer.",
-    day: 12,
-    month: "Nov"
+    description: "We are excited to invite you to our Open House event for the Early College High School program! This is a fantastic opportunity for prospective students and their families to learn more about our innovative curriculum, dedicated faculty, and the unique advantages of our early college model. Join us for an informative session where you can ask questions, meet our staff, and explore the possibilities that await you at our school. Together, we can pave the way for a extraordinary future!",
+    day: 20,
+    month: "Sept"
   },
   {
     title: "Break Time, Big Smiles",
@@ -233,7 +233,7 @@ export default function HeroSection() {
                 </button>
                 </div>
               <div className="p-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2 break-words whitespace-normal overflow-wrap-anywhere hyphens-auto">
                   {slides[currentIndex].title}
                 </h2>
                 <p className="text-lg text-gray-600 mb-4">

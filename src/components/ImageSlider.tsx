@@ -111,8 +111,9 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
               style={{
               objectFit: "cover",
               objectPosition: "center",
+              transitionDuration: "1500ms",
               }}
-              className="transition-transform duration-[1.5s] ease-out"
+              className="transition-transform ease-out"
               priority={
               index === currentIndex ||
               index === (currentIndex + 1) % images.length
@@ -122,19 +123,6 @@ export function ImageSlider({ images, interval = 5000 }: ImageSliderProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent" />
             </div>
         ))}
-
-        {/* <div className="absolute inset-0 bg-black/10 sm:hidden">
-          <div>
-            <div className="flex items-center justify-center h-full">
-              <p className="text-black text-sm">
-                Please use a modern browser to view this content.
-              </p>
-            </div>
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-black text-xs">
-              <p>© 2023 American Schools of Angola</p>
-            </div>
-          </div>
-        </div> */}
 
         <div className="absolute inset-0 flex items-center justify-center md:justify-start">
           <div className="text-left text-white max-w-3xl px-4 sm:px-6 mt-8 sm:mt-16 pl-4 sm:pl-6 md:pl-32 flex flex-col items-start w-full">

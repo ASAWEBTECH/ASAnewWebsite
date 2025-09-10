@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Newspaper, GraduationCap, Trophy, Phone, Mail, MapPin } from 'lucide-react';
-import { Header } from '../components/Header';
+import Header from '../components/Header';
 import { WhatsAppButton } from '../components/WhatsAppButton';
 
 const sections = [
@@ -16,12 +16,12 @@ const sections = [
     }
   },
   {
-    title: "Breast Cancer Awareness Drive",
+    title: "Open House - Early College High School",
     icon: Newspaper,
     article: {
-      image: "/news2.jpg",
-      headline: "Annual Arts Festival Showcases Student Creativity",
-      content: "As part of our commitment to promoting health and wellness, we organized a meaningful Breast Cancer Awareness Drive aimed at educating and empowering our community. This event served as an opportunity to highlight the importance of early detection, regular screenings, and the steps we can all take to support those affected by breast cancer. Through informative talks, interactive workshops, and personal stories shared by survivors, participants gained valuable insights into the realities of breast cancer and the critical role awareness plays in saving lives. The event also featured fundraising efforts, with proceeds directed toward research and support for individuals and families navigating this journey. We are proud of the participation and enthusiasm shown by everyone involved, and we remain committed to fostering a community that values health, compassion, and action. Together, we can make a difference in the fight against breast cancer."
+      image: "/news2.webp",
+      headline: "Open House - Early College High School",
+      content: "We are excited to invite you to our Open House event for the Early College High School program! This is a fantastic opportunity for prospective students and their families to learn more about our innovative curriculum, dedicated faculty, and the unique advantages of our early college model. Join us for an informative session where you can ask questions, meet our staff, and explore the possibilities that await you at our school. Together, we can pave the way for a extraordinary future!"
     }
   },
   {

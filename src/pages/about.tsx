@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Phone, MapPin, GraduationCap, Award,RotateCcw } from "lucide-react";
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 import Image from "next/image";
 import Footer from "../components/Footer";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
@@ -18,66 +18,6 @@ function About() {
   const enrollmentSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const locationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const accreditationSectionAnimation = useScrollAnimation({ threshold: 0.15, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
-
-  // Staff data array
-  /* const staffMembers = [
-    {
-      id: 1,
-      name: "Dr. Babita Parashar",
-      position: "Academic Director",
-      qualification: "Ph.D, Educational Leadership",
-      image: "/staff-director.jpg",
-    },
-    {
-      id: 2,
-      name: "Name Principal",
-      position: "Principal",
-      qualification: "Master's in Education",
-      image: "/staff-principal.jpg",
-    },
-    {
-      id: 3,
-      name: "Name Psychologist",
-      position: "Licensed Psychologist",
-      qualification: "Multilingual Support",
-      image: "/staff-psychologist.jpg",
-    },
-    {
-      id: 4,
-      name: "Name STEM",
-      position: "STEM Coordinator",
-      qualification: "Robotics & Technology",
-      image: "/staff-stem.jpg",
-    },
-    {
-      id: 5,
-      name: "Name Humanities",
-      position: "Humanities Teacher",
-      qualification: "English & Literature",
-      image: "/staff-humanities.jpg",
-    },
-    {
-      id: 6,
-      name: "Name Arts",
-      position: "Visual Arts Teacher",
-      qualification: "Fine Arts & Design",
-      image: "/staff-arts.jpg",
-    },
-    {
-      id: 7,
-      name: "Name Music",
-      position: "Music Teacher",
-      qualification: "Music & Performance",
-      image: "/staff-music.jpg",
-    },
-    {
-      id: 8,
-      name: "Name Coach",
-      position: "Learning Coach",
-      qualification: "Academic Support",
-      image: "/staff-coach.jpg",
-    },
-  ];*/
 
   useEffect(() => {
     // Trigger header animations after component mounts
@@ -200,7 +140,8 @@ function About() {
       {/* Our Mission Section */}
       <div
         ref={missionSectionAnimation.ref}
-        className={`mb-16 transition-all duration-1000 ease-out ${missionSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        className={`mb-16 transform-gpu transition-opacity transition-transform duration-1000 ease-out ${missionSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        style={{ willChange: 'opacity, transform', backfaceVisibility: 'hidden' }}
       >
         {/* Mission Title and Description - Full Width */}
         <div className="mb-12">
@@ -265,7 +206,8 @@ function About() {
         {/* School Philosophy Section */}
         <div
           ref={philosophySectionAnimation.ref}
-          className={`bg-blue-50 p-8 rounded-xl mb-16 transition-all duration-1000 ease-out ${philosophySectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`bg-blue-50 p-8 rounded-xl mb-16 transform-gpu transition-opacity transition-transform duration-1000 ease-out ${philosophySectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ willChange: 'opacity, transform', backfaceVisibility: 'hidden' }}
         >
           <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
             Our School Philosophy is Student-Centered
@@ -310,7 +252,8 @@ function About() {
         {/* Non-Discrimination Policy & Logo Section */}
         <div
           ref={nondiscriminationSectionAnimation.ref}
-          className={`bg-white p-8 rounded-xl border border-gray-200 mb-16 transition-all duration-1000 ease-out ${nondiscriminationSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`bg-white p-8 rounded-xl border border-gray-200 mb-16 transform-gpu transition-opacity transition-transform duration-1000 ease-out ${nondiscriminationSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ willChange: 'opacity, transform', backfaceVisibility: 'hidden' }}
         >
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -358,7 +301,8 @@ function About() {
         {/* Programs & Services Section */}
         <div
           ref={programsSectionAnimation.ref}
-          className={`grid md:grid-cols-2 gap-8 mb-16 transition-all duration-1000 ease-out ${programsSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`grid md:grid-cols-2 gap-8 mb-16 transform-gpu transition-opacity transition-transform duration-1000 ease-out ${programsSectionAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          style={{ willChange: 'opacity, transform', backfaceVisibility: 'hidden' }}
         >
           {/* Student-Centered Programs */}
           <div className="bg-blue-50 p-8 rounded-xl">
@@ -694,7 +638,7 @@ function About() {
             <div className="grid md:grid-cols-3 gap-6 items-center">
               <div className="text-center">
                 <Image
-                  src="/ministry-logo.jpg"
+                  src="/ministry-logo.webp"
                   alt="Angolan Ministry of Education"
                   width={200}
                   height={150}

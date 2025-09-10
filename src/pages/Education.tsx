@@ -9,7 +9,7 @@ import {
   Download
 } from "lucide-react";
 import DynamicCalendar from "@/components/Calendar";
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import { useScrollAnimation, useStaggeredAnimation } from "../hooks/useScrollAnimation";
@@ -236,7 +236,7 @@ const gradeLevels: GradeLevel[] = [
         icon: <BookOpen className="w-6 h-6" />,
         images: [
           {
-            url: "/high2.jpg",
+            url: "/high2.webp",
             label: "Creative Writing",
           },
         ],
@@ -609,7 +609,7 @@ export default function Education() {
     <>
       <SEO 
         title="Education Programs"
-        description="Comprehensive US-based curriculum from Pre-K to High School. Advanced Placement courses, STEM programs, and personalized learning paths for academic excellence."
+        description="Comprehensive US-based curriculum from Pre-K to High School. Advanced Placement courses, career pathways, and extensive extracurricular opportunities. We prepare students for success in higher education and future careers."
         keywords="US curriculum Angola, international education Luanda, Advanced Placement courses, STEM education Angola, PreK-12 education"
         canonical="https://asangola.com/Education"
       />

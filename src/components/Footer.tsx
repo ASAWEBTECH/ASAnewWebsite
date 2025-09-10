@@ -232,6 +232,15 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 <li>
+                  <Link
+                    href="/courseCatalog"
+                    className="flex items-center gap-2 hover:text-blue-400 transition-colors group"
+                  >
+                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full group-hover:scale-125 transition-transform"></span>
+                    Course Catalog
+                  </Link>
+                </li>
+                <li>
                     <Link
                     href="/about"
                     className="flex items-center gap-2 hover:text-blue-400 transition-colors group"
