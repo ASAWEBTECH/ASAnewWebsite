@@ -536,7 +536,6 @@ export default function Education() {
   // Animation hooks
   const academicExcellenceAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
   const calendarAnimation = useScrollAnimation({ threshold: 0.2, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
-  const logosAnimation = useScrollAnimation({ threshold: 0.3, triggerOnce: true }) as { ref: React.RefObject<HTMLDivElement>, isVisible: boolean };
 
   const toggleSection = (sectionId: string) => {
     const newExpanded = new Set(expandedSections);
@@ -876,26 +875,7 @@ export default function Education() {
           </div>
         </div>
 
-        <div 
-          ref={logosAnimation.ref}
-          className={`flex justify-center pb-5 mt-20 transition-all duration-1000 ease-out ${
-            logosAnimation.isVisible 
-              ? "opacity-100 translate-y-0 scale-100" 
-              : "opacity-0 translate-y-8 scale-95"
-          }`}
-        >
-          <Image
-            src="/importantLogos.jpg"
-            alt="Important Logos"
-            width={700}
-            height={700}
-            style={{
-              justifySelf: "center",
-              paddingBottom: "20px",
-            }}
-            className="hover:scale-105 transition-transform duration-500"
-          />
-        </div>
+ 
         <Footer />
       </div>
     </>

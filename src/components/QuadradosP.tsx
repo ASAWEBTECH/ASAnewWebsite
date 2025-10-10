@@ -108,29 +108,13 @@ function QuadradosP() {
   ];
 
   const accreditations = [
-     {
-      src: "/AdvancED.png",
-      alt: "AdvancED"
-    },
-    {
-      src: "/advenced.jpg", 
-      alt: "AdvancED"
-    },
     {
       src: "/asu-logo.png",
       alt: "Arizona State University"
     },
     {
-      src: "/cognia.png",
-      alt: "Cognia"
-    },
-    {
       src: "/credencialimg.png",
       alt: "National Collegiate Athletic Association"
-    },
-    {
-      src: "/njit.png",
-      alt: "New Jersey Institute of Technology"
     },
     {
       src: "/ministry-logo.webp",

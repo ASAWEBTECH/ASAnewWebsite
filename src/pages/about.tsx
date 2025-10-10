@@ -658,48 +658,7 @@ function About() {
                   Accreditation Certificate
                 </p>
               </div>
-              <div className="text-center">
-                <Image
-                  src="/advenced.jpg"
-                  alt="Advanced accreditation"
-                  width={200}
-                  height={150}
-                  className="mx-auto mb-2"
-                />
-                <p className="text-sm text-gray-600">Advanced Accreditation</p>
-              </div>
-              <div className="text-center">
-                <Image
-                  src="/AdvancED.png"
-                  alt="AdvancED accreditation"
-                  width={200}
-                  height={150}
-                  className="mx-auto mb-2"
-                />
-                <p className="text-sm text-gray-600">AdvencED Accreditation</p>
-              </div>
-              <div className="text-center">
-                <Image
-                  src="/cognia.png"
-                  alt="Cognia accreditation"
-                  width={200}
-                  height={150}
-                  className="mx-auto mb-2"
-                />
-                <p className="text-sm text-gray-600">Cognia Accreditation</p>
-              </div>
-              <div className="text-center">
-                <Image
-                  src="/njit.png"
-                  alt="New Jersey Institute of Technology accreditation"
-                  width={200}
-                  height={150}
-                  className="mx-auto mb-2"
-                />
-                <p className="text-sm text-gray-600">
-                  New Jersey Institute of Technology accreditation
-                </p>
-              </div>
+
             </div>
 
             <div className="text-center">
